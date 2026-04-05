@@ -3,7 +3,7 @@ import Home from './Pages/Home'
 import OurStory from './Pages/OurStory'
 import Guestbook from './Pages/Guestbook'
 import WeddingParty from './Pages/WeddingParty'
-import OrderOfEvents from './pages/OrderOfEvents'
+import OrderOfEvents from './Pages/OrderOfEvents'
 import RSVP from './Pages/RSVP'
 
 export default function App() {
