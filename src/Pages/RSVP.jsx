@@ -191,7 +191,8 @@ export default function RSVP() {
                   <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mt-2">
                     <button
                       onClick={handleSubmit}
-                      className="bg-[#2D4C3B] text-white text-[11px] font-semibold tracking-[0.25em] uppercase px-8 py-4 hover:bg-[#3a6050] transition-colors duration-300 flex-shrink-0"
+                      style={{ color: '#ffffff' }}
+                      className="bg-[#2D4C3B] text-[11px] font-semibold tracking-[0.25em] uppercase px-8 py-4 hover:bg-[#3a6050] transition-colors duration-300 flex-shrink-0"
                     >
                       Confirm Attendance
                     </button>
@@ -246,18 +247,18 @@ export default function RSVP() {
             </div>
 
             {/* Col 2: Dress Code — dark green card */}
-            <div className="bg-[#2D4C3B] text-white p-8 flex flex-col items-center text-center gap-5">
+            <div style={{ color: '#ffffff' }} className="bg-[#2D4C3B] p-8 flex flex-col items-center text-center gap-5">
               {/* Hanger icon */}
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#a8c5b5" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M20.38 18H3.62a1 1 0 0 1-.76-1.64L12 6"/><path d="M12 6a2 2 0 1 1 1.73-3"/><line x1="12" y1="6" x2="12" y2="4"/>
               </svg>
               <div>
-                <h3 className="font-display italic text-white text-xl lg:text-2xl mb-2">The Dress Code</h3>
-                <p className="text-[10px] tracking-[0.28em] uppercase text-white/50 font-semibold mb-5">
+                <h3 style={{ color: '#ffffff' }} className="font-display italic text-xl lg:text-2xl mb-2">The Dress Code</h3>
+                <p style={{ color: 'rgba(255,255,255,0.5)' }} className="text-[10px] tracking-[0.28em] uppercase font-semibold mb-5">
                   Black Tie Preferred
                 </p>
                 <div className="w-8 h-px bg-white/20 mx-auto mb-5" />
-                <p className="text-white/65 text-[13px] leading-[1.8]">
+                <p style={{ color: 'rgba(255,255,255,0.65)' }} className="text-[13px] leading-[1.8]">
                   We invite you to join us in formal attire. Think timeless elegance and botanical tones.
                 </p>
               </div>
@@ -286,4 +287,3 @@ export default function RSVP() {
     </Layout>
   )
 }
-

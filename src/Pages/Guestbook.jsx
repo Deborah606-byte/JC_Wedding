@@ -63,7 +63,7 @@ function PlainCard({ name, date, message }) {
   )
 }
 
-function PhotoCard({ name, date, message, tag, img }) {
+function PhotoCard({ name, message, tag, img }) {
   return (
     <div className="bg-white border border-stone-200 rounded-sm overflow-hidden flex flex-col sm:flex-row">
       {img && (
@@ -84,15 +84,18 @@ function PhotoCard({ name, date, message, tag, img }) {
 
 function FeaturedCard({ name, message }) {
   return (
-    <div className="bg-[#2D4C3B] rounded-sm p-7 relative overflow-hidden">
+    <div
+      style={{ color: '#ffffff' }}
+      className="bg-[#2D4C3B] rounded-sm p-7 relative overflow-hidden"
+    >
       {/* Faint leaf watermark */}
       <div className="absolute bottom-3 right-4 opacity-10 text-white">
         <svg width="60" height="60" viewBox="0 0 24 24" fill="currentColor">
           <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 0 0 8 20C19 20 22 3 22 3c-1 2-8 2-8 2s0-8-7-8c0 0 3 5 2 11z"/>
         </svg>
       </div>
-      <h3 className="font-display italic text-white text-xl mb-4">{name}</h3>
-      <p className="text-white/75 text-[13.5px] leading-[1.8] italic">"{message}"</p>
+      <h3 style={{ color: '#ffffff' }} className="font-display italic text-xl mb-4">{name}</h3>
+      <p style={{ color: '#ffffff' }} className="text-[13.5px] leading-[1.8] italic">"{message}"</p>
     </div>
   )
 }
@@ -206,7 +209,8 @@ export default function Guestbook() {
                   {/* Submit */}
                   <button
                     onClick={handleSubmit}
-                    className="w-full bg-[#2D4C3B] text-white text-[11px] font-semibold tracking-[0.25em] uppercase py-3.5 rounded-sm hover:bg-[#3a6050] transition-colors duration-300 flex items-center justify-center gap-2 mt-2"
+                    style={{ color: '#ffffff' }}
+                    className="w-full bg-[#2D4C3B] text-[11px] font-semibold tracking-[0.25em] uppercase py-3.5 rounded-sm hover:bg-[#3a6050] transition-colors duration-300 flex items-center justify-center gap-2 mt-2"
                   >
                     {submitted ? 'Blessing Sent ✓' : (
                       <>
@@ -258,4 +262,3 @@ export default function Guestbook() {
     </Layout>
   )
 }
-

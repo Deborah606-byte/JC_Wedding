@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import logo from '../assets/LOGO.png'
 
@@ -12,13 +12,29 @@ const navLinks = [
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const location = useLocation()
 
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24)
+    onScroll()
+    window.addEventListener('scroll', onScroll, { passive: true })
+    return () => window.removeEventListener('scroll', onScroll)
+  }, [])
+
   return (
-    <header className="bg-white border-b border-stone-100 w-full sticky top-0 z-50 shadow-sm">
+    <header
+      className={`w-full sticky top-0 z-50 border-b border-stone-200/70 bg-white/85 backdrop-blur-md transition-shadow duration-300 ${
+        scrolled ? 'shadow-md' : 'shadow-sm'
+      }`}
+    >
 
       {/* Top: Centered Logo Block */}
-      <div className="flex flex-col items-center justify-center pt-5 pb-3 px-6">
+      <div
+        className={`flex flex-col items-center justify-center px-6 overflow-hidden transition-all duration-300 ${
+          scrolled ? 'max-h-0 opacity-0 py-0 pointer-events-none' : 'max-h-40 pt-5 pb-3 opacity-100'
+        }`}
+      >
         <Link to="/" onClick={() => setMenuOpen(false)}>
           <img
             src={logo}
@@ -31,27 +47,29 @@ export default function Navbar() {
             Josephine &amp; Christopher
           </span>
         </Link>
+        <div className="mt-3 flex items-center gap-3 w-44">
+          <div className="flex-1 h-px bg-stone-200" />
+          <div className="w-1 h-1 rounded-full bg-[#2D4C3B]/40" />
+          <div className="flex-1 h-px bg-stone-200" />
+        </div>
       </div>
 
       {/* Bottom: Desktop Nav Links */}
-      <nav className="hidden md:flex border-t border-stone-100">
-        <div className="flex items-center justify-center gap-8 lg:gap-12 px-6 py-2.5 w-full flex-wrap">
+      <nav className="hidden md:flex border-t border-stone-200/70">
+        <div className="flex items-center justify-center gap-8 lg:gap-12 px-6 py-3 w-full flex-wrap">
           {navLinks.map(({ label, to }) => {
             const active = location.pathname === to
             return (
               <Link
                 key={to}
                 to={to}
-                className={`text-[13.5px] tracking-wide transition-colors duration-200 relative pb-0.5 ${
+                className={`text-[13px] tracking-wide transition-colors duration-200 relative pb-1 after:absolute after:left-0 after:right-0 after:-bottom-[9px] after:h-[2px] after:bg-[#2D4C3B] after:origin-left after:transition-transform after:duration-300 ${
                   active
-                    ? 'font-bold text-[#0F0F0F]'
-                    : 'font-normal text-[#0F0F0F]/55 hover:text-[#2D4C3B]'
+                    ? 'font-semibold text-[#2D4C3B] after:scale-x-100'
+                    : 'font-medium text-[#0F0F0F]/60 hover:text-[#2D4C3B] after:scale-x-0 hover:after:scale-x-100'
                 }`}
               >
                 {label}
-                {active && (
-                  <span className="absolute -bottom-[11px] left-0 right-0 h-[2px] bg-[#2D4C3B]" />
-                )}
               </Link>
             )
           })}
@@ -59,7 +77,8 @@ export default function Navbar() {
           {/* RSVP Button */}
           <Link
             to="/rsvp"
-            className="text-[12px] font-semibold tracking-widest uppercase px-5 py-1.5 rounded-sm bg-[#2D4C3B] text-white hover:bg-[#3a6050] transition-colors duration-200"
+            style={{ color: '#ffffff' }}
+            className="text-[12px] font-semibold tracking-widest uppercase px-6 py-2 rounded-full bg-[#2D4C3B] text-white shadow-sm hover:shadow-md hover:bg-[#3a6050] transition-all duration-200"
           >
             RSVP
           </Link>
@@ -67,7 +86,7 @@ export default function Navbar() {
       </nav>
 
       {/* Mobile: Hamburger + Dropdown */}
-      <div className="md:hidden border-t border-stone-100">
+      <div className="md:hidden border-t border-stone-200/70">
         <div className="flex items-center justify-center py-2 px-6">
           <button
             onClick={() => setMenuOpen(!menuOpen)}
@@ -81,7 +100,7 @@ export default function Navbar() {
         </div>
 
         <div className={`overflow-hidden transition-all duration-400 ${menuOpen ? 'max-h-96 opacity-100' : 'max-h-0 opacity-0'}`}>
-          <nav className="flex flex-col items-center gap-4 px-6 pb-6 pt-2">
+          <nav className="flex flex-col items-center gap-4 px-6 pb-7 pt-3 bg-white/80 backdrop-blur-md">
             {navLinks.map(({ label, to }) => {
               const active = location.pathname === to
               return (
@@ -90,7 +109,7 @@ export default function Navbar() {
                   to={to}
                   onClick={() => setMenuOpen(false)}
                   className={`text-[13px] tracking-wide ${
-                    active ? 'font-bold text-[#0F0F0F]' : 'text-[#0F0F0F]/55 hover:text-[#2D4C3B]'
+                    active ? 'font-semibold text-[#2D4C3B]' : 'font-medium text-[#0F0F0F]/60 hover:text-[#2D4C3B]'
                   }`}
                 >
                   {label}
@@ -100,7 +119,8 @@ export default function Navbar() {
             <Link
               to="/rsvp"
               onClick={() => setMenuOpen(false)}
-              className="text-[12px] font-semibold tracking-widest uppercase px-6 py-2 rounded-sm bg-[#2D4C3B] text-white mt-1"
+              style={{ color: '#ffffff' }}
+              className="text-[12px] font-semibold tracking-widest uppercase px-7 py-2.5 rounded-full bg-[#2D4C3B] text-white shadow-sm mt-1"
             >
               RSVP
             </Link>

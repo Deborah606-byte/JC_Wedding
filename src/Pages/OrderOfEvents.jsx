@@ -13,9 +13,13 @@ import event03ImgB   from '../assets/flower6.png' // Cocktail Hour right
 import event05Img    from '../assets/flower1.png'   // Grand Send-off
 
 // ── Shared number label ────────────────────────────────────
-function EventNumber({ n }) {
+function EventNumber({ n, className = '', style }) {
+  const colorClassName = className.trim().length ? className : 'text-[#0F0F0F]/20'
   return (
-    <span className="font-display text-[#0F0F0F]/20 text-5xl lg:text-6xl leading-none select-none">
+    <span
+      style={style}
+      className={`font-display text-5xl lg:text-6xl leading-none select-none ${colorClassName}`}
+    >
       {String(n).padStart(2, '0')}
     </span>
   )
@@ -27,44 +31,43 @@ export default function OrderOfEvents() {
     <Layout>
 
       {/* ── 1. HERO ── */}
-     {/* ── 1. HERO ── */}
-<section className="bg-white overflow-hidden">
-  <div className="flex flex-col lg:flex-row h-auto lg:h-[380px]">
+      <section className="bg-white overflow-hidden pt-8 lg:pt-10">
+        <div className="max-w-6xl mx-auto px-6 lg:px-10">
+          <div className="flex flex-col lg:flex-row h-auto lg:h-[380px]">
 
-    {/* Left: text — vertically centered, contained */}
-    <div className="flex-1 flex flex-col justify-center py-12 lg:py-0">
-      <div className="max-w-6xl mx-auto px-8 lg:px-16 w-full">
-        <p className="text-[10px] tracking-[0.3em] uppercase text-[#2D4C3B] font-semibold mb-4">
-          The Weekend
-        </p>
-        <h1 className="font-display text-[#0F0F0F] text-4xl lg:text-5xl leading-[1.05] mb-5">
-          The Order<br />
-          <span className="italic">of Events</span>
-        </h1>
-        <p className="text-[#0F0F0F]/45 text-[14px] leading-[1.85] max-w-xs">
-          A curation of moments designed for connection, celebration, and the beauty of the botanical surroundings at Oakwood Estate.
-        </p>
-      </div>
-    </div>
+            <div className="flex-1 flex flex-col justify-center py-12 lg:py-0">
+              <div className="w-full">
+                <p className="text-[10px] tracking-[0.3em] uppercase text-[#2D4C3B] font-semibold mb-4">
+                  The Weekend
+                </p>
+                <h1 className="font-display text-[#0F0F0F] text-4xl lg:text-5xl leading-[1.05] mb-5">
+                  The Order<br />
+                  <span className="italic">of Events</span>
+                </h1>
+                <p className="text-[#0F0F0F]/45 text-[14px] leading-[1.85] max-w-xs">
+                  A curation of moments designed for connection, celebration, and the beauty of the botanical surroundings at Oakwood Estate.
+                </p>
+              </div>
+            </div>
 
-    {/* Right: large photo + small overlapping photo */}
-    <div className="lg:w-[42%] flex-shrink-0 relative h-52 lg:h-full">
-      <img
-        src={heroFlowers1}
-        alt="Flowers"
-        className="w-full h-full object-cover"
-      />
-      <div className="absolute bottom-6 -left-10 border-4 border-white shadow-xl w-[40%]">
-        <img
-          src={heroFlowers2}
-          alt="Fern"
-          className="w-full h-28 lg:h-36 object-cover"
-        />
-      </div>
-    </div>
+            <div className="lg:w-[42%] flex-shrink-0 relative h-52 lg:h-full">
+              <img
+                src={heroFlowers1}
+                alt="Flowers"
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute bottom-6 left-0 -translate-x-8 border-4 border-white shadow-xl w-[40%]">
+                <img
+                  src={heroFlowers2}
+                  alt="Fern"
+                  className="w-full h-28 lg:h-36 object-cover"
+                />
+              </div>
+            </div>
 
-  </div>
-</section>
+          </div>
+        </div>
+      </section>
 
       {/* ── EVENT 01: Welcome Drinks ── */}
       <section className="bg-white py-14 lg:py-20 border-t border-stone-100">
@@ -165,22 +168,22 @@ export default function OrderOfEvents() {
       </section>
 
       {/* ── EVENT 04: Dinner & Dancing (full-width green) ── */}
-      <section className="bg-[#2D4C3B] py-20 lg:py-28">
+      <section style={{ color: '#ffffff' }} className="bg-[#2D4C3B] py-20 lg:py-28">
         <div className="max-w-3xl mx-auto px-6 text-center flex flex-col items-center gap-5">
-          <EventNumber n={4} />
-          <h2 className="font-display italic text-white text-3xl lg:text-5xl leading-tight">
+          <EventNumber n={4} style={{ color: 'rgba(255,255,255,0.2)' }} />
+          <h2 style={{ color: '#ffffff' }} className="font-display italic text-3xl lg:text-5xl leading-tight">
             Dinner &amp; Dancing
           </h2>
-          <p className="text-[10px] tracking-[0.28em] uppercase text-white/50 font-semibold">
+          <p style={{ color: 'rgba(255,255,255,0.5)' }} className="text-[10px] tracking-[0.28em] uppercase font-semibold">
             Saturday · 6:30 PM Until Late
           </p>
-          <p className="text-white/60 text-[14px] leading-[1.85] max-w-md mt-2">
+          <p style={{ color: 'rgba(255,255,255,0.6)' }} className="text-[14px] leading-[1.85] max-w-md mt-2">
             A farm-to-table feast served family-style, followed by a night of movement and melody under the stars.
           </p>
           {/* Feature tags */}
           <div className="flex items-center gap-6 mt-4 flex-wrap justify-center">
             {['Main Hall', 'Live Quartet', 'Open Bar'].map((tag) => (
-              <span key={tag} className="text-[10px] tracking-[0.25em] uppercase text-white/40 font-medium">
+              <span key={tag} style={{ color: 'rgba(255,255,255,0.4)' }} className="text-[10px] tracking-[0.25em] uppercase font-medium">
                 {tag}
               </span>
             ))}
@@ -217,4 +220,3 @@ export default function OrderOfEvents() {
     </Layout>
   )
 }
-

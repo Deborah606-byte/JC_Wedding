@@ -11,10 +11,30 @@ import gm1 from '../assets/men1.png'
 import gm2 from '../assets/men2.png'   
 import gm3 from '../assets/men3.png'  
 
-// ── Section heading ────────────────────────────────────────
 function SectionTitle({ title }) {
   return (
-    <h2 className="font-display text-[#0F0F0F] text-2xl lg:text-3xl mb-10">{title}</h2>
+    <h2 className="font-display italic text-[#2D4C3B] text-2xl lg:text-3xl mb-10">{title}</h2>
+  )
+}
+
+function PersonCard({ imageSrc, imageAlt, name, bio, label, className = '' }) {
+  return (
+    <div className={`flex flex-col gap-4 ${className}`}>
+      <div className="overflow-hidden rounded-sm bg-white shadow-sm group">
+        <img
+          src={imageSrc}
+          alt={imageAlt}
+          className="w-full h-[320px] sm:h-[360px] lg:h-[400px] object-cover grayscale transition-transform duration-700 group-hover:scale-105"
+        />
+      </div>
+      <div className="px-1">
+        {label ? (
+          <p className="text-[10px] tracking-[0.22em] uppercase text-[#2D4C3B] font-semibold">{label}</p>
+        ) : null}
+        <p className="font-display italic text-[#0F0F0F]/80 text-[16px] lg:text-[17px] mt-1">{name}</p>
+        <p className="text-[#0F0F0F]/55 text-[13px] leading-[1.75] mt-2">{bio}</p>
+      </div>
+    </div>
   )
 }
 
@@ -30,7 +50,7 @@ export default function WeddingParty() {
             Meet the Inner Circle
           </p>
           <div className="flex flex-col lg:flex-row lg:items-start gap-6 lg:gap-16">
-            <h1 className="font-display text-[#0F0F0F] text-5xl lg:text-6xl leading-tight flex-shrink-0">
+            <h1 className="font-display text-[#2D4C3B] text-5xl lg:text-6xl leading-tight flex-shrink-0">
               The Wedding Party
             </h1>
             <p className="text-[#0F0F0F]/55 text-[14px] leading-[1.85] max-w-xs lg:pt-3">
@@ -135,62 +155,29 @@ export default function WeddingParty() {
       {/* ── 3. GROOMSMEN ── */}
       <section className="bg-[#f7f6f2] py-14 lg:py-20">
         <div className="max-w-6xl mx-auto px-6 lg:px-10">
-          <SectionTitle title="The Groomsmen" />
+          <h2 className="font-display text-[#0F0F0F]/80 text-xl lg:text-2xl mb-10">The Groomsmen</h2>
 
-          {/* David large left + Marcus center (lower) + Julian right */}
-          <div className="flex flex-col md:flex-row gap-4 items-end">
-
-            {/* David — large left */}
-            <div className="md:w-[38%] flex-shrink-0 flex flex-col gap-3">
-              <div className="overflow-hidden group">
-                <img
-                  src={gm1}
-                  alt="David Thorne"
-                  className="w-full h-[380px] lg:h-[460px] object-cover grayscale transition-transform duration-700 group-hover:scale-105"
-                />
-              </div>
-              <div>
-                <p className="text-[10px] tracking-[0.2em] uppercase text-[#2D4C3B] font-semibold">Best Man</p>
-                <p className="font-semibold text-[#0F0F0F] text-[15px] mt-0.5">David Thorne</p>
-                <p className="text-[#0F0F0F]/50 text-[12.5px] leading-relaxed mt-1">
-                  The guy who once convinced me that moving to London with £200 was 'a brilliant tactical maneuver'. We made it.
-                </p>
-              </div>
-            </div>
-
-            {/* Marcus — center, starts lower (pushed down) */}
-            <div className="flex-1 flex flex-col gap-3 md:mb-0 md:self-end">
-              <div className="overflow-hidden group">
-                <img
-                  src={gm2}
-                  alt="Marcus Vane"
-                  className="w-full h-52 lg:h-[280px] object-cover grayscale transition-transform duration-700 group-hover:scale-105"
-                />
-              </div>
-              <div>
-                <p className="font-semibold text-[#0F0F0F] text-[14px]">Marcus Vane</p>
-                <p className="text-[#0F0F0F]/50 text-[12.5px] leading-relaxed mt-1">
-                  Expert in craft beer, mediocre at golf, and the first person I call when something breaks. Usually it's my car.
-                </p>
-              </div>
-            </div>
-
-            {/* Julian — right, mid height */}
-            <div className="flex-1 flex flex-col gap-3">
-              <div className="overflow-hidden group">
-                <img
-                  src={gm3}
-                  alt="Julian Chen"
-                  className="w-full h-52 lg:h-72 object-cover grayscale transition-transform duration-700 group-hover:scale-105"
-                />
-              </div>
-              <div>
-                <p className="font-semibold text-[#0F0F0F] text-[14px]">Julian Chen</p>
-                <p className="text-[#0F0F0F]/50 text-[12.5px] leading-relaxed mt-1">
-                  The culinary genius of the group. If the reception food is good, it's because Julian approved the tasting menu.
-                </p>
-              </div>
-            </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-14 items-start">
+            <PersonCard
+              imageSrc={gm1}
+              imageAlt="David Thorne"
+              label="BEST MAN"
+              name="David Thorne"
+              bio="The guy who once convinced me that moving to London with £500 was a brilliant tactical maneuver. We made it."
+            />
+            <PersonCard
+              imageSrc={gm2}
+              imageAlt="Marcus Vane"
+              className="lg:mt-16"
+              name="Marcus Vane"
+              bio="Expert in craft beer; mediocre at golf; and the first person I call when something breaks. Usually it's my car."
+            />
+            <PersonCard
+              imageSrc={gm3}
+              imageAlt="Julian Chen"
+              name="Julian Chen"
+              bio="The culinary genius of the group. If the reception food is good, it's because Julian approved the tasting menu."
+            />
           </div>
         </div>
       </section>
@@ -199,4 +186,3 @@ export default function WeddingParty() {
     </Layout>
   )
 }
-

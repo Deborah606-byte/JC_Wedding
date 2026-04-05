@@ -11,7 +11,7 @@ const footerLinks = [
 
 export default function Footer() {
   return (
-    <footer className="bg-[#f7f6f2] border-t border-stone-200">
+    <footer className="bg-gradient-to-b from-[#f7f6f2] via-[#f7f6f2] to-white border-t border-stone-200">
       {/* Top decorative line */}
       <div className="flex items-center justify-center pt-14 pb-10">
         <div className="flex flex-col items-center gap-5">
@@ -29,15 +29,15 @@ export default function Footer() {
           </h2>
 
           {/* Tagline */}
-          <p className="text-[11px] tracking-[0.3em] uppercase text-[#0F0F0F]/40 font-medium">
+          <p className="text-[11px] tracking-[0.3em] uppercase text-[#0F0F0F]/45 font-medium">
             Together Forever · November 2025
           </p>
 
           {/* Divider */}
-          <div className="flex items-center gap-3 w-40">
-            <div className="flex-1 h-px bg-stone-300" />
-            <div className="w-1 h-1 rounded-full bg-[#2D4C3B]/40" />
-            <div className="flex-1 h-px bg-stone-300" />
+          <div className="flex items-center gap-3 w-44">
+            <div className="flex-1 h-px bg-stone-300/80" />
+            <div className="w-1 h-1 rounded-full bg-[#2D4C3B]/45" />
+            <div className="flex-1 h-px bg-stone-300/80" />
           </div>
 
           {/* Nav links */}
@@ -46,7 +46,7 @@ export default function Footer() {
               <Link
                 key={to}
                 to={to}
-                className="text-[11px] tracking-[0.2em] uppercase text-[#0F0F0F]/50 hover:text-[#2D4C3B] transition-colors duration-300 font-medium"
+                className="text-[11px] tracking-[0.2em] uppercase text-[#0F0F0F]/55 hover:text-[#2D4C3B] transition-colors duration-300 font-medium relative after:absolute after:left-0 after:right-0 after:-bottom-1 after:h-px after:bg-[#2D4C3B]/60 after:scale-x-0 after:origin-center after:transition-transform after:duration-300 hover:after:scale-x-100"
               >
                 {label}
               </Link>
@@ -56,8 +56,8 @@ export default function Footer() {
       </div>
 
       {/* Bottom bar */}
-      <div className="border-t border-stone-200 py-5 px-6">
-        <p className="text-center text-[11px] text-[#0F0F0F]/35 tracking-wider">
+      <div className="border-t border-stone-200/80 py-6 px-6">
+        <p className="text-center text-[11px] text-[#0F0F0F]/40 tracking-wider">
           © 2025 Josephine & Christopher — A Botanical Love Story. Designed with love.
         </p>
       </div>
