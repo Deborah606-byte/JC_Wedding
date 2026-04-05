@@ -1,4 +1,4 @@
-import Layout from '../components/Layout'
+import Layout from '../Components/Layout'
 
 // ─────────────────────────────────────────────────────────
 // 🖼️  IMAGES — rename your files in src/assets/ to match

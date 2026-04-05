@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import Layout from '../components/Layout'
+import Layout from '../Components/Layout'
 import { Link } from 'react-router-dom'
 
 // ─────────────────────────────────────────────────────────

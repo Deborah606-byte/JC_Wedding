@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import Layout from '../components/Layout'
+import Layout from '../Components/Layout'
 
 // 🖼️ Replace with your actual asset imports
 import botanicalImg from '../assets/happy.jpg'   // flower/botanical photo bottom-left
