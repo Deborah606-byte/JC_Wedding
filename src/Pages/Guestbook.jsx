@@ -1,5 +1,7 @@
 import { useState } from 'react'
-import Layout from '../Components/Layout'
+import { motion } from 'motion/react'
+import PageTransition from '../Components/PageTransition'
+import Reveal, { StaggerGroup, StaggerItem } from '../Components/Reveal'
 
 // 🖼️ Replace with your actual asset imports
 import botanicalImg from '../assets/happy.jpg'   // flower/botanical photo bottom-left
@@ -146,22 +148,24 @@ export default function Guestbook() {
   }
 
   return (
-    <Layout>
+    <PageTransition>
 
       {/* ── 1. HERO ── */}
       <section className="bg-[#f7f6f2] pt-16 pb-14 lg:pt-20 lg:pb-18 text-center">
         <div className="max-w-2xl mx-auto px-6">
-          <p className="text-[10px] tracking-[0.35em] uppercase text-[#2D4C3B] font-semibold mb-5">
+          <Reveal as="p" className="text-[10px] tracking-[0.35em] uppercase text-[#2D4C3B] font-semibold mb-5">
             Guestbook
-          </p>
-          <h1 className="font-display text-[#0F0F0F] text-4xl lg:text-6xl leading-[1.1] mb-6">
-            Leave a blessing,<br />
-            <span className="italic">share a memory</span>
-          </h1>
-          <p className="text-[#0F0F0F]/55 text-[15px] leading-[1.85] max-w-md mx-auto">
+          </Reveal>
+          <Reveal delay={0.1}>
+            <h1 className="font-display text-[#0F0F0F] text-4xl lg:text-6xl leading-[1.1] mb-6">
+              Leave a blessing,<br />
+              <span className="italic">share a memory</span>
+            </h1>
+          </Reveal>
+          <Reveal delay={0.25} as="p" className="text-[#0F0F0F]/55 text-[15px] leading-[1.85] max-w-md mx-auto">
             Your presence is our greatest gift, but your words are our most cherished
             keepsake. Please share a note for us to look back on for years to come.
-          </p>
+          </Reveal>
         </div>
       </section>
 
@@ -171,7 +175,7 @@ export default function Guestbook() {
           <div className="flex flex-col lg:flex-row gap-6 items-start">
 
             {/* ── LEFT: Form + botanical photo ── */}
-            <div className="w-full lg:w-[38%] flex flex-col gap-4 lg:sticky lg:top-28">
+            <Reveal x={-30} y={0} className="w-full lg:w-[38%] flex flex-col gap-4 lg:sticky lg:top-28">
 
               {/* Write form */}
               <div className="bg-white border border-stone-200 rounded-sm p-7">
@@ -228,37 +232,40 @@ export default function Guestbook() {
               <div className="overflow-hidden rounded-sm">
                 <img
                   src={botanicalImg}
-                  alt="Botanical"
+                  alt=""
+                  aria-hidden="true"
                   className="w-full h-48 lg:h-56 object-cover"
                 />
               </div>
-            </div>
+            </Reveal>
 
             {/* ── RIGHT: Blessing cards ── */}
-            <div className="flex-1 flex flex-col gap-4">
-              {visibleBlessings.map((b) => {
-                if (b.type === 'plain')    return <PlainCard    key={b.id} {...b} />
-                if (b.type === 'photo')    return <PhotoCard    key={b.id} {...b} />
-                if (b.type === 'featured') return <FeaturedCard key={b.id} {...b} />
-                if (b.type === 'minimal')  return <MinimalCard  key={b.id} {...b} />
-                return null
-              })}
+            <StaggerGroup stagger={0.1} className="flex-1 flex flex-col gap-4">
+              {visibleBlessings.map((b) => (
+                <StaggerItem key={b.id}>
+                  {b.type === 'plain'    && <PlainCard    {...b} />}
+                  {b.type === 'photo'    && <PhotoCard    {...b} />}
+                  {b.type === 'featured' && <FeaturedCard {...b} />}
+                  {b.type === 'minimal'  && <MinimalCard  {...b} />}
+                </StaggerItem>
+              ))}
 
               {/* View all toggle */}
               {blessings.length > 4 && (
-                <button
+                <motion.button
+                  whileHover={{ x: 3 }}
                   onClick={() => setShowAll(!showAll)}
                   className="self-end flex items-center gap-2 text-[11px] tracking-[0.2em] uppercase text-[#0F0F0F]/40 hover:text-[#2D4C3B] transition-colors font-medium mt-2"
                 >
                   {showAll ? 'Show Less ↑' : 'View All Memories ↓'}
-                </button>
+                </motion.button>
               )}
-            </div>
+            </StaggerGroup>
 
           </div>
         </div>
       </section>
 
-    </Layout>
+    </PageTransition>
   )
 }

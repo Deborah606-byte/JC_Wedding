@@ -1,4 +1,5 @@
-import Layout from '../Components/Layout'
+import PageTransition from '../Components/PageTransition'
+import Reveal, { StaggerGroup, StaggerItem } from '../Components/Reveal'
 
 // ─────────────────────────────────────────────────────────
 // 🖼️  IMAGES — rename your files in src/assets/ to match
@@ -41,21 +42,23 @@ function PersonCard({ imageSrc, imageAlt, name, bio, label, className = '' }) {
 // ── Page ───────────────────────────────────────────────────
 export default function WeddingParty() {
   return (
-    <Layout>
+    <PageTransition>
 
       {/* ── 1. HERO ── */}
       <section className="bg-white pt-14 pb-10 lg:pt-16">
         <div className="max-w-6xl mx-auto px-6 lg:px-10">
-          <p className="text-[10px] tracking-[0.3em] uppercase text-[#2D4C3B] font-semibold mb-3">
+          <Reveal as="p" className="text-[10px] tracking-[0.3em] uppercase text-[#2D4C3B] font-semibold mb-3">
             Meet the Inner Circle
-          </p>
+          </Reveal>
           <div className="flex flex-col lg:flex-row lg:items-start gap-6 lg:gap-16">
-            <h1 className="font-display text-[#2D4C3B] text-5xl lg:text-6xl leading-tight flex-shrink-0">
-              The Wedding Party
-            </h1>
-            <p className="text-[#0F0F0F]/55 text-[14px] leading-[1.85] max-w-xs lg:pt-3">
+            <Reveal delay={0.1}>
+              <h1 className="font-display text-[#2D4C3B] text-5xl lg:text-6xl leading-tight flex-shrink-0">
+                The Wedding Party
+              </h1>
+            </Reveal>
+            <Reveal delay={0.25} as="p" className="text-[#0F0F0F]/55 text-[14px] leading-[1.85] max-w-xs lg:pt-3">
               The people who've been there since chapter one. Our confidants, our troublemakers, and our forever friends.
-            </p>
+            </Reveal>
           </div>
         </div>
       </section>
@@ -63,13 +66,15 @@ export default function WeddingParty() {
       {/* ── 2. BRIDESMAIDS ── */}
       <section className="bg-white py-10 lg:py-14">
         <div className="max-w-6xl mx-auto px-6 lg:px-10">
-          <SectionTitle title="The Bridesmaids" />
+          <Reveal>
+            <SectionTitle title="The Bridesmaids" />
+          </Reveal>
 
           {/* ROW 1: Sarah large left + Elena small right */}
-          <div className="flex flex-col md:flex-row gap-4 mb-4">
+          <StaggerGroup stagger={0.15} className="flex flex-col md:flex-row gap-4 mb-4">
 
             {/* Sarah — large, name overlay bottom-left */}
-            <div className="md:w-[55%] flex-shrink-0 flex flex-col gap-3">
+            <StaggerItem className="md:w-[55%] flex-shrink-0 flex flex-col gap-3">
               <div className="relative overflow-hidden group">
                 <img
                   src={bm1}
@@ -86,10 +91,10 @@ export default function WeddingParty() {
               <p className="text-[#0F0F0F]/50 text-[12.5px] leading-relaxed">
                 Met in 3rd grade over a shared love of glitter pens. Sarah is the architect of our wildest adventures and the keeper of all my secrets since 1998.
               </p>
-            </div>
+            </StaggerItem>
 
             {/* Elena — small top-right, name + bio below */}
-            <div className="flex-1 flex flex-col gap-3 md:pt-12">
+            <StaggerItem className="flex-1 flex flex-col gap-3 md:pt-12">
               <div className="overflow-hidden group">
                 <img
                   src={bm2}
@@ -103,14 +108,14 @@ export default function WeddingParty() {
                   The one who will definitely start the dance battle and knows every word to 2000s R&B.
                 </p>
               </div>
-            </div>
-          </div>
+            </StaggerItem>
+          </StaggerGroup>
 
           {/* ROW 2: Chloe small left + Maya large portrait right */}
-          <div className="flex flex-col md:flex-row gap-4 items-start">
+          <StaggerGroup stagger={0.15} className="flex flex-col md:flex-row gap-4 items-start">
 
             {/* Chloe — small left, name + bio below */}
-            <div className="md:w-[32%] flex-shrink-0 flex flex-col gap-3">
+            <StaggerItem className="md:w-[32%] flex-shrink-0 flex flex-col gap-3">
               <div className="overflow-hidden group">
                 <img
                   src={bm3}
@@ -124,10 +129,10 @@ export default function WeddingParty() {
                   My college roommate and the voice of reason. Chloe has a PhD in 'Calming Me Down'.
                 </p>
               </div>
-            </div>
+            </StaggerItem>
 
             {/* Maya — large portrait right with bio card beside/below */}
-            <div className="flex-1 flex flex-col md:flex-row gap-4 items-start">
+            <StaggerItem className="flex-1 flex flex-col md:flex-row gap-4 items-start">
               <div className="w-full md:w-[55%] overflow-hidden group flex-shrink-0">
                 <img
                   src={bm4}
@@ -146,43 +151,47 @@ export default function WeddingParty() {
                   <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 0 0 8 20C19 20 22 3 22 3c-1 2-8 2-8 2s0-8-7-8c0 0 3 5 2 11z"/>
                 </svg>
               </div>
-            </div>
+            </StaggerItem>
 
-          </div>
+          </StaggerGroup>
         </div>
       </section>
 
       {/* ── 3. GROOMSMEN ── */}
       <section className="bg-[#f7f6f2] py-14 lg:py-20">
         <div className="max-w-6xl mx-auto px-6 lg:px-10">
-          <h2 className="font-display text-[#0F0F0F]/80 text-xl lg:text-2xl mb-10">The Groomsmen</h2>
+          <Reveal as="h2" className="font-display text-[#0F0F0F]/80 text-xl lg:text-2xl mb-10">The Groomsmen</Reveal>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-14 items-start">
-            <PersonCard
-              imageSrc={gm1}
-              imageAlt="David Thorne"
-              label="BEST MAN"
-              name="David Thorne"
-              bio="The guy who once convinced me that moving to London with £500 was a brilliant tactical maneuver. We made it."
-            />
-            <PersonCard
-              imageSrc={gm2}
-              imageAlt="Marcus Vane"
-              className="lg:mt-16"
-              name="Marcus Vane"
-              bio="Expert in craft beer; mediocre at golf; and the first person I call when something breaks. Usually it's my car."
-            />
-            <PersonCard
-              imageSrc={gm3}
-              imageAlt="Julian Chen"
-              name="Julian Chen"
-              bio="The culinary genius of the group. If the reception food is good, it's because Julian approved the tasting menu."
-            />
-          </div>
+          <StaggerGroup stagger={0.15} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-14 items-start">
+            <StaggerItem>
+              <PersonCard
+                imageSrc={gm1}
+                imageAlt="David Thorne"
+                label="BEST MAN"
+                name="David Thorne"
+                bio="The guy who once convinced me that moving to London with £500 was a brilliant tactical maneuver. We made it."
+              />
+            </StaggerItem>
+            <StaggerItem className="lg:mt-16">
+              <PersonCard
+                imageSrc={gm2}
+                imageAlt="Marcus Vane"
+                name="Marcus Vane"
+                bio="Expert in craft beer; mediocre at golf; and the first person I call when something breaks. Usually it's my car."
+              />
+            </StaggerItem>
+            <StaggerItem>
+              <PersonCard
+                imageSrc={gm3}
+                imageAlt="Julian Chen"
+                name="Julian Chen"
+                bio="The culinary genius of the group. If the reception food is good, it's because Julian approved the tasting menu."
+              />
+            </StaggerItem>
+          </StaggerGroup>
         </div>
       </section>
-    
 
-    </Layout>
+    </PageTransition>
   )
 }

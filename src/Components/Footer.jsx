@@ -30,7 +30,7 @@ export default function Footer() {
 
           {/* Tagline */}
           <p className="text-[11px] tracking-[0.3em] uppercase text-[#0F0F0F]/45 font-medium">
-            Together Forever · November 2025
+            Together Forever · October 2026
           </p>
 
           {/* Divider */}
@@ -58,7 +58,7 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-stone-200/80 py-6 px-6">
         <p className="text-center text-[11px] text-[#0F0F0F]/40 tracking-wider">
-          © 2025 Josephine & Christopher — A Botanical Love Story. Designed with love.
+          © 2026 Josephine & Christopher — A Botanical Love Story. Designed with love.
         </p>
       </div>
     </footer>

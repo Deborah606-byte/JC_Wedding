@@ -14,4 +14,32 @@
     background-color: #ffffff;
     color: #0F0F0F;
   }
+
+  /* Visible focus ring for keyboard users */
+  *:focus {
+    outline: none;
+  }
+  *:focus-visible {
+    outline: 2px solid #2D4C3B;
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  /* Buttons and links keep their existing visual styles, but get clear keyboard focus */
+  button:focus-visible,
+  a:focus-visible {
+    outline-offset: 4px;
+  }
+}
+
+/* Respect users who request less motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
