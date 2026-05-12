@@ -9,11 +9,12 @@ import Reveal from '../Components/Reveal'
 // ─────────────────────────────────────────────────────────
 import heroFlowers1  from '../assets/flower1.png'   // top-right flowers (top)
 import heroFlowers2  from '../assets/flower2.png'   // top-right flowers (bottom)
-import event01Img    from '../assets/flower3.png'    // Welcome Drinks
-import event02Img    from '../assets/flower4.png'  // The Ceremony
-import event03ImgA   from '../assets/flower5.png' // Cocktail Hour left
-import event03ImgB   from '../assets/flower6.png' // Cocktail Hour right
-import event05Img    from '../assets/flower1.png'   // Grand Send-off
+import event01Img    from '../assets/flower3.png'    // Court Wedding
+import event02Img    from '../assets/flower4.png'    // Traditional Marriage
+import event03ImgA   from '../assets/flower5.png'    // Bridal Shower
+import event03ImgB   from '../assets/flower6.png'    // Bachelor Party
+import event05Img    from '../assets/flower1.png'    // Reception & Celebration
+import event06Img    from '../assets/flower2.png'    // Thanksgiving Service
 
 // ── Shared number label ────────────────────────────────────
 function EventNumber({ n, className = '', style }) {
@@ -51,7 +52,7 @@ function OrderHero() {
                 </h1>
               </Reveal>
               <Reveal delay={0.25} as="p" className="text-[#0F0F0F]/45 text-[14px] leading-[1.85] max-w-xs">
-                A curation of moments designed for connection, celebration, and the beauty of a garden wedding in Benin City.
+                Five days of celebration in Benin City — from the civil ceremony to a closing thanksgiving, woven together by family, tradition, and faith.
               </Reveal>
             </div>
           </div>
@@ -102,20 +103,17 @@ export default function OrderOfEvents() {
 
             <Reveal x={-40} y={0} className="lg:w-[38%] flex-shrink-0 flex flex-col gap-3">
               <EventNumber n={1} />
-              <h2 className="font-display text-[#0F0F0F] text-2xl lg:text-3xl mt-1">Welcome Drinks</h2>
+              <h2 className="font-display text-[#0F0F0F] text-2xl lg:text-3xl mt-1">Court Wedding</h2>
               <p className="text-[10px] tracking-[0.22em] uppercase text-[#2D4C3B] font-semibold">
-                Friday · 5:30 PM
+                Wednesday · October 21
               </p>
               <p className="text-[#0F0F0F]/55 text-[13.5px] leading-[1.85] mt-1">
-                Join us for artisanal botanical cocktails and small plates at the garden pavilion of the reception venue.
+                The civil ceremony at the marriage registry — where Josephine and Christopher are joined in law before close family.
               </p>
-              <button className="text-[11px] tracking-[0.18em] text-[#0F0F0F]/40 hover:text-[#2D4C3B] transition-colors flex items-center gap-1 mt-1 w-fit">
-                View Attire: Garden Chic →
-              </button>
             </Reveal>
 
             <Reveal x={40} y={0} delay={0.15} className="flex-1 overflow-hidden">
-              <img src={event01Img} alt="Welcome Drinks" className="w-full h-60 lg:h-72 object-cover hover:scale-105 transition-transform duration-700" />
+              <img src={event01Img} alt="Court Wedding" className="w-full h-60 lg:h-72 object-cover hover:scale-105 transition-transform duration-700" />
             </Reveal>
 
           </div>
@@ -128,7 +126,7 @@ export default function OrderOfEvents() {
           <div className="flex flex-col lg:flex-row gap-10 lg:gap-12 items-start">
 
             <Reveal x={-40} y={0} className="lg:w-[52%] flex-shrink-0 relative">
-              <img src={event02Img} alt="The Ceremony" className="w-full h-72 lg:h-[420px] object-cover hover:scale-105 transition-transform duration-700" />
+              <img src={event02Img} alt="Traditional Marriage" className="w-full h-72 lg:h-[420px] object-cover hover:scale-105 transition-transform duration-700" />
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -140,22 +138,22 @@ export default function OrderOfEvents() {
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#2D4C3B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
                   </svg>
-                  <span className="font-display italic text-[#0F0F0F] text-[13px]">The Church</span>
+                  <span className="font-display italic text-[#0F0F0F] text-[13px]">Bride's Family</span>
                 </div>
                 <p className="text-[11px] text-[#0F0F0F]/45 leading-relaxed">
-                  Benin City, Nigeria · Please arrive by 3:45 PM for the processional.
+                  Benin City · Guests are encouraged to wear traditional attire.
                 </p>
               </motion.div>
             </Reveal>
 
             <Reveal x={40} y={0} delay={0.15} className="flex-1 flex flex-col gap-3 lg:pt-10">
               <EventNumber n={2} />
-              <h2 className="font-display text-[#0F0F0F] text-2xl lg:text-3xl mt-1">The Ceremony</h2>
+              <h2 className="font-display text-[#0F0F0F] text-2xl lg:text-3xl mt-1">Traditional Marriage</h2>
               <p className="text-[10px] tracking-[0.22em] uppercase text-[#2D4C3B] font-semibold">
-                Saturday · 4:00 PM
+                Thursday · October 22
               </p>
               <p className="text-[#0F0F0F]/55 text-[13.5px] leading-[1.85] mt-1 max-w-xs">
-                A church ceremony in Benin City. We exchange vows in the presence of family, faith, and those we love most.
+                The honoring of culture and heritage. Families gather for the customary rites, blessings, and the joining of two homes.
               </p>
             </Reveal>
 
@@ -170,21 +168,27 @@ export default function OrderOfEvents() {
 
             <Reveal x={-40} y={0} className="lg:w-[34%] flex-shrink-0 flex flex-col gap-3">
               <EventNumber n={3} />
-              <h2 className="font-display text-[#0F0F0F] text-2xl lg:text-3xl mt-1">Cocktail Hour</h2>
+              <h2 className="font-display text-[#0F0F0F] text-2xl lg:text-3xl mt-1">Bridal Shower &amp; Bachelor Party</h2>
               <p className="text-[10px] tracking-[0.22em] uppercase text-[#2D4C3B] font-semibold">
-                Saturday · 5:00 PM
+                Friday · October 23
               </p>
               <p className="text-[#0F0F0F]/55 text-[13.5px] leading-[1.85] mt-1">
-                Music on the lawn. Refreshing botanical spritzers and lawn games as the sun begins to set.
+                Two celebrations, one day — the bride and groom mark the eve of the wedding apart with their closest friends.
               </p>
             </Reveal>
 
             <Reveal x={40} y={0} delay={0.15} className="flex-1 grid grid-cols-2 gap-3">
-              <div className="overflow-hidden">
-                <img src={event03ImgA} alt="Cocktail Hour" className="w-full h-52 lg:h-64 object-cover hover:scale-105 transition-transform duration-700" />
+              <div className="overflow-hidden relative group">
+                <img src={event03ImgA} alt="Bridal Shower" className="w-full h-52 lg:h-64 object-cover group-hover:scale-105 transition-transform duration-700" />
+                <span className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm px-2.5 py-1 text-[10px] tracking-[0.22em] uppercase font-semibold text-[#2D4C3B]">
+                  Bridal Shower
+                </span>
               </div>
-              <div className="overflow-hidden mt-6">
-                <img src={event03ImgB} alt="Cocktail Hour" className="w-full h-52 lg:h-64 object-cover hover:scale-105 transition-transform duration-700" />
+              <div className="overflow-hidden mt-6 relative group">
+                <img src={event03ImgB} alt="Bachelor Party" className="w-full h-52 lg:h-64 object-cover group-hover:scale-105 transition-transform duration-700" />
+                <span className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm px-2.5 py-1 text-[10px] tracking-[0.22em] uppercase font-semibold text-[#2D4C3B]">
+                  Bachelor Party
+                </span>
               </div>
             </Reveal>
 
@@ -200,54 +204,92 @@ export default function OrderOfEvents() {
           </Reveal>
           <Reveal delay={0.1}>
             <h2 style={{ color: '#ffffff' }} className="font-display italic text-3xl lg:text-5xl leading-tight">
-              Dinner &amp; Dancing
+              White Wedding
             </h2>
           </Reveal>
           <Reveal delay={0.2} as="p" style={{ color: 'rgba(255,255,255,0.5)' }} className="text-[10px] tracking-[0.28em] uppercase font-semibold">
-            Saturday · 6:30 PM Until Late
+            Saturday · October 24 · 4:00 PM
           </Reveal>
           <Reveal delay={0.3} as="p" style={{ color: 'rgba(255,255,255,0.6)' }} className="text-[14px] leading-[1.85] max-w-md mt-2">
-            A farm-to-table feast served family-style, followed by a night of movement and melody under the stars.
+            We exchange vows before God, family, and friends as we begin our new journey together in love and faith.
           </Reveal>
-          <motion.div
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.12, delayChildren: 0.4 } } }}
-            className="flex items-center gap-6 mt-4 flex-wrap justify-center"
-          >
-            {['Main Hall', 'Live Quartet', 'Open Bar'].map((tag) => (
-              <motion.span
-                key={tag}
-                variants={{ hidden: { opacity: 0, y: 12 }, show: { opacity: 1, y: 0 } }}
-                style={{ color: 'rgba(255,255,255,0.4)' }}
-                className="text-[10px] tracking-[0.25em] uppercase font-medium"
-              >
-                {tag}
-              </motion.span>
-            ))}
-          </motion.div>
+          <Reveal delay={0.45} className="mt-5">
+            <div className="flex items-start gap-3 max-w-md text-left bg-white/[0.06] border border-white/15 px-5 py-4">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.7)" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" className="mt-1 flex-shrink-0">
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+              </svg>
+              <div>
+                <p style={{ color: 'rgba(255,255,255,0.7)' }} className="text-[10px] tracking-[0.22em] uppercase font-semibold">
+                  Wedding Venue
+                </p>
+                <p style={{ color: 'rgba(255,255,255,0.85)' }} className="text-[12.5px] leading-[1.7] mt-1.5">
+                  Assurance Of Salvation Ministries Inc Fire Centre,<br />
+                  Irhinmwirin Mega Church (FC8)<br />
+                  No. 2 Freedom Street, Off Enogie Palace Road,<br />
+                  Through St. Saviour, Benin City
+                </p>
+              </div>
+            </div>
+          </Reveal>
         </div>
       </section>
 
-      {/* ── EVENT 05: Grand Send-off ── */}
+      {/* ── EVENT 05: Reception & Celebration ── */}
       <section className="bg-[#f7f6f2] py-14 lg:py-20 overflow-hidden">
         <div className="max-w-6xl mx-auto px-6 lg:px-10">
           <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-center">
 
             <Reveal x={-40} y={0} className="lg:w-[52%] flex-shrink-0 overflow-hidden">
-              <img src={event05Img} alt="Grand Send-off" className="w-full h-72 lg:h-[400px] object-cover hover:scale-105 transition-transform duration-700" />
+              <img src={event05Img} alt="Reception & Celebration" className="w-full h-72 lg:h-[400px] object-cover hover:scale-105 transition-transform duration-700" />
             </Reveal>
 
             <Reveal x={40} y={0} delay={0.15} className="flex-1 flex flex-col gap-3">
               <EventNumber n={5} />
-              <h2 className="font-display text-[#0F0F0F] text-2xl lg:text-3xl mt-1">Grand Send-off</h2>
+              <h2 className="font-display text-[#0F0F0F] text-2xl lg:text-3xl mt-1">Reception &amp; Celebration</h2>
               <p className="text-[10px] tracking-[0.22em] uppercase text-[#2D4C3B] font-semibold">
-                Saturday · 11:45 PM
+                Saturday · Immediately After the Ceremony
               </p>
-              <p className="text-[#0F0F0F]/55 text-[13.5px] leading-[1.85] mt-1 max-w-xs">
-                Sparklers and well-wishes as the new couple departs for their next chapter.
+              <p className="text-[#0F0F0F]/55 text-[13.5px] leading-[1.85] mt-1 max-w-sm">
+                Join us for an evening of love, music, dining, dancing, and unforgettable memories as we celebrate together into the night.
               </p>
+              <div className="flex items-start gap-2.5 mt-3 max-w-sm">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#2D4C3B" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="mt-1 flex-shrink-0">
+                  <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
+                </svg>
+                <div>
+                  <p className="text-[10px] tracking-[0.22em] uppercase text-[#2D4C3B] font-semibold">
+                    Reception Venue
+                  </p>
+                  <p className="text-[12.5px] text-[#0F0F0F]/60 leading-[1.7] mt-1">
+                    1st Igiewie Street, Off Enogie Palace Road,<br />
+                    St. Saviour Road, Benin City
+                  </p>
+                </div>
+              </div>
+            </Reveal>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ── EVENT 06: Thanksgiving Service ── */}
+      <section className="bg-white py-14 lg:py-20 border-t border-stone-100 overflow-hidden">
+        <div className="max-w-6xl mx-auto px-6 lg:px-10">
+          <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-center">
+
+            <Reveal x={-40} y={0} className="lg:w-[38%] flex-shrink-0 flex flex-col gap-3">
+              <EventNumber n={6} />
+              <h2 className="font-display text-[#0F0F0F] text-2xl lg:text-3xl mt-1">Thanksgiving Service</h2>
+              <p className="text-[10px] tracking-[0.22em] uppercase text-[#2D4C3B] font-semibold">
+                Sunday · October 25, 2026
+              </p>
+              <p className="text-[#0F0F0F]/55 text-[13.5px] leading-[1.85] mt-1">
+                With grateful hearts, we gather for a thanksgiving service to appreciate God&rsquo;s faithfulness, love, and blessings throughout our wedding celebrations.
+              </p>
+            </Reveal>
+
+            <Reveal x={40} y={0} delay={0.15} className="flex-1 overflow-hidden">
+              <img src={event06Img} alt="Thanksgiving Service" className="w-full h-60 lg:h-72 object-cover hover:scale-105 transition-transform duration-700" />
             </Reveal>
 
           </div>

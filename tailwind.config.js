@@ -20,6 +20,7 @@ export default {
       fontFamily: {
         sans: ['Manrope', 'sans-serif'],
         display: ['Sora', 'sans-serif'],
+        script: ['Allura', 'cursive'],
       },
     },
   },

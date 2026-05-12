@@ -4,7 +4,6 @@ import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react'
 import PageTransition from '../Components/PageTransition'
 import Reveal, { StaggerGroup, StaggerItem } from '../Components/Reveal'
 import Lightbox, { useLightbox } from '../Components/Lightbox'
-import AddToCalendar from '../Components/AddToCalendar'
 
 import heroImg  from '../assets/home-hero.png'
 import venueImg from '../assets/section1.png'
@@ -43,7 +42,7 @@ function CountUnit({ value, label }) {
   const padded = String(value).padStart(2, '0')
   return (
     <div className="flex flex-col items-center gap-1">
-      <div className="relative font-display text-5xl lg:text-7xl text-[#0F0F0F] tracking-tight leading-none h-[1em] w-[1.6em] overflow-hidden">
+      <div className="relative font-display text-[34px] sm:text-5xl lg:text-7xl text-[#0F0F0F] tracking-tight leading-none h-[1em] w-[1.6em] overflow-hidden">
         <AnimatePresence mode="popLayout" initial={false}>
           <motion.span
             key={padded}
@@ -57,7 +56,7 @@ function CountUnit({ value, label }) {
           </motion.span>
         </AnimatePresence>
       </div>
-      <span className="text-[10px] tracking-[0.25em] uppercase text-[#0F0F0F]/40 font-medium">
+      <span className="text-[9px] sm:text-[10px] tracking-[0.22em] sm:tracking-[0.25em] uppercase text-[#0F0F0F]/40 font-medium">
         {label}
       </span>
     </div>
@@ -170,14 +169,28 @@ export default function Home() {
           <Reveal as="p" className="font-display italic text-[#0F0F0F]/50 text-lg tracking-wide">
             The Final Countdown
           </Reveal>
-          <Reveal delay={0.15} className="flex items-start justify-center gap-8 lg:gap-16 w-full">
+          <Reveal delay={0.15} className="flex items-start justify-center gap-3 sm:gap-8 lg:gap-16 w-full">
             <CountUnit value={days} label="Days" />
             <CountUnit value={hours} label="Hours" />
             <CountUnit value={minutes} label="Minutes" />
             <CountUnit value={seconds} label="Seconds" />
           </Reveal>
           <Reveal delay={0.3}>
-            <AddToCalendar className="mt-2" />
+            <div className="mt-2 inline-flex items-center gap-3 sm:gap-8 p-1.5 sm:p-2 pl-6 sm:pl-20 pr-1.5 sm:pr-8 bg-white rounded-full shadow-[0_10px_30px_-12px_rgba(15,15,15,0.25)] ring-1 ring-stone-200/70 max-w-full">
+              <Link
+                to="/rsvp"
+                className="text-[12px] sm:text-[13.5px] font-medium tracking-wide text-[#0F0F0F] hover:text-[#2D4C3B] transition-colors duration-200 whitespace-nowrap"
+              >
+                RSVP Now
+              </Link>
+              <Link
+                to="/guestbook"
+                style={{ color: '#ffffff' }}
+                className="text-[12px] sm:text-[13.5px] font-semibold tracking-wide text-white bg-[#0F0F0F] hover:bg-[#2D4C3B] px-5 sm:px-9 py-2.5 sm:py-3 rounded-full transition-colors duration-200 whitespace-nowrap"
+              >
+                Leave a Love Note
+              </Link>
+            </div>
           </Reveal>
         </div>
       </section>

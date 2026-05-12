@@ -16,7 +16,16 @@ export default function Navbar() {
   const location = useLocation()
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24)
+    // Hysteresis: collapse past 60, expand back below 20.
+    // Prevents flip-flop at the threshold when the header changes height.
+    const onScroll = () => {
+      const y = window.scrollY
+      setScrolled(prev => {
+        if (!prev && y > 60) return true
+        if (prev && y < 20) return false
+        return prev
+      })
+    }
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
@@ -24,42 +33,50 @@ export default function Navbar() {
 
   return (
     <header
-      className={`w-full sticky top-0 z-50 border-b border-stone-200/70 bg-white/90 backdrop-blur-md transition-shadow duration-300 ${
-        scrolled ? 'shadow-md' : ''
+      style={{ willChange: 'transform' }}
+      className={`w-full sticky top-0 z-50 bg-[#F8F4EC]/75 backdrop-blur-xl backdrop-saturate-150 transition-shadow duration-300 transform-gpu ${
+        scrolled ? 'shadow-[0_4px_24px_-14px_rgba(45,76,59,0.25)]' : ''
       }`}
     >
-
-      {/* Top: Centered Logo Block — collapses on scroll */}
+      {/* Top: JC monogram + script names — collapses on scroll */}
       <div
-        className={`flex flex-col items-center justify-center px-6 overflow-hidden transition-all duration-300 ${
-          scrolled ? 'max-h-0 opacity-0 py-0 pointer-events-none' : 'max-h-28 pt-3 pb-1.5 opacity-100'
+        className={`flex flex-col items-center justify-center px-6 overflow-hidden transition-[max-height,opacity,padding] duration-300 ease-out ${
+          scrolled
+            ? 'max-h-0 opacity-0 py-0 pointer-events-none'
+            : 'max-h-64 pt-6 md:pt-9 pb-2 md:pb-3 opacity-100'
         }`}
       >
-        <Link to="/" onClick={() => setMenuOpen(false)} className="flex items-center gap-2.5">
+        <Link
+          to="/"
+          onClick={() => setMenuOpen(false)}
+          className="flex flex-col items-center gap-1 md:gap-2 group"
+        >
           <img
             src={logo}
             alt="JC Monogram"
-            className="h-7 w-auto object-contain"
+            className="h-11 sm:h-14 md:h-20 lg:h-24 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.03]"
           />
-          <span className="font-display italic text-[#2D4C3B] text-xl lg:text-[1.4rem] tracking-wide leading-none hover:opacity-80 transition-opacity">
+          <span className="font-script text-[#2D4C3B] text-[26px] sm:text-3xl md:text-5xl lg:text-[3.75rem] leading-none tracking-wide whitespace-nowrap">
             Josephine &amp; Christopher
           </span>
         </Link>
       </div>
 
-      {/* Bottom: Desktop Nav Links */}
-      <nav className="hidden md:flex border-t border-stone-200/60">
-        <div className="flex items-center justify-center gap-7 lg:gap-10 px-6 py-2.5 w-full flex-wrap">
+      {/* Desktop nav links — always visible */}
+      <nav className="hidden md:block">
+        <div className={`flex items-center justify-center gap-8 lg:gap-12 px-6 transition-[padding] duration-300 ease-out ${
+          scrolled ? 'py-3' : 'pb-5 md:pb-6 pt-1'
+        }`}>
           {navLinks.map(({ label, to }) => {
             const active = location.pathname === to
             return (
               <Link
                 key={to}
                 to={to}
-                className={`text-[12.5px] tracking-wide transition-colors duration-200 relative pb-1 after:absolute after:left-0 after:right-0 after:-bottom-[7px] after:h-[2px] after:bg-[#2D4C3B] after:transition-transform after:duration-300 ${
+                className={`text-[15px] tracking-wide transition-colors duration-200 ${
                   active
-                    ? 'font-semibold text-[#2D4C3B] after:origin-left after:scale-x-100'
-                    : 'font-medium text-[#0F0F0F]/60 hover:text-[#2D4C3B] after:origin-center after:scale-x-0 hover:after:scale-x-100'
+                    ? 'font-bold text-[#0F0F0F]'
+                    : 'font-medium text-[#0F0F0F]/60 hover:text-[#2D4C3B]'
                 }`}
               >
                 {label}
@@ -67,20 +84,21 @@ export default function Navbar() {
             )
           })}
 
-          {/* RSVP Button — solid green, square corners */}
           <Link
             to="/rsvp"
             style={{ color: '#ffffff' }}
-            className="text-[11px] font-semibold tracking-[0.22em] uppercase px-5 py-2 bg-[#2D4C3B] text-white hover:bg-[#3a6050] transition-colors duration-200"
+            className="text-[12px] font-semibold tracking-[0.22em] uppercase px-6 py-2.5 bg-[#2D4C3B] text-white hover:bg-[#3a6050] transition-colors duration-200"
           >
             RSVP
           </Link>
         </div>
       </nav>
 
-      {/* Mobile: Hamburger + Dropdown */}
-      <div className="md:hidden border-t border-stone-200/60">
-        <div className="flex items-center justify-between py-2 px-5">
+      {/* Mobile: compact bar with hamburger */}
+      <div className="md:hidden">
+        <div className={`flex items-center justify-between px-5 transition-[padding] duration-300 ease-out ${
+          scrolled ? 'py-3' : 'pb-3 pt-1'
+        }`}>
           <Link
             to="/rsvp"
             onClick={() => setMenuOpen(false)}
@@ -110,8 +128,8 @@ export default function Navbar() {
                   key={to}
                   to={to}
                   onClick={() => setMenuOpen(false)}
-                  className={`text-[13px] tracking-wide py-3 border-b border-stone-100 ${
-                    active ? 'font-semibold text-[#2D4C3B]' : 'font-medium text-[#0F0F0F]/65 hover:text-[#2D4C3B]'
+                  className={`text-[14px] tracking-wide py-3 border-b border-stone-100 ${
+                    active ? 'font-bold text-[#0F0F0F]' : 'font-medium text-[#0F0F0F]/65 hover:text-[#2D4C3B]'
                   }`}
                 >
                   {label}
@@ -121,7 +139,6 @@ export default function Navbar() {
           </nav>
         </div>
       </div>
-
     </header>
   )
 }

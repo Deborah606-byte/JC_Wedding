@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react'
 import PageTransition from '../Components/PageTransition'
 import Reveal, { StaggerGroup, StaggerItem } from '../Components/Reveal'
+import { submitRsvp } from '../lib/api'
 
 // ─────────────────────────────────────────────────────────
 // 🖼️  IMAGES — rename your files in src/assets/ to match
@@ -142,11 +143,22 @@ export default function RSVP() {
     note: '',
   })
   const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [error, setError] = useState('')
   const [openFaq, setOpenFaq] = useState(0)
 
-  const handleSubmit = () => {
-    if (!form.name || !form.meal) return
-    setSubmitted(true)
+  const handleSubmit = async () => {
+    if (!form.name || !form.meal || submitting) return
+    setError('')
+    setSubmitting(true)
+    try {
+      await submitRsvp(form)
+      setSubmitted(true)
+    } catch (err) {
+      setError(err.message || 'Something went wrong. Please try again.')
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   return (
@@ -286,15 +298,21 @@ export default function RSVP() {
                   <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 mt-2">
                     <button
                       onClick={handleSubmit}
+                      disabled={submitting}
                       style={{ color: '#ffffff' }}
-                      className="bg-[#2D4C3B] text-[11px] font-semibold tracking-[0.25em] uppercase px-8 py-4 hover:bg-[#3a6050] transition-colors duration-300 flex-shrink-0"
+                      className="bg-[#2D4C3B] text-[11px] font-semibold tracking-[0.25em] uppercase px-8 py-4 hover:bg-[#3a6050] transition-colors duration-300 flex-shrink-0 disabled:opacity-60 disabled:cursor-not-allowed"
                     >
-                      Confirm Attendance
+                      {submitting ? 'Sending…' : 'Confirm Attendance'}
                     </button>
                     <p className="text-[11px] text-[#0F0F0F]/35 leading-relaxed">
                       Kindly contact the bridal party for special requests.
                     </p>
                   </div>
+                  {error && (
+                    <p className="text-[12px] text-red-700 bg-red-50 border border-red-200 px-3 py-2">
+                      {error}
+                    </p>
+                  )}
                 </>
               )}
             </div>

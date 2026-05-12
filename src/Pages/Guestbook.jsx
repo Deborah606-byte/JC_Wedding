@@ -1,48 +1,22 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { motion } from 'motion/react'
 import PageTransition from '../Components/PageTransition'
 import Reveal, { StaggerGroup, StaggerItem } from '../Components/Reveal'
+import { submitBlessing, fetchBlessings, isApiConfigured } from '../lib/api'
 
 // 🖼️ Replace with your actual asset imports
 import botanicalImg from '../assets/happy.jpg'   // flower/botanical photo bottom-left
-import guestImg1    from '../assets/happy.jpg'      // Uncle David card photo
 
-// ── Sample blessings data ──────────────────────────────────
-const initialBlessings = [
-  {
-    id: 1,
-    name: 'Sarah & Michael',
-    date: 'June 12, 2024',
-    message: 'To the most beautiful couple. May your journey together be as stunning as this day. We still remember that first camping trip where we knew you two were made for each other. All our love!',
-    type: 'plain',
-    tag: null,
-  },
-  {
-    id: 2,
-    name: 'Uncle David',
-    date: 'June 11, 2024',
-    message: 'Watching you grow from a curious little girl into the woman you are today has been the joy of my life. Michael is a lucky man, but then again, you both are.',
-    type: 'photo',
-    tag: 'A Life-Long Blessing',
-    img: guestImg1,
-  },
-  {
-    id: 3,
-    name: 'The Miller Cousins',
-    date: 'June 10, 2024',
-    message: "Can't wait to tear up the dance floor with you both! So incredibly happy to welcome Michael into the family (officially!). Cheers to a lifetime of adventures.",
-    type: 'featured',
-    tag: null,
-  },
-  {
-    id: 4,
-    name: 'Elena & Thomas',
-    date: 'June 10, 2024',
-    message: 'A marriage is not just two people, but two stories becoming one. We are so honored to be part of this chapter.',
-    type: 'minimal',
-    tag: null,
-  },
-]
+// ── Card type cycle (visual variety for backend-driven entries) ──
+const CARD_TYPES = ['featured', 'plain', 'minimal', 'plain']
+
+function formatDate(iso) {
+  try {
+    return new Date(iso).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })
+  } catch {
+    return ''
+  }
+}
 
 // ── Blessing card variants ─────────────────────────────────
 function PlainCard({ name, date, message }) {
@@ -60,25 +34,6 @@ function PlainCard({ name, date, message }) {
           <span className="text-[11px] text-[#0F0F0F]/35 flex-shrink-0 ml-4">{date}</span>
         </div>
         <p className="text-[#0F0F0F]/60 text-[13.5px] leading-[1.75] italic">"{message}"</p>
-      </div>
-    </div>
-  )
-}
-
-function PhotoCard({ name, message, tag, img }) {
-  return (
-    <div className="bg-white border border-stone-200 rounded-sm overflow-hidden flex flex-col sm:flex-row">
-      {img && (
-        <div className="sm:w-44 flex-shrink-0">
-          <img src={img} alt={name} className="w-full h-44 sm:h-full object-cover" />
-        </div>
-      )}
-      <div className="p-6 flex flex-col justify-center gap-3">
-        <span className="font-semibold text-[#0F0F0F] text-[16px]">{name}</span>
-        <p className="text-[#0F0F0F]/60 text-[13.5px] leading-[1.75] italic">"{message}"</p>
-        {tag && (
-          <span className="text-[10px] tracking-[0.2em] uppercase text-[#2D4C3B] font-semibold">{tag}</span>
-        )}
       </div>
     </div>
   )
@@ -124,27 +79,60 @@ function MinimalCard({ name, date, message }) {
 
 // ── Page ───────────────────────────────────────────────────
 export default function Guestbook() {
-  const [blessings, setBlessings] = useState(initialBlessings)
+  const [blessings, setBlessings] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [loadError, setLoadError] = useState('')
   const [showAll, setShowAll] = useState(false)
   const [form, setForm] = useState({ name: '', message: '' })
   const [submitted, setSubmitted] = useState(false)
+  const [submitting, setSubmitting] = useState(false)
+  const [submitError, setSubmitError] = useState('')
+
+  useEffect(() => {
+    let cancelled = false
+    if (!isApiConfigured) {
+      setLoading(false)
+      return
+    }
+    fetchBlessings()
+      .then(entries => {
+        if (cancelled) return
+        const decorated = entries.map((e, i) => ({
+          id: e.timestamp + i,
+          name: e.name,
+          message: e.message,
+          date: formatDate(e.timestamp),
+          type: CARD_TYPES[i % CARD_TYPES.length],
+          tag: null,
+        }))
+        setBlessings(decorated)
+      })
+      .catch(err => {
+        if (cancelled) return
+        setLoadError(err.message || 'Could not load blessings.')
+      })
+      .finally(() => {
+        if (!cancelled) setLoading(false)
+      })
+    return () => { cancelled = true }
+  }, [])
 
   const visibleBlessings = showAll ? blessings : blessings.slice(0, 4)
 
-  const handleSubmit = () => {
-    if (!form.name.trim() || !form.message.trim()) return
-    const newBlessing = {
-      id: Date.now(),
-      name: form.name,
-      date: new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }),
-      message: form.message,
-      type: 'minimal',
-      tag: null,
+  const handleSubmit = async () => {
+    if (!form.name.trim() || !form.message.trim() || submitting) return
+    setSubmitError('')
+    setSubmitting(true)
+    try {
+      await submitBlessing({ name: form.name, message: form.message })
+      setForm({ name: '', message: '' })
+      setSubmitted(true)
+      setTimeout(() => setSubmitted(false), 5000)
+    } catch (err) {
+      setSubmitError(err.message || 'Could not send. Please try again.')
+    } finally {
+      setSubmitting(false)
     }
-    setBlessings([newBlessing, ...blessings])
-    setForm({ name: '', message: '' })
-    setSubmitted(true)
-    setTimeout(() => setSubmitted(false), 3000)
   }
 
   return (
@@ -213,10 +201,11 @@ export default function Guestbook() {
                   {/* Submit */}
                   <button
                     onClick={handleSubmit}
+                    disabled={submitting}
                     style={{ color: '#ffffff' }}
-                    className="w-full bg-[#2D4C3B] text-[11px] font-semibold tracking-[0.25em] uppercase py-3.5 rounded-sm hover:bg-[#3a6050] transition-colors duration-300 flex items-center justify-center gap-2 mt-2"
+                    className="w-full bg-[#2D4C3B] text-[11px] font-semibold tracking-[0.25em] uppercase py-3.5 rounded-sm hover:bg-[#3a6050] transition-colors duration-300 flex items-center justify-center gap-2 mt-2 disabled:opacity-60 disabled:cursor-not-allowed"
                   >
-                    {submitted ? 'Blessing Sent ✓' : (
+                    {submitting ? 'Sending…' : submitted ? 'Blessing Sent ✓' : (
                       <>
                         Send Blessing
                         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -225,6 +214,17 @@ export default function Guestbook() {
                       </>
                     )}
                   </button>
+
+                  {submitted && (
+                    <p className="text-[12px] text-[#2D4C3B] bg-[#2D4C3B]/[0.06] border border-[#2D4C3B]/15 px-3 py-2 leading-relaxed">
+                      Thank you. Your blessing has been received and will appear here once the couple approves it.
+                    </p>
+                  )}
+                  {submitError && (
+                    <p className="text-[12px] text-red-700 bg-red-50 border border-red-200 px-3 py-2">
+                      {submitError}
+                    </p>
+                  )}
                 </div>
               </div>
 
@@ -240,27 +240,47 @@ export default function Guestbook() {
             </Reveal>
 
             {/* ── RIGHT: Blessing cards ── */}
-            <StaggerGroup stagger={0.1} className="flex-1 flex flex-col gap-4">
-              {visibleBlessings.map((b) => (
-                <StaggerItem key={b.id}>
-                  {b.type === 'plain'    && <PlainCard    {...b} />}
-                  {b.type === 'photo'    && <PhotoCard    {...b} />}
-                  {b.type === 'featured' && <FeaturedCard {...b} />}
-                  {b.type === 'minimal'  && <MinimalCard  {...b} />}
-                </StaggerItem>
-              ))}
-
-              {/* View all toggle */}
-              {blessings.length > 4 && (
-                <motion.button
-                  whileHover={{ x: 3 }}
-                  onClick={() => setShowAll(!showAll)}
-                  className="self-end flex items-center gap-2 text-[11px] tracking-[0.2em] uppercase text-[#0F0F0F]/40 hover:text-[#2D4C3B] transition-colors font-medium mt-2"
-                >
-                  {showAll ? 'Show Less ↑' : 'View All Memories ↓'}
-                </motion.button>
+            <div className="flex-1 flex flex-col gap-4">
+              {loading && (
+                <div className="bg-white border border-stone-200 rounded-sm px-6 py-10 text-center text-[13px] text-[#0F0F0F]/45">
+                  Loading blessings…
+                </div>
               )}
-            </StaggerGroup>
+
+              {!loading && loadError && (
+                <div className="bg-red-50 border border-red-200 rounded-sm px-6 py-5 text-[13px] text-red-700">
+                  {loadError}
+                </div>
+              )}
+
+              {!loading && !loadError && blessings.length === 0 && (
+                <div className="bg-white border border-stone-200 rounded-sm px-6 py-10 text-center">
+                  <p className="font-display italic text-[#0F0F0F] text-lg mb-1">No blessings yet</p>
+                  <p className="text-[13px] text-[#0F0F0F]/50">Be the first to leave a note for the couple.</p>
+                </div>
+              )}
+
+              <StaggerGroup stagger={0.1} className="flex flex-col gap-4">
+                {visibleBlessings.map((b) => (
+                  <StaggerItem key={b.id}>
+                    {b.type === 'plain'    && <PlainCard    {...b} />}
+                    {b.type === 'featured' && <FeaturedCard {...b} />}
+                    {b.type === 'minimal'  && <MinimalCard  {...b} />}
+                  </StaggerItem>
+                ))}
+
+                {/* View all toggle */}
+                {blessings.length > 4 && (
+                  <motion.button
+                    whileHover={{ x: 3 }}
+                    onClick={() => setShowAll(!showAll)}
+                    className="self-end flex items-center gap-2 text-[11px] tracking-[0.2em] uppercase text-[#0F0F0F]/40 hover:text-[#2D4C3B] transition-colors font-medium mt-2"
+                  >
+                    {showAll ? 'Show Less ↑' : 'View All Memories ↓'}
+                  </motion.button>
+                )}
+              </StaggerGroup>
+            </div>
 
           </div>
         </div>
