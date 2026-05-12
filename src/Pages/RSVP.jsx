@@ -117,7 +117,8 @@ function RsvpHero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          className="font-display italic text-[#2D4C3B] text-4xl lg:text-6xl xl:text-7xl leading-[1.1] drop-shadow-sm max-w-3xl"
+          style={{ color: '#ffffff' }}
+          className="font-display italic text-white text-4xl lg:text-6xl xl:text-7xl leading-[1.1] drop-shadow-lg max-w-3xl"
         >
           Kindly respond by the twenty-fourth of September
         </motion.h1>
@@ -125,7 +126,8 @@ function RsvpHero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          className="text-[#0F0F0F]/65 text-[14px] leading-[1.85] max-w-md mt-2"
+          style={{ color: 'rgba(255,255,255,0.85)' }}
+          className="text-white/85 text-[14px] leading-[1.85] max-w-md mt-2 drop-shadow"
         >
           We look forward to celebrating this special milestone with those we love most in the heart of Benin City.
         </motion.p>

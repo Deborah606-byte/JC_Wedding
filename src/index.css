@@ -9,8 +9,10 @@
     box-sizing: border-box;
   }
 
-  html, body {
-    overflow-x: hidden;
+  html {
+    /* overflow-x: clip prevents horizontal scroll without breaking
+       position: sticky on descendants (unlike overflow: hidden). */
+    overflow-x: clip;
   }
 
   body {
