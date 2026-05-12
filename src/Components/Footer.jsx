@@ -16,7 +16,7 @@ export default function Footer() {
       <div className="flex items-center justify-center pt-14 pb-10">
         <div className="flex flex-col items-center gap-5">
           {/* Monogram / ornament */}
-          <div className="text-[#2D4C3B] opacity-40">
+          <div className="text-[#2D4C3B] opacity-40" aria-hidden="true">
             <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M18 2 L18 34 M2 18 L34 18 M6 6 L30 30 M30 6 L6 30" stroke="currentColor" strokeWidth="0.8" strokeLinecap="round"/>
               <circle cx="18" cy="18" r="10" stroke="currentColor" strokeWidth="0.8"/>

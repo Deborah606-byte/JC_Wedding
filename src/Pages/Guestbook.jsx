@@ -242,8 +242,23 @@ export default function Guestbook() {
             {/* ── RIGHT: Blessing cards ── */}
             <div className="flex-1 flex flex-col gap-4">
               {loading && (
-                <div className="bg-white border border-stone-200 rounded-sm px-6 py-10 text-center text-[13px] text-[#0F0F0F]/45">
-                  Loading blessings…
+                <div className="flex flex-col gap-4" aria-label="Loading blessings" aria-busy="true">
+                  {[0, 1, 2].map(i => (
+                    <div key={i} className="bg-white border border-stone-200 rounded-sm p-6 flex gap-4 animate-pulse">
+                      <div className="w-9 h-9 rounded-md bg-stone-200 flex-shrink-0" />
+                      <div className="flex-1 min-w-0 flex flex-col gap-3">
+                        <div className="flex items-center justify-between">
+                          <div className="h-3 bg-stone-200 rounded w-1/3" />
+                          <div className="h-3 bg-stone-100 rounded w-20" />
+                        </div>
+                        <div className="space-y-2">
+                          <div className="h-2.5 bg-stone-100 rounded w-full" />
+                          <div className="h-2.5 bg-stone-100 rounded w-11/12" />
+                          <div className="h-2.5 bg-stone-100 rounded w-4/5" />
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               )}
 

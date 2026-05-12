@@ -231,7 +231,7 @@ export default function Home() {
       <section className="bg-white py-20 lg:py-28">
         <div className="max-w-xl mx-auto px-6 flex flex-col items-center gap-6 text-center">
           <Reveal>
-            <svg width="20" height="28" viewBox="0 0 20 28" fill="none" className="text-[#2D4C3B]/40">
+            <svg width="20" height="28" viewBox="0 0 20 28" fill="none" className="text-[#2D4C3B]/40" aria-hidden="true">
               <path d="M10 28 C10 28 10 14 10 0 M10 14 C10 14 2 10 0 4 M10 14 C10 14 18 10 20 4 M10 20 C10 20 4 18 2 13 M10 20 C10 20 16 18 18 13" stroke="currentColor" strokeWidth="1" strokeLinecap="round"/>
             </svg>
           </Reveal>
