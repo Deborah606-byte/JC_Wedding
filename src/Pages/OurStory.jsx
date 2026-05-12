@@ -1,26 +1,40 @@
-import { motion } from 'motion/react'
+import { motion, useScroll, useTransform } from 'motion/react'
 import PageTransition from '../Components/PageTransition'
 import Reveal, { StaggerGroup, StaggerItem } from '../Components/Reveal'
 import Lightbox, { useLightbox } from '../Components/Lightbox'
 
 // ─────────────────────────────────────────────────────────
-// 🖼️  IMAGES — rename your files in src/assets/ to match
+// 🖼️  IMAGES — swap any of these for real couple photos
 // ─────────────────────────────────────────────────────────
-import storyImg1   from '../assets/happy.jpg'      // Where It Began
-import storyImg2   from '../assets/32089.jpg'      // Faith & Fellowship
-import storyImg3   from '../assets/pic1.png'       // Growing Together
-import storyImg4   from '../assets/47639.jpg'      // The Proposal
-import storyImg5   from '../assets/home-hero.png'  // Forever Begins
-import collected1  from '../assets/happy.jpg'
-import collected2  from '../assets/32089.jpg'
-import collected3  from '../assets/47639.jpg'
-import collected4  from '../assets/pic1.png'
-import collected5  from '../assets/home-hero.png'
+import heroImg    from '../assets/happy.jpg'      // Full-bleed page hero
+import storyImg1  from '../assets/32089.jpg'      // Where It Began
+import storyImg2  from '../assets/pic1.png'       // Faith & Fellowship
+import storyImg3  from '../assets/47639.jpg'      // From Friendship to Love
+import storyImg4  from '../assets/home-hero.png'  // The Proposal
+import storyImg5  from '../assets/hero.png'       // Forever Begins
+import collected1 from '../assets/happy.jpg'
+import collected2 from '../assets/32089.jpg'
+import collected3 from '../assets/47639.jpg'
+import collected4 from '../assets/pic1.png'
+import collected5 from '../assets/home-hero.png'
+
+const EASE = [0.22, 1, 0.36, 1]
+
+// ── Decorative botanical sprig (reused from Home's letter section) ──
+function Sprig({ className = '' }) {
+  return (
+    <svg width="22" height="34" viewBox="0 0 20 28" fill="none" className={className} aria-hidden="true">
+      <path d="M10 28 C10 28 10 14 10 0 M10 14 C10 14 2 10 0 4 M10 14 C10 14 18 10 20 4 M10 20 C10 20 4 18 2 13 M10 20 C10 20 16 18 18 13"
+        stroke="currentColor" strokeWidth="1" strokeLinecap="round"/>
+    </svg>
+  )
+}
 
 // ── Timeline chapters ──────────────────────────────────────
 const chapters = [
   {
     id: 1,
+    roman: 'I',
     label: 'Edo State Polytechnic, Usen',
     title: 'Where It Began',
     body: 'We first met as students — simply schoolmates navigating lectures, assignments, and the future ahead of us. Neither of us knew that behind those ordinary moments, God was quietly preparing something extraordinary.',
@@ -29,6 +43,7 @@ const chapters = [
   },
   {
     id: 2,
+    roman: 'II',
     label: 'Nigeria Fellowship of Evangelical Students',
     title: 'Faith Brought Us Closer',
     body: 'Our journey truly began through fellowship and service. Christopher served as Bible Study Secretary; Josephine served as General Secretary. From prayer meetings to programmes and long conversations, friendship grew naturally — laying the foundation for something much deeper.',
@@ -37,6 +52,7 @@ const chapters = [
   },
   {
     id: 3,
+    roman: 'III',
     label: 'Stage by Stage',
     title: 'From Friendship to Love',
     body: 'From schoolmates to fellowship members, to executives serving side by side, to genuine friends, and at last to love. Somewhere along the journey, we stopped imagining the future separately and began seeing it together.',
@@ -45,6 +61,7 @@ const chapters = [
   },
   {
     id: 4,
+    roman: 'IV',
     label: 'The Question',
     title: 'The Proposal',
     body: 'After years of friendship, prayers, and growth, Christopher asked the question that would change our lives forever. With a full heart and joyful tears, Josephine said yes — yes to love, to partnership, to purpose, to forever.',
@@ -53,6 +70,7 @@ const chapters = [
   },
   {
     id: 5,
+    roman: 'V',
     label: 'October 2026',
     title: 'Forever Begins',
     body: 'As we prepare for our wedding, our hearts are filled with gratitude — for every season, every lesson, and every person who has been part of our journey. Most of all, for a God who wrote a story more beautiful than we could have imagined.',
@@ -62,24 +80,25 @@ const chapters = [
 ]
 
 // ── Chapter block ──────────────────────────────────────────
-function Chapter({ label, title, body, img, imgLeft }) {
+function Chapter({ roman, label, title, body, img, imgLeft }) {
   return (
-    <div className="flex flex-col lg:flex-row items-center gap-0 w-full overflow-hidden">
+    <div className="flex flex-col lg:flex-row items-stretch w-full">
 
       {/* Image side */}
       <motion.div
         initial={{ opacity: 0, x: imgLeft ? -50 : 50 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true, margin: '-80px' }}
-        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+        transition={{ duration: 0.9, ease: EASE }}
         className={`w-full lg:w-1/2 ${imgLeft ? 'lg:order-1' : 'lg:order-2'}`}
       >
-        <div className="overflow-hidden">
+        <div className="relative h-full overflow-hidden group">
           <img
             src={img}
             alt={title}
-            className="w-full h-72 lg:h-[480px] object-cover transition-transform duration-700 hover:scale-105"
+            className="w-full h-80 lg:h-[540px] object-cover transition-transform duration-[1200ms] group-hover:scale-105"
           />
+          <div className="absolute inset-0 ring-1 ring-inset ring-black/5 pointer-events-none" />
         </div>
       </motion.div>
 
@@ -88,17 +107,23 @@ function Chapter({ label, title, body, img, imgLeft }) {
         initial={{ opacity: 0, x: imgLeft ? 50 : -50 }}
         whileInView={{ opacity: 1, x: 0 }}
         viewport={{ once: true, margin: '-80px' }}
-        transition={{ duration: 0.9, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-        className={`w-full lg:w-1/2 flex flex-col justify-center px-8 lg:px-16 py-12 lg:py-0
-          ${imgLeft ? 'lg:order-2' : 'lg:order-1 text-right lg:items-end'}`}
+        transition={{ duration: 0.9, delay: 0.15, ease: EASE }}
+        className={`w-full lg:w-1/2 flex flex-col justify-center px-8 lg:px-20 py-14 lg:py-0
+          ${imgLeft ? 'lg:order-2' : 'lg:order-1'}`}
       >
-        <p className="text-[11px] tracking-[0.3em] uppercase text-[#2D4C3B] font-semibold mb-3">
+        <div className={`flex items-center gap-5 mb-5 ${imgLeft ? '' : 'lg:flex-row-reverse'}`}>
+          <span className="font-display italic text-[#2D4C3B]/40 text-5xl lg:text-6xl leading-none tracking-wider select-none">
+            {roman}
+          </span>
+          <div className="h-px bg-[#2D4C3B]/25 w-16 lg:w-20" />
+        </div>
+        <p className="text-[10px] tracking-[0.32em] uppercase text-[#2D4C3B] font-semibold mb-3">
           {label}
         </p>
-        <h2 className="font-display text-[#0F0F0F] text-3xl lg:text-4xl mb-4 leading-tight">
+        <h2 className="font-display text-[#0F0F0F] text-3xl lg:text-[40px] mb-5 leading-[1.15]">
           {title}
         </h2>
-        <p className="text-[#0F0F0F]/55 text-[15px] leading-[1.85] max-w-sm">
+        <p className="text-[#0F0F0F]/60 text-[15px] leading-[1.9] max-w-md">
           {body}
         </p>
       </motion.div>
@@ -115,6 +140,73 @@ const collageImages = [
   { src: collected5, alt: 'Josephine and Christopher together' },
 ]
 
+// ── Hero with parallax ────────────────────────────────────
+function StoryHero() {
+  const { scrollY } = useScroll()
+  const y = useTransform(scrollY, [0, 800], [0, 200])
+  const scale = useTransform(scrollY, [0, 800], [1, 1.08])
+
+  return (
+    <section className="relative w-full h-[78vh] lg:h-[92vh] overflow-hidden">
+      <motion.img
+        src={heroImg}
+        alt="Josephine and Christopher"
+        style={{ y, scale }}
+        className="absolute inset-0 w-full h-[115%] object-cover"
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/15 to-black/60" />
+
+      <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6 z-10">
+        <motion.p
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.3, ease: EASE }}
+          className="text-[10px] tracking-[0.45em] uppercase text-white/85 font-semibold mb-7 drop-shadow"
+        >
+          Our Story
+        </motion.p>
+        <motion.h1
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.2, delay: 0.5, ease: EASE }}
+          className="font-display italic text-white text-5xl sm:text-6xl lg:text-8xl leading-[1.05] drop-shadow-lg max-w-4xl"
+        >
+          From Schoolmates<br />to Soulmates.
+        </motion.h1>
+        <motion.div
+          initial={{ scaleX: 0 }}
+          animate={{ scaleX: 1 }}
+          transition={{ duration: 1, delay: 1.1, ease: EASE }}
+          className="h-px bg-white/45 w-24 my-9 origin-center"
+        />
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 1, ease: EASE }}
+          className="font-script text-white text-4xl sm:text-5xl lg:text-6xl drop-shadow-lg leading-none"
+        >
+          Christopher &amp; Josephine
+        </motion.p>
+      </div>
+
+      {/* Scroll cue */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.6, duration: 0.8 }}
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-white/70"
+      >
+        <span className="text-[9px] tracking-[0.45em] uppercase font-medium">Read Our Story</span>
+        <motion.div
+          animate={{ y: [0, 10, 0], opacity: [0.4, 1, 0.4] }}
+          transition={{ duration: 2.2, repeat: Infinity, ease: 'easeInOut' }}
+          className="w-px h-8 bg-white/60"
+        />
+      </motion.div>
+    </section>
+  )
+}
+
 // ── Page ───────────────────────────────────────────────────
 export default function OurStory() {
   const lb = useLightbox(collageImages)
@@ -122,128 +214,166 @@ export default function OurStory() {
   return (
     <PageTransition>
 
-      {/* ── 1. HERO HEADER ── */}
-      <section className="bg-white pt-16 pb-12 lg:pt-20 lg:pb-16">
-        <div className="max-w-6xl mx-auto px-6 lg:px-10">
+      {/* ── 1. HERO ── */}
+      <StoryHero />
 
-          <Reveal as="p" className="text-[10px] tracking-[0.3em] uppercase text-[#2D4C3B] font-semibold mb-4">
-            Our Story
+      {/* ── 2. OPENING INVOCATION ── */}
+      <section className="bg-white py-20 lg:py-28">
+        <div className="max-w-2xl mx-auto px-6 flex flex-col items-center text-center gap-6">
+          <Reveal>
+            <Sprig className="text-[#2D4C3B]/45" />
           </Reveal>
-
-          <div className="flex flex-col lg:flex-row lg:items-end gap-8 lg:gap-20">
-            <Reveal delay={0.1}>
-              <h1 className="font-display text-[#0F0F0F] text-5xl lg:text-7xl leading-[1.05] flex-shrink-0">
-                From Schoolmates<br />
-                <span className="italic">to Soulmates.</span>
-              </h1>
-            </Reveal>
-            <Reveal delay={0.25} as="div" className="max-w-sm lg:pb-2 flex flex-col gap-4">
-              <p className="text-[#0F0F0F]/55 text-[15px] leading-[1.9]">
-                Every love story is beautiful, but ours is deeply rooted in friendship, faith, service, growth, and God&rsquo;s perfect timing.
-              </p>
-              <p className="text-[#0F0F0F]/55 text-[15px] leading-[1.9]">
-                What started within the walls of Edo State Polytechnic, Usen became something far greater than either of us imagined.
-              </p>
-            </Reveal>
-          </div>
-
-          <motion.div
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="mt-12 h-px bg-stone-200 w-full origin-left"
-          />
+          <Reveal delay={0.1} as="p" className="text-[10px] tracking-[0.4em] uppercase text-[#2D4C3B] font-semibold">
+            From Friendship to Forever
+          </Reveal>
+          <Reveal delay={0.2} as="h2" className="font-display italic text-[#0F0F0F] text-3xl lg:text-[42px] leading-[1.2]">
+            Every love story is beautiful, but ours is deeply rooted in friendship, faith, service, growth, and God&rsquo;s perfect timing.
+          </Reveal>
+          <Reveal delay={0.3} as="p" className="text-[#0F0F0F]/60 text-[15.5px] leading-[1.95] max-w-lg mt-2">
+            What started within the walls of Edo State Polytechnic, Usen became something far greater than either of us imagined. Looking back now, we can truly say God was writing our story long before we even understood it ourselves.
+          </Reveal>
         </div>
       </section>
 
-      {/* ── 2. MEET THE COUPLE ── */}
-      <section className="bg-[#f7f6f2] py-16 lg:py-24">
-        <div className="max-w-3xl mx-auto px-6 text-center">
+      {/* ── 3. MEET THE COUPLE (centerpiece) ── */}
+      <section className="relative bg-[#2D4C3B] py-20 lg:py-32 overflow-hidden">
+        {/* Corner sprigs */}
+        <div className="absolute top-10 left-10 text-white/15 hidden lg:block">
+          <Sprig className="w-10 h-14" />
+        </div>
+        <div className="absolute bottom-10 right-10 text-white/15 hidden lg:block rotate-180">
+          <Sprig className="w-10 h-14" />
+        </div>
 
-          <Reveal as="p" className="text-[10px] tracking-[0.3em] uppercase text-[#2D4C3B] font-semibold mb-8">
+        <div className="relative max-w-4xl mx-auto px-6 text-center">
+
+          <Reveal as="p" style={{ color: 'rgba(255,255,255,0.55)' }} className="text-[10px] tracking-[0.45em] uppercase text-white/55 font-semibold mb-10">
             Meet The Couple
           </Reveal>
 
-          <Reveal delay={0.05} as="p" className="text-[#0F0F0F]/60 text-[14px] leading-[1.9] mb-10 font-display italic">
-            Together with our families,
-          </Reveal>
-
-          <Reveal delay={0.1}>
-            <p className="font-display italic text-[#0F0F0F] text-lg lg:text-xl leading-relaxed">
-              Dr. Ekhator Julius &amp; Mrs. Itohan Augustina Ighodaro
-            </p>
-            <p className="text-[#0F0F0F]/55 text-[12.5px] tracking-wide mt-1.5">
-              of Evboesi, Orhionmwon LGA, Edo State
+          <Reveal delay={0.05}>
+            <p style={{ color: 'rgba(255,255,255,0.8)' }} className="font-display italic text-white/80 text-base lg:text-lg leading-[1.9] mb-14">
+              Together with our families,
             </p>
           </Reveal>
 
-          <Reveal delay={0.2} as="p" className="text-[#0F0F0F]/35 text-[14px] my-6 font-display italic">
-            and
-          </Reveal>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 mb-14">
+            <Reveal delay={0.1} className="flex flex-col items-center md:items-end md:text-right">
+              <p style={{ color: '#ffffff' }} className="font-display italic text-white text-xl lg:text-[24px] leading-[1.45]">
+                Dr. Ekhator Julius<br />
+                &amp; Mrs. Itohan Augustina<br />
+                Ighodaro
+              </p>
+              <p style={{ color: 'rgba(255,255,255,0.55)' }} className="text-white/55 text-[12px] tracking-wide mt-4 leading-relaxed">
+                of Evboesi, Orhionmwon LGA
+              </p>
+              <p style={{ color: 'rgba(255,255,255,0.4)' }} className="text-white/40 text-[10px] tracking-[0.3em] uppercase mt-1">
+                Edo State, Nigeria
+              </p>
+            </Reveal>
+            <Reveal delay={0.2} className="flex flex-col items-center md:items-start md:text-left">
+              <p style={{ color: '#ffffff' }} className="font-display italic text-white text-xl lg:text-[24px] leading-[1.45]">
+                Late Barrister F.U. Ineomon<br />
+                &amp; Mrs. Franca<br />
+                Ineomon
+              </p>
+              <p style={{ color: 'rgba(255,255,255,0.55)' }} className="text-white/55 text-[12px] tracking-wide mt-4 leading-relaxed">
+                of Eidenu, Irrua, Esan Central LGA
+              </p>
+              <p style={{ color: 'rgba(255,255,255,0.4)' }} className="text-white/40 text-[10px] tracking-[0.3em] uppercase mt-1">
+                Edo State, Nigeria
+              </p>
+            </Reveal>
+          </div>
 
           <Reveal delay={0.3}>
-            <p className="font-display italic text-[#0F0F0F] text-lg lg:text-xl leading-relaxed">
-              Late Barrister F.U. Ineomon &amp; Mrs. Franca Ineomon
-            </p>
-            <p className="text-[#0F0F0F]/55 text-[12.5px] tracking-wide mt-1.5">
-              of Eidenu, Irrua, Esan Central LGA, Edo State
+            <div className="h-px bg-white/25 w-20 mx-auto mb-10" />
+            <p style={{ color: 'rgba(255,255,255,0.75)' }} className="text-white/75 text-[13.5px] tracking-wide leading-[2] max-w-xl mx-auto">
+              joyfully celebrate the solemnization of the<br />
+              Holy Matrimony of their beloved children,
             </p>
           </Reveal>
 
-          <Reveal delay={0.4} as="p" className="text-[#0F0F0F]/60 text-[14px] leading-[1.9] mt-12 mb-2 max-w-xl mx-auto">
-            joyfully celebrate the solemnization of the Holy Matrimony of their beloved children,
+          <Reveal delay={0.4} className="mt-14">
+            <p style={{ color: '#ffffff' }} className="font-script text-white text-5xl sm:text-6xl lg:text-7xl leading-[1.05]">
+              Christopher
+            </p>
+            <p style={{ color: 'rgba(255,255,255,0.55)' }} className="font-display italic text-white/55 text-2xl lg:text-3xl my-4">
+              &amp;
+            </p>
+            <p style={{ color: '#ffffff' }} className="font-script text-white text-5xl sm:text-6xl lg:text-7xl leading-[1.05]">
+              Josephine
+            </p>
           </Reveal>
 
           <Reveal delay={0.5}>
-            <h2 className="font-display text-[#0F0F0F] text-3xl lg:text-5xl mt-10 leading-[1.15]">
-              Christopher Oziengbe<br />
-              <span className="italic text-[#2D4C3B]">Ineomon</span>
-            </h2>
-            <p className="font-display italic text-[#2D4C3B] text-2xl lg:text-3xl my-5">&amp;</p>
-            <h2 className="font-display text-[#0F0F0F] text-3xl lg:text-5xl leading-[1.15]">
-              Josephine Osemwonyemwen<br />
-              <span className="italic text-[#2D4C3B]">Ekhator</span>
-            </h2>
-          </Reveal>
-
-          <motion.div
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-            className="h-px bg-stone-300 mt-12 mb-10 mx-auto w-16 origin-center"
-          />
-
-          <Reveal delay={0.6} as="p" className="text-[#0F0F0F]/60 text-[14px] leading-[1.95] max-w-md mx-auto italic">
-            To many friends and loved ones, she is fondly known as <span className="font-display">Jossy Nation</span> — full of warmth, joy, and vibrant energy. To Christopher, she became a best friend, answered prayer, peace, and forever.
+            <div className="h-px bg-white/25 w-20 mx-auto mt-14 mb-10" />
+            <p style={{ color: 'rgba(255,255,255,0.75)' }} className="text-white/75 text-[14px] leading-[2] max-w-lg mx-auto italic">
+              To many friends and loved ones, she is fondly known as{' '}
+              <span style={{ color: '#ffffff' }} className="font-display text-white not-italic">Jossy Nation</span>{' '}
+              — full of warmth, joy, and vibrant energy. To Christopher, she became a best friend, answered prayer, peace, and forever.
+            </p>
           </Reveal>
         </div>
       </section>
 
-      {/* ── 3. TIMELINE CHAPTERS ── */}
+      {/* ── 4. CHAPTERS INTRO ── */}
+      <section className="bg-white pt-20 lg:pt-28 pb-4">
+        <div className="max-w-2xl mx-auto px-6 text-center">
+          <Reveal as="p" className="text-[10px] tracking-[0.4em] uppercase text-[#2D4C3B] font-semibold mb-4">
+            Five Chapters
+          </Reveal>
+          <Reveal delay={0.1} as="h2" className="font-display italic text-[#0F0F0F] text-3xl lg:text-5xl leading-tight mb-5">
+            How It All Unfolded
+          </Reveal>
+          <Reveal delay={0.2} as="p" className="text-[#0F0F0F]/55 text-[15px] leading-[1.9] max-w-md mx-auto">
+            Quiet moments that, looking back, were all part of one beautiful design.
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── 5. TIMELINE CHAPTERS ── */}
       <section className="bg-white">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex flex-col gap-0 divide-y divide-stone-100">
-            {chapters.map((ch) => (
-              <div key={ch.id} className="py-12 lg:py-0 lg:h-[480px] overflow-hidden">
-                <Chapter {...ch} />
-              </div>
-            ))}
-          </div>
+        <div className="max-w-7xl mx-auto">
+          {chapters.map((ch, i) => (
+            <div
+              key={ch.id}
+              className={i % 2 === 0 ? 'bg-white' : 'bg-[#f7f6f2]'}
+            >
+              <Chapter {...ch} />
+            </div>
+          ))}
         </div>
       </section>
 
-      {/* ── 4. COLLECTED MOMENTS ── */}
-      <section className="bg-[#f7f6f2] py-16 lg:py-24">
+      {/* ── 6. PULL QUOTE — dark green band ── */}
+      <section className="relative bg-[#2D4C3B] py-20 lg:py-28 overflow-hidden">
+        <div className="relative max-w-3xl mx-auto px-6 text-center">
+          <Reveal>
+            <Sprig className="text-white/45 mx-auto mb-8" />
+          </Reveal>
+          <Reveal delay={0.1} as="blockquote" style={{ color: '#ffffff' }} className="font-display italic text-white text-3xl lg:text-5xl leading-[1.3] mb-8">
+            &ldquo;Built on friendship,<br />grounded in faith,<br />and covered in love.&rdquo;
+          </Reveal>
+          <Reveal delay={0.2}>
+            <div className="h-px bg-white/30 w-20 mx-auto mb-6" />
+            <p style={{ color: 'rgba(255,255,255,0.65)' }} className="text-[10px] tracking-[0.45em] uppercase text-white/65 font-semibold">
+              — Christopher &amp; Josephine
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── 7. COLLECTED MOMENTS ── */}
+      <section className="bg-[#f7f6f2] py-20 lg:py-28">
         <div className="max-w-6xl mx-auto px-6 lg:px-10">
 
-          <div className="flex items-end justify-between mb-8">
-            <Reveal as="h2" className="font-display text-[#0F0F0F] text-2xl lg:text-3xl">
-              Collected Moments
-            </Reveal>
-            <Reveal delay={0.1} as="p" className="text-[10px] tracking-[0.25em] uppercase text-[#0F0F0F]/35 font-medium hidden md:block">
+          <div className="flex flex-col items-center text-center gap-2 mb-12">
+            <Reveal as="p" className="text-[10px] tracking-[0.4em] uppercase text-[#2D4C3B] font-semibold">
               A Visual Diary
+            </Reveal>
+            <Reveal delay={0.1} as="h2" className="font-display italic text-[#0F0F0F] text-3xl lg:text-4xl">
+              Collected Moments
             </Reveal>
           </div>
 
@@ -279,41 +409,25 @@ export default function OurStory() {
         </div>
       </section>
 
-      {/* ── 5. PULL QUOTE ── */}
-      <section className="bg-[#f7f6f2] pb-20 lg:pb-28">
-        <div className="max-w-2xl mx-auto px-6 text-center">
-          <motion.div
-            initial={{ scaleX: 0 }}
-            whileInView={{ scaleX: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            className="h-px bg-stone-300 mb-12 mx-auto w-24 origin-center"
-          />
-          <Reveal as="blockquote" className="font-display italic text-[#0F0F0F] text-2xl lg:text-3xl leading-relaxed mb-5">
-            &ldquo;Built on friendship, grounded in faith, and covered in love.&rdquo;
+      {/* ── 8. CLOSING ── */}
+      <section className="bg-white py-20 lg:py-32 border-t border-stone-100">
+        <div className="max-w-2xl mx-auto px-6 text-center flex flex-col items-center gap-6">
+          <Reveal>
+            <Sprig className="text-[#2D4C3B]/45" />
           </Reveal>
-          <Reveal delay={0.15} as="p" className="text-[11px] tracking-[0.25em] uppercase text-[#2D4C3B] font-semibold">
-            — Christopher &amp; Josephine
-          </Reveal>
-        </div>
-      </section>
-
-      {/* ── 6. CLOSING ── */}
-      <section className="bg-white py-20 lg:py-28 border-t border-stone-100">
-        <div className="max-w-2xl mx-auto px-6 text-center">
-          <Reveal as="p" className="text-[10px] tracking-[0.3em] uppercase text-[#2D4C3B] font-semibold mb-5">
+          <Reveal delay={0.1} as="p" className="text-[10px] tracking-[0.4em] uppercase text-[#2D4C3B] font-semibold">
             Closing
           </Reveal>
-          <Reveal delay={0.1} as="h2" className="font-display text-[#0F0F0F] text-3xl lg:text-5xl mb-6 leading-tight">
-            See You In <span className="italic">Benin City.</span>
+          <Reveal delay={0.15} as="h2" className="font-display italic text-[#0F0F0F] text-3xl lg:text-5xl leading-tight">
+            See You In<br />Benin City.
           </Reveal>
-          <Reveal delay={0.2} as="p" className="text-[#0F0F0F]/55 text-[15px] leading-[1.9] max-w-md mx-auto mb-10">
+          <Reveal delay={0.25} as="p" className="text-[#0F0F0F]/60 text-[15px] leading-[1.95] max-w-md">
             We cannot wait to celebrate love, family, faith, laughter, and forever with you. October 2026 will forever remain one of the most meaningful seasons of our lives, and it means so much to have you share it with us.
           </Reveal>
-          <Reveal delay={0.3} as="p" className="text-[11px] tracking-[0.3em] uppercase text-[#2D4C3B] font-semibold mb-2">
+          <Reveal delay={0.35} as="p" className="text-[10px] tracking-[0.4em] uppercase text-[#2D4C3B] font-semibold mt-6">
             With love,
           </Reveal>
-          <Reveal delay={0.4} as="p" className="font-display italic text-[#0F0F0F] text-xl lg:text-2xl">
+          <Reveal delay={0.4} as="p" className="font-script text-[#2D4C3B] text-5xl lg:text-6xl leading-none">
             Christopher &amp; Josephine
           </Reveal>
         </div>
