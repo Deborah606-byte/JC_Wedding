@@ -7,6 +7,7 @@ import Lightbox, { useLightbox } from '../Components/Lightbox'
 
 import heroImg  from '../assets/home-hero.png'
 import venueImg from '../assets/section1.png'
+import heritageImg from '../assets/hero.png'
 import moment1  from '../assets/pic1.png'
 import moment2  from '../assets/ourservices.png'
 import moment3  from '../assets/secondservice.png'
@@ -17,6 +18,16 @@ import moment7  from '../assets/32089.jpg'
 import moment8  from '../assets/47639.jpg'
 
 const EASE = [0.22, 1, 0.36, 1]
+
+// ── Decorative botanical sprig ──
+function Sprig({ className = '' }) {
+  return (
+    <svg width="22" height="32" viewBox="0 0 20 28" fill="none" className={className} aria-hidden="true">
+      <path d="M10 28 C10 28 10 14 10 0 M10 14 C10 14 2 10 0 4 M10 14 C10 14 18 10 20 4 M10 20 C10 20 4 18 2 13 M10 20 C10 20 16 18 18 13"
+        stroke="currentColor" strokeWidth="1" strokeLinecap="round"/>
+    </svg>
+  )
+}
 
 // ── Countdown ──────────────────────────────────────────────
 function useCountdown(target) {
@@ -119,29 +130,45 @@ function Hero() {
   const scale = useTransform(scrollY, [0, 800], [1, 1.08])
 
   return (
-    <section className="relative w-full h-[70vh] lg:h-[85vh] overflow-hidden">
+    <section className="relative w-full h-[78vh] lg:h-[92vh] overflow-hidden">
       <motion.img
         src={heroImg}
         alt="Josephine & Christopher"
         style={{ y, scale }}
         className="absolute inset-0 w-full h-[115%] object-cover object-top"
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/50" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/15 via-transparent to-black/55" />
 
-      <div className="absolute bottom-10 left-0 right-0 flex flex-col items-center gap-2">
+      <div className="absolute bottom-12 left-0 right-0 flex flex-col items-center gap-3 px-4 text-center">
+        <motion.p
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.15, ease: EASE }}
+          className="text-white/85 text-[10px] tracking-[0.5em] uppercase font-semibold drop-shadow"
+        >
+          Benin City
+        </motion.p>
         <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.3, ease: EASE }}
-          className="font-script text-white text-5xl sm:text-7xl lg:text-8xl leading-[0.95] tracking-wide drop-shadow-lg px-4 text-center"
+          className="font-script text-white text-5xl sm:text-7xl lg:text-8xl leading-[0.95] tracking-wide drop-shadow-lg"
         >
           Josephine &amp; Christopher
         </motion.h1>
         <motion.p
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1, delay: 0.7, ease: EASE }}
-          className="text-white/80 text-[13px] tracking-[0.3em] uppercase font-medium drop-shadow"
+          transition={{ duration: 1, delay: 0.6, ease: EASE }}
+          className="font-display italic text-white/95 text-base sm:text-lg lg:text-xl drop-shadow mt-1"
+        >
+          A Celebration of Love, Faith &amp; Family
+        </motion.p>
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.8, ease: EASE }}
+          className="text-white/80 text-[12px] sm:text-[13px] tracking-[0.3em] uppercase font-medium drop-shadow mt-3"
         >
           Saturday · October 24, 2026
         </motion.p>
@@ -191,7 +218,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── VENUE ── */}
+      {/* ── WHERE OUR FOREVER BEGINS (Venue) ── */}
       <section className="bg-[#f7f6f2] py-16 lg:py-24 overflow-hidden">
         <div className="max-w-5xl mx-auto px-6 lg:px-10">
           <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
@@ -200,25 +227,30 @@ export default function Home() {
                 <img
                   src={venueImg}
                   alt="Benin City"
-                  className="w-full h-72 lg:h-96 object-cover transition-transform duration-[1200ms] group-hover:scale-105"
+                  className="w-full h-72 lg:h-[440px] object-cover transition-transform duration-[1200ms] group-hover:scale-105"
                 />
               </div>
             </Reveal>
 
-            <Reveal x={40} y={0} delay={0.15} className="flex flex-col gap-4 lg:gap-6">
-              <p className="text-[10px] tracking-[0.3em] uppercase text-[#2D4C3B] font-semibold">
+            <Reveal x={40} y={0} delay={0.15} className="flex flex-col gap-5 lg:w-[55%]">
+              <p className="text-[10px] tracking-[0.35em] uppercase text-[#2D4C3B] font-semibold">
                 The Setting
               </p>
-              <h2 className="font-display italic text-[#0F0F0F] text-3xl lg:text-4xl leading-snug">
-                A Celebration<br />in Benin City
+              <h2 className="font-display italic text-[#0F0F0F] text-3xl lg:text-[44px] leading-[1.15]">
+                Where Our Forever<br />Begins.
               </h2>
-              <p className="text-[#0F0F0F]/55 text-sm leading-relaxed">
-                Edo State, Nigeria<br />
-                October 24, 2026
+              <p className="text-[#2D4C3B] text-[12px] tracking-[0.25em] uppercase font-semibold">
+                Benin City, Edo State, Nigeria &middot; October 24, 2026
+              </p>
+              <p className="text-[#0F0F0F]/60 text-[15px] leading-[1.9] max-w-md">
+                In the heart of Benin City, surrounded by the people we love most, we will begin the next chapter of our lives together.
+              </p>
+              <p className="text-[#0F0F0F]/60 text-[15px] leading-[1.9] max-w-md">
+                A beautiful celebration of love, joyful memories, heartfelt prayers, laughter, and forever.
               </p>
               <Link
                 to="/order-of-events"
-                className="inline-flex items-center gap-2 text-[11px] tracking-[0.2em] uppercase font-semibold text-[#2D4C3B] border border-[#2D4C3B]/30 px-5 py-2.5 rounded-sm hover:bg-[#2D4C3B] hover:text-white transition-all duration-300 w-fit"
+                className="inline-flex items-center gap-2 text-[11px] tracking-[0.2em] uppercase font-semibold text-[#2D4C3B] border border-[#2D4C3B]/30 px-5 py-2.5 rounded-sm hover:bg-[#2D4C3B] hover:text-white transition-all duration-300 w-fit mt-2"
               >
                 View More Details →
               </Link>
@@ -227,44 +259,123 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── COUPLE'S LETTER ── */}
+      {/* ── OUR JOURNEY ── */}
       <section className="bg-white py-20 lg:py-28">
-        <div className="max-w-xl mx-auto px-6 flex flex-col items-center gap-6 text-center">
+        <div className="max-w-2xl mx-auto px-6 flex flex-col items-center text-center gap-6">
           <Reveal>
-            <svg width="20" height="28" viewBox="0 0 20 28" fill="none" className="text-[#2D4C3B]/40" aria-hidden="true">
-              <path d="M10 28 C10 28 10 14 10 0 M10 14 C10 14 2 10 0 4 M10 14 C10 14 18 10 20 4 M10 20 C10 20 4 18 2 13 M10 20 C10 20 16 18 18 13" stroke="currentColor" strokeWidth="1" strokeLinecap="round"/>
-            </svg>
+            <Sprig className="text-[#2D4C3B]/45" />
           </Reveal>
-
-          <Reveal delay={0.1} as="p" className="font-display italic text-[#0F0F0F] text-xl lg:text-2xl leading-relaxed">
-            To our dearest family and friends
+          <Reveal delay={0.1} as="p" className="text-[10px] tracking-[0.4em] uppercase text-[#2D4C3B] font-semibold">
+            Our Journey
           </Reveal>
-
-          <Reveal delay={0.2} as="p" className="text-[#0F0F0F]/60 text-[15px] leading-[1.9] max-w-md">
-            It is with hearts full of joy that we invite you to celebrate the beginning of our forever.
-            Our journey together has been a tapestry woven with laughter, growth, and undeniable love.
+          <Reveal delay={0.15} as="h2" className="font-display italic text-[#0F0F0F] text-3xl lg:text-[42px] leading-[1.2]">
+            From schoolmates, <br />to friends, to forever.
           </Reveal>
-          <Reveal delay={0.3} as="p" className="text-[#0F0F0F]/60 text-[15px] leading-[1.9] max-w-md">
-            We cannot wait to share this sacred moment with the people who have shaped our lives and
-            supported us through every chapter. Your presence is the greatest gift we could receive.
+          <Reveal delay={0.25} as="p" className="text-[#0F0F0F]/60 text-[15.5px] leading-[1.95] max-w-lg mt-2">
+            What began within the walls of Edo State Polytechnic, Usen slowly became a journey of friendship, faith, growth, and love.
           </Reveal>
-
-          <Reveal delay={0.4} as="p" className="font-script text-[#2D4C3B] text-4xl lg:text-5xl leading-none mt-3">
-            Josephine &amp; Christopher
+          <Reveal delay={0.3} as="p" className="text-[#0F0F0F]/60 text-[15.5px] leading-[1.95] max-w-lg">
+            Through shared moments, fellowship, laughter, prayers, and years of knowing each other, God was quietly writing a story more beautiful than we ever imagined.
+          </Reveal>
+          <Reveal delay={0.4}>
+            <Link
+              to="/our-story"
+              className="inline-flex items-center gap-2 text-[11px] tracking-[0.2em] uppercase font-semibold text-[#2D4C3B] border border-[#2D4C3B]/30 px-5 py-2.5 rounded-sm hover:bg-[#2D4C3B] hover:text-white transition-all duration-300 mt-4"
+            >
+              Read Our Story →
+            </Link>
           </Reveal>
         </div>
       </section>
 
-      {/* ── PRE-WEDDING MOMENTS ── */}
-      <section className="bg-[#f7f6f2] py-16 lg:py-24">
+      {/* ── BUILT ON FAITH & FRIENDSHIP — dark green band ── */}
+      <section className="relative bg-[#2D4C3B] py-20 lg:py-28 overflow-hidden">
+        <div className="absolute top-10 left-10 text-white/15 hidden lg:block">
+          <Sprig className="w-10 h-14" />
+        </div>
+        <div className="absolute bottom-10 right-10 text-white/15 hidden lg:block rotate-180">
+          <Sprig className="w-10 h-14" />
+        </div>
+
+        <div className="relative max-w-3xl mx-auto px-6 text-center">
+          <Reveal as="p" style={{ color: 'rgba(255,255,255,0.55)' }} className="text-[10px] tracking-[0.45em] uppercase text-white/55 font-semibold mb-8">
+            Built on Faith &amp; Friendship
+          </Reveal>
+          <Reveal delay={0.1} as="blockquote" style={{ color: '#ffffff' }} className="font-display italic text-white text-3xl lg:text-[44px] leading-[1.3] mb-8">
+            Before the love story, <br />there was friendship.<br />
+            Before forever, <br />there was faith.
+          </Reveal>
+          <Reveal delay={0.2}>
+            <div className="h-px bg-white/30 w-20 mx-auto mb-6" />
+            <p style={{ color: 'rgba(255,255,255,0.75)' }} className="text-white/75 text-[14.5px] leading-[1.95] max-w-md mx-auto italic">
+              And through every season, love continued to grow beautifully between us.
+            </p>
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── ROOTED IN FAITH, FAMILY & HERITAGE ── */}
+      <section className="bg-[#f7f6f2] py-20 lg:py-28 overflow-hidden">
+        <div className="max-w-5xl mx-auto px-6 lg:px-10">
+          <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-16">
+
+            <Reveal x={40} y={0} delay={0.15} className="flex flex-col gap-5 lg:w-[55%] lg:order-2">
+              <p className="text-[10px] tracking-[0.35em] uppercase text-[#2D4C3B] font-semibold">
+                Two Families, One Love
+              </p>
+              <h2 className="font-display italic text-[#0F0F0F] text-3xl lg:text-[42px] leading-[1.15]">
+                Rooted in Faith,<br />Family &amp; Heritage.
+              </h2>
+              <p className="text-[#0F0F0F]/60 text-[15px] leading-[1.9] max-w-md">
+                From Evboesi to Irrua, our story is deeply connected to love, family, culture, faith, and God&rsquo;s grace.
+              </p>
+
+              <div className="flex items-center gap-4 my-2 max-w-sm">
+                <span className="font-display italic text-[#2D4C3B] text-lg">Evboesi</span>
+                <div className="flex-1 h-px bg-[#2D4C3B]/25" />
+                <span className="font-display italic text-[#2D4C3B]/50 text-xl">&amp;</span>
+                <div className="flex-1 h-px bg-[#2D4C3B]/25" />
+                <span className="font-display italic text-[#2D4C3B] text-lg">Irrua</span>
+              </div>
+
+              <p className="font-display italic text-[#0F0F0F]/70 text-[15px] leading-[1.9] max-w-md">
+                And now, two families become one.
+              </p>
+              <Link
+                to="/our-story"
+                className="inline-flex items-center gap-2 text-[11px] tracking-[0.2em] uppercase font-semibold text-[#2D4C3B] border border-[#2D4C3B]/30 px-5 py-2.5 rounded-sm hover:bg-[#2D4C3B] hover:text-white transition-all duration-300 w-fit mt-2"
+              >
+                View Wedding Details →
+              </Link>
+            </Reveal>
+
+            <Reveal x={-40} y={0} className="w-full lg:w-[45%] flex-shrink-0 lg:order-1">
+              <div className="relative rounded-sm overflow-hidden shadow-xl group">
+                <img
+                  src={heritageImg}
+                  alt="Our families"
+                  className="w-full h-72 lg:h-[440px] object-cover transition-transform duration-[1200ms] group-hover:scale-105"
+                />
+              </div>
+            </Reveal>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ── MOMENTS ALONG THE WAY ── */}
+      <section className="bg-white py-20 lg:py-28">
         <div className="max-w-6xl mx-auto px-6 lg:px-10">
 
-          <div className="flex flex-col items-center gap-2 mb-10">
-            <Reveal as="h2" className="font-display italic text-[#0F0F0F] text-2xl lg:text-3xl tracking-wide">
-              Moments Together
+          <div className="flex flex-col items-center text-center gap-3 mb-12">
+            <Reveal as="p" className="text-[10px] tracking-[0.4em] uppercase text-[#2D4C3B] font-semibold">
+              A Visual Diary
             </Reveal>
-            <Reveal delay={0.1} as="p" className="text-[10px] tracking-[0.28em] uppercase text-[#0F0F0F]/40 font-medium">
-              A few favorites on the way to the altar
+            <Reveal delay={0.1} as="h2" className="font-display italic text-[#0F0F0F] text-3xl lg:text-4xl">
+              Moments Along The Way
+            </Reveal>
+            <Reveal delay={0.2} as="p" className="text-[#0F0F0F]/55 text-[14.5px] leading-[1.95] max-w-md mt-1">
+              The laughter. The memories. The little moments. The answered prayers. Every step has led beautifully to this season of forever.
             </Reveal>
           </div>
 
@@ -278,6 +389,55 @@ export default function Home() {
               </StaggerItem>
             ))}
           </StaggerGroup>
+        </div>
+      </section>
+
+      {/* ── TO OUR FAVORITE PEOPLE ── */}
+      <section className="bg-[#f7f6f2] py-20 lg:py-28">
+        <div className="max-w-xl mx-auto px-6 flex flex-col items-center gap-6 text-center">
+          <Reveal>
+            <Sprig className="text-[#2D4C3B]/45" />
+          </Reveal>
+
+          <Reveal delay={0.1} as="p" className="text-[10px] tracking-[0.4em] uppercase text-[#2D4C3B] font-semibold">
+            A Note of Thanks
+          </Reveal>
+
+          <Reveal delay={0.15} as="h2" className="font-display italic text-[#0F0F0F] text-3xl lg:text-[42px] leading-[1.2]">
+            To Our Favorite People.
+          </Reveal>
+
+          <Reveal delay={0.25} as="p" className="text-[#0F0F0F]/60 text-[15px] leading-[1.95] max-w-md">
+            Thank you for being part of our journey, our memories, our prayers, and our joy.
+          </Reveal>
+          <Reveal delay={0.3} as="p" className="text-[#0F0F0F]/60 text-[15px] leading-[1.95] max-w-md">
+            Celebrating this beautiful moment with you means more to us than words could ever express.
+          </Reveal>
+        </div>
+      </section>
+
+      {/* ── FOREVER STARTS HERE — closing ── */}
+      <section className="bg-white py-20 lg:py-28 border-t border-stone-100">
+        <div className="max-w-2xl mx-auto px-6 text-center flex flex-col items-center gap-6">
+          <Reveal>
+            <Sprig className="text-[#2D4C3B]/45" />
+          </Reveal>
+          <Reveal delay={0.1} as="p" className="text-[10px] tracking-[0.4em] uppercase text-[#2D4C3B] font-semibold">
+            Forever Starts Here
+          </Reveal>
+          <Reveal delay={0.15} as="h2" className="font-display italic text-[#0F0F0F] text-3xl lg:text-5xl leading-tight">
+            October 24, 2026<br />
+            <span className="text-[#2D4C3B]">Benin City, Nigeria.</span>
+          </Reveal>
+          <Reveal delay={0.25} as="p" className="text-[#0F0F0F]/60 text-[15px] leading-[1.95] max-w-md">
+            And we truly cannot wait to celebrate with you.
+          </Reveal>
+          <Reveal delay={0.35} as="p" className="text-[10px] tracking-[0.4em] uppercase text-[#2D4C3B] font-semibold mt-6">
+            With love,
+          </Reveal>
+          <Reveal delay={0.4} as="p" className="font-script text-[#2D4C3B] text-5xl lg:text-6xl leading-none">
+            Josephine &amp; Christopher
+          </Reveal>
         </div>
       </section>
 
