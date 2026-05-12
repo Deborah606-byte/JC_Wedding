@@ -8,6 +8,7 @@ import Guestbook from './Pages/Guestbook'
 import WeddingParty from './Pages/WeddingParty'
 import OrderOfEvents from './Pages/OrderOfEvents'
 import RSVP from './Pages/RSVP'
+import NotFound from './Pages/NotFound'
 
 function ScrollToTop() {
   const { pathname } = useLocation()
@@ -28,6 +29,7 @@ function AnimatedRoutes() {
         <Route path="/wedding-party" element={<WeddingParty />} />
         <Route path="/order-of-events" element={<OrderOfEvents />} />
         <Route path="/rsvp" element={<RSVP />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </AnimatePresence>
   )

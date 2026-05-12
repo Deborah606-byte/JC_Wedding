@@ -65,18 +65,14 @@ function CountUnit({ value, label }) {
 
 // ── Pre-Wedding moments ──
 const moments = [
-  { id: 1, src: moment1, account: 'DestinationWeddings', caption: 'Josephine & Christopher', likes: '2.3K' },
-  { id: 2, src: moment2, account: 'DestinationWeddings', caption: 'Josephine & Christopher', likes: '2.3K' },
-  { id: 3, src: moment3, account: 'DestinationWeddings', caption: 'Josephine & Christopher', likes: '2.3K' },
-  { id: 4, src: moment4, account: 'DestinationWeddings', caption: 'Josephine & Christopher', likes: '2.3K' },
-  { id: 5, src: moment5, account: 'DestinationWeddings', caption: 'Josephine & Christopher', likes: '3.1K' },
-  { id: 6, src: moment6, account: 'DestinationWeddings', caption: 'Josephine & Christopher', likes: '2.3K' },
-  { id: 7, src: moment7, account: 'DestinationWeddings', caption: 'Josephine & Christopher', likes: '2.8K' },
-  { id: 8, src: moment8, account: 'DestinationWeddings', caption: 'Josephine & Christopher', likes: '2.3K' },
-  { id: 9, src: moment1, account: 'DestinationWeddings', caption: 'Josephine & Christopher', likes: '2.3K' },
-  { id: 10, src: moment2, account: 'DestinationWeddings', caption: 'Josephine & Christopher', likes: '2.3K' },
-  { id: 11, src: moment3, account: 'DestinationWeddings', caption: 'Josephine & Christopher', likes: '2.3K' },
-  { id: 12, src: moment4, account: 'DestinationWeddings', caption: 'Josephine & Christopher', likes: '2.3K' },
+  { id: 1, src: moment1, account: 'Josephine & Christopher', caption: 'A moment together', likes: '2.3K' },
+  { id: 2, src: moment2, account: 'Josephine & Christopher', caption: 'Pre-wedding portrait', likes: '2.8K' },
+  { id: 3, src: moment3, account: 'Josephine & Christopher', caption: 'Garden afternoon', likes: '3.1K' },
+  { id: 4, src: moment4, account: 'Josephine & Christopher', caption: 'Soft light', likes: '2.4K' },
+  { id: 5, src: moment5, account: 'Josephine & Christopher', caption: 'Laughter and love', likes: '2.9K' },
+  { id: 6, src: moment6, account: 'Josephine & Christopher', caption: 'Quiet joy', likes: '3.4K' },
+  { id: 7, src: moment7, account: 'Josephine & Christopher', caption: 'Hand in hand', likes: '2.6K' },
+  { id: 8, src: moment8, account: 'Josephine & Christopher', caption: 'Forever begins', likes: '3.0K' },
 ]
 
 function MomentCard({ src, account, caption, likes, onClick }) {
@@ -137,7 +133,7 @@ function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.3, ease: EASE }}
-          className="font-display italic text-white text-4xl lg:text-6xl tracking-wide drop-shadow-lg"
+          className="font-script text-white text-5xl sm:text-7xl lg:text-8xl leading-[0.95] tracking-wide drop-shadow-lg px-4 text-center"
         >
           Josephine &amp; Christopher
         </motion.h1>
@@ -203,7 +199,7 @@ export default function Home() {
               <div className="relative rounded-sm overflow-hidden shadow-xl group">
                 <img
                   src={venueImg}
-                  alt="A Garden Celebration in Benin City"
+                  alt="Benin City"
                   className="w-full h-72 lg:h-96 object-cover transition-transform duration-[1200ms] group-hover:scale-105"
                 />
               </div>
@@ -214,11 +210,11 @@ export default function Home() {
                 The Setting
               </p>
               <h2 className="font-display italic text-[#0F0F0F] text-3xl lg:text-4xl leading-snug">
-                A Garden Celebration<br />in Benin City
+                A Celebration<br />in Benin City
               </h2>
               <p className="text-[#0F0F0F]/55 text-sm leading-relaxed">
-                Benin City<br />
-                Edo State, Nigeria
+                Edo State, Nigeria<br />
+                October 24, 2026
               </p>
               <Link
                 to="/order-of-events"
@@ -253,8 +249,8 @@ export default function Home() {
             supported us through every chapter. Your presence is the greatest gift we could receive.
           </Reveal>
 
-          <Reveal delay={0.4} as="p" className="font-display italic text-[#2D4C3B] text-lg mt-2">
-            — Josephine &amp; Christopher
+          <Reveal delay={0.4} as="p" className="font-script text-[#2D4C3B] text-4xl lg:text-5xl leading-none mt-3">
+            Josephine &amp; Christopher
           </Reveal>
         </div>
       </section>
@@ -265,10 +261,10 @@ export default function Home() {
 
           <div className="flex flex-col items-center gap-2 mb-10">
             <Reveal as="h2" className="font-display italic text-[#0F0F0F] text-2xl lg:text-3xl tracking-wide">
-              Pre-Wedding Moments
+              Moments Together
             </Reveal>
             <Reveal delay={0.1} as="p" className="text-[10px] tracking-[0.28em] uppercase text-[#0F0F0F]/40 font-medium">
-              Captured by the Botanical Curator
+              A few favorites on the way to the altar
             </Reveal>
           </div>
 

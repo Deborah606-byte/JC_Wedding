@@ -9,7 +9,7 @@
  * 2. Create TWO tabs (rename them exactly):
  *
  *    Tab name: RSVP
- *    Row 1:   Timestamp | Name | Guests | Meal | Note
+ *    Row 1:   Timestamp | Name | Attending | Guests | Contact | Note
  *
  *    Tab name: Guestbook
  *    Row 1:   Timestamp | Name | Message | Status
@@ -73,7 +73,14 @@ function doGet(e) {
 function handleRsvp(body) {
   const sheet = SpreadsheetApp.getActive().getSheetByName(SHEET_NAMES.RSVP)
   if (!sheet) throw new Error('RSVP sheet not found. Create a tab named "RSVP".')
-  sheet.appendRow([new Date(), body.name || '', body.guests || '', body.meal || '', body.note || ''])
+  sheet.appendRow([
+    new Date(),
+    body.name || '',
+    body.attending || '',
+    body.guests || '',
+    body.contact || '',
+    body.note || '',
+  ])
   try {
     sendRsvpEmail(body)
   } catch (err) {
@@ -111,12 +118,13 @@ function sendRsvpEmail(body) {
   const lines = [
     'A new RSVP has been submitted.',
     '',
-    `Name:    ${body.name || '(blank)'}`,
-    `Guests:  ${body.guests || '(blank)'}`,
-    `Meal:    ${body.meal || '(blank)'}`,
-    `Note:    ${body.note || '(none)'}`,
+    `Name:       ${body.name || '(blank)'}`,
+    `Attending:  ${body.attending || '(blank)'}`,
+    `Guests:     ${body.guests || '(blank)'}`,
+    `Contact:    ${body.contact || '(blank)'}`,
+    `Note:       ${body.note || '(none)'}`,
     '',
-    `Received: ${new Date().toString()}`,
+    `Received:   ${new Date().toString()}`,
   ]
   MailApp.sendEmail({
     to: RECIPIENT_EMAIL,

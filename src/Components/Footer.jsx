@@ -24,13 +24,13 @@ export default function Footer() {
           </div>
 
           {/* Couple name */}
-          <h2 className="font-display italic text-2xl lg:text-3xl text-[#2D4C3B] tracking-wide">
+          <h2 className="font-script text-4xl lg:text-5xl text-[#2D4C3B] leading-[1.05] tracking-wide text-center px-4">
             Josephine & Christopher
           </h2>
 
           {/* Tagline */}
           <p className="text-[11px] tracking-[0.3em] uppercase text-[#0F0F0F]/45 font-medium">
-            Together Forever · October 2026
+            Together Forever · October 24, 2026
           </p>
 
           {/* Divider */}
@@ -58,7 +58,7 @@ export default function Footer() {
       {/* Bottom bar */}
       <div className="border-t border-stone-200/80 py-6 px-6">
         <p className="text-center text-[11px] text-[#0F0F0F]/40 tracking-wider">
-          © 2026 Josephine & Christopher — A Botanical Love Story. Designed with love.
+          © 2026 Josephine &amp; Christopher · Benin City, Nigeria
         </p>
       </div>
     </footer>

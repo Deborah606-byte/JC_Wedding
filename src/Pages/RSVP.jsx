@@ -1,8 +1,10 @@
 import { useState } from 'react'
+import { Link } from 'react-router-dom'
 import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react'
 import PageTransition from '../Components/PageTransition'
 import Reveal, { StaggerGroup, StaggerItem } from '../Components/Reveal'
 import { submitRsvp } from '../lib/api'
+import AddToCalendar from '../Components/AddToCalendar'
 
 // ─────────────────────────────────────────────────────────
 // 🖼️  IMAGES — rename your files in src/assets/ to match
@@ -10,39 +12,55 @@ import { submitRsvp } from '../lib/api'
 import heroBg    from '../assets/flower1.png'   // full-width botanical background
 import rsvpFloral from '../assets/flower2.png'   // dark floral/roses photo left of form
 
-// ── Timeline data ──────────────────────────────────────────
-const timeline = [
-  { event: 'Ceremony',       time: '4:00 PM' },
-  { event: 'Cocktail Hour',  time: '5:30 PM' },
-  { event: 'Dinner & Toast', time: '7:00 PM' },
-  { event: 'Dancing',        time: '9:00 PM' },
+// ── Wedding-day programme ──
+const programme = [
+  { event: 'White Wedding Ceremony', time: '4:00 PM' },
+  { event: 'Reception & Celebration', time: 'After Ceremony' },
+]
+
+// ── Venue data ──
+const venues = [
+  {
+    label: 'Wedding Ceremony',
+    name: 'Assurance Of Salvation Ministries Inc Fire Centre',
+    sub: 'Irhinmwirin Mega Church (FC8)',
+    address: 'No. 2 Freedom Street, Off Enogie Palace Road, Through St. Saviour, Benin City',
+    mapQuery: 'Assurance Of Salvation Ministries Fire Centre Irhinmwirin Benin City',
+  },
+  {
+    label: 'Reception',
+    name: 'Reception Venue',
+    sub: null,
+    address: '1st Igiewie Street, Off Enogie Palace Road, St. Saviour Road, Benin City',
+    mapQuery: '1st Igiewie Street, Off Enogie Palace Road, St. Saviour Road, Benin City',
+  },
 ]
 
 // ── FAQ data ──
 const faqs = [
   {
-    q: 'What time should I arrive?',
-    a: 'Please arrive at least 30 minutes before the 4:00 PM ceremony so you can be seated and settled before the processional begins.',
+    q: 'When should I RSVP by?',
+    a: 'Kindly respond no later than September 24, 2026. This helps us finalize seating, catering, and the small details that make the day flow smoothly.',
   },
   {
-    q: 'Is there a dress code?',
-    a: 'Black tie preferred. We invite you to lean into timeless elegance and botanical tones — soft greens, ivory, deep neutrals, and floral accents are all welcome.',
+    q: 'What time should I arrive on the wedding day?',
+    a: 'Please arrive at least 30 minutes before the 4:00 PM church ceremony so you can be seated before the processional begins.',
+  },
+  {
+    q: 'Where exactly are the church and reception venues?',
+    a: 'The church is in the Irhinmwirin area of Benin City, off Enogie Palace Road. The reception is a short distance away on 1st Igiewie Street, also off Enogie Palace Road. Full addresses and map links are below in the Practical Information section.',
+  },
+  {
+    q: 'What should I wear?',
+    a: 'Formal attire is encouraged for the White Wedding and Reception on Saturday. For the Traditional Marriage on Thursday, guests are warmly welcomed to wear traditional Nigerian attire.',
   },
   {
     q: 'Can I bring a plus one?',
-    a: 'We have reserved seats for the names listed on your invitation. If you would like to bring a guest who is not named, please contact the bridal party first.',
+    a: 'Reserved seats are for the names listed on your invitation. If you would like to bring an additional guest, please reach out before submitting your RSVP.',
   },
   {
-    q: 'Are children welcome?',
-    a: 'We adore your little ones, but we have planned an adults-only celebration so that everyone can fully relax and enjoy the evening.',
-  },
-  {
-    q: 'Where can I park?',
-    a: 'Parking is available at both the church and the reception venue. Attendants will be on hand to direct you on arrival.',
-  },
-  {
-    q: 'Will the celebration be indoors or outdoors?',
-    a: 'A blend of both — the ceremony is indoors, while cocktails and parts of the reception are in the gardens. We recommend dressing for an evening that may begin warm and cool down later.',
+    q: 'Will there be parking?',
+    a: 'Parking will be available at both venues. Attendants will be on hand to direct you on arrival.',
   },
 ]
 
@@ -140,8 +158,9 @@ function RsvpHero() {
 export default function RSVP() {
   const [form, setForm] = useState({
     name: '',
+    attending: 'Yes, gladly',
     guests: 'One Guest',
-    meal: '',
+    contact: '',
     note: '',
   })
   const [submitted, setSubmitted] = useState(false)
@@ -150,7 +169,7 @@ export default function RSVP() {
   const [openFaq, setOpenFaq] = useState(0)
 
   const handleSubmit = async () => {
-    if (!form.name || !form.meal || submitting) return
+    if (!form.name || !form.attending || submitting) return
     setError('')
     setSubmitting(true)
     try {
@@ -211,10 +230,35 @@ export default function RSVP() {
                     </svg>
                   </div>
                   <p className="font-display italic text-[#2D4C3B] text-xl">Thank you, {form.name}!</p>
-                  <p className="text-[#0F0F0F]/50 text-sm">We've received your RSVP and can't wait to celebrate with you.</p>
+                  <p className="text-[#0F0F0F]/55 text-sm max-w-xs">
+                    We&rsquo;ve received your RSVP and can&rsquo;t wait to celebrate with you. Save the date below.
+                  </p>
+                  <div className="mt-3">
+                    <AddToCalendar />
+                  </div>
                 </div>
               ) : (
                 <>
+                  {/* Attending */}
+                  <div>
+                    <label className="text-[10px] tracking-[0.22em] uppercase text-[#2D4C3B] font-semibold block mb-2">
+                      Will You Attend?
+                    </label>
+                    <div className="relative">
+                      <select
+                        value={form.attending}
+                        onChange={e => setForm({ ...form, attending: e.target.value })}
+                        className="w-full border border-stone-200 focus:border-[#2D4C3B] outline-none px-3 py-2 text-[13.5px] text-[#0F0F0F] bg-white appearance-none cursor-pointer transition-colors"
+                      >
+                        <option>Yes, gladly</option>
+                        <option>No, with regret</option>
+                      </select>
+                      <svg className="absolute right-3 top-1/2 -translate-y-1/2 pointer-events-none text-[#0F0F0F]/40" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                        <polyline points="6 9 12 15 18 9"/>
+                      </svg>
+                    </div>
+                  </div>
+
                   {/* Name + Guest count row */}
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <div>
@@ -237,7 +281,8 @@ export default function RSVP() {
                         <select
                           value={form.guests}
                           onChange={e => setForm({ ...form, guests: e.target.value })}
-                          className="w-full border border-stone-200 focus:border-[#2D4C3B] outline-none px-3 py-2 text-[13.5px] text-[#0F0F0F] bg-white appearance-none cursor-pointer transition-colors"
+                          disabled={form.attending === 'No, with regret'}
+                          className="w-full border border-stone-200 focus:border-[#2D4C3B] outline-none px-3 py-2 text-[13.5px] text-[#0F0F0F] bg-white appearance-none cursor-pointer transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
                         >
                           <option>One Guest</option>
                           <option>Two Guests</option>
@@ -251,35 +296,18 @@ export default function RSVP() {
                     </div>
                   </div>
 
-                  {/* Meal preference */}
+                  {/* Contact */}
                   <div>
-                    <label className="text-[10px] tracking-[0.22em] uppercase text-[#2D4C3B] font-semibold block mb-3">
-                      Meal Preference
+                    <label className="text-[10px] tracking-[0.22em] uppercase text-[#2D4C3B] font-semibold block mb-2">
+                      Phone or Email
                     </label>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
-                      {['Beef Bourguignon', 'Roasted Sea Bass', 'Herb Gnocchi (V)'].map((option) => (
-                        <label key={option} className="flex items-center gap-2.5 cursor-pointer group">
-                          <div
-                            onClick={() => setForm({ ...form, meal: option })}
-                            className={`w-4 h-4 rounded-full border-2 flex-shrink-0 flex items-center justify-center transition-colors cursor-pointer ${
-                              form.meal === option
-                                ? 'border-[#2D4C3B]'
-                                : 'border-stone-300 group-hover:border-stone-400'
-                            }`}
-                          >
-                            {form.meal === option && (
-                              <div className="w-2 h-2 rounded-full bg-[#2D4C3B]" />
-                            )}
-                          </div>
-                          <span
-                            onClick={() => setForm({ ...form, meal: option })}
-                            className="text-[13px] text-[#0F0F0F]/70 select-none"
-                          >
-                            {option}
-                          </span>
-                        </label>
-                      ))}
-                    </div>
+                    <input
+                      type="text"
+                      placeholder="So the couple can reach you if needed"
+                      value={form.contact}
+                      onChange={e => setForm({ ...form, contact: e.target.value })}
+                      className="w-full border-0 border-b border-stone-200 focus:border-[#2D4C3B] outline-none pb-2 text-[13.5px] text-[#0F0F0F] placeholder-[#0F0F0F]/25 bg-transparent transition-colors"
+                    />
                   </div>
 
                   {/* Note */}
@@ -289,7 +317,7 @@ export default function RSVP() {
                     </label>
                     <textarea
                       rows={3}
-                      placeholder="Dietary restrictions or a warm message…"
+                      placeholder="Dietary needs or a warm message…"
                       value={form.note}
                       onChange={e => setForm({ ...form, note: e.target.value })}
                       className="w-full border-0 border-b border-stone-200 focus:border-[#2D4C3B] outline-none pb-2 text-[13.5px] text-[#0F0F0F] placeholder-[#0F0F0F]/25 bg-transparent resize-none transition-colors"
@@ -339,37 +367,36 @@ export default function RSVP() {
           {/* 3 columns */}
           <StaggerGroup stagger={0.15} className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-4 items-start">
 
-            {/* Col 1: The Sanctuary / Location */}
+            {/* Col 1: Venues */}
             <StaggerItem className="flex flex-col gap-4">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0F0F0F" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="opacity-40">
                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
               </svg>
-              <div>
-                <h3 className="font-display italic text-[#0F0F0F] text-xl lg:text-2xl mb-2">Ceremony &amp; Reception</h3>
-                <p className="text-[#0F0F0F]/50 text-[13px] leading-[1.8]">
-                  A church ceremony followed by the reception, both in Benin City, Nigeria. Please arrive 30 minutes early to be seated.
-                </p>
+              <h3 className="font-display italic text-[#0F0F0F] text-xl lg:text-2xl">Where We&rsquo;ll Be</h3>
+              <div className="flex flex-col gap-5">
+                {venues.map((v) => (
+                  <div key={v.label} className="flex flex-col gap-1.5">
+                    <p className="text-[10px] tracking-[0.22em] uppercase text-[#2D4C3B] font-semibold">
+                      {v.label}
+                    </p>
+                    <p className="font-display italic text-[#0F0F0F] text-[15px] leading-tight">
+                      {v.name}
+                    </p>
+                    {v.sub && (
+                      <p className="text-[12px] text-[#0F0F0F]/55 leading-relaxed">{v.sub}</p>
+                    )}
+                    <p className="text-[12px] text-[#0F0F0F]/55 leading-relaxed">{v.address}</p>
+                    <a
+                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(v.mapQuery)}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-[10.5px] tracking-[0.18em] uppercase font-semibold text-[#2D4C3B] hover:underline w-fit mt-1"
+                    >
+                      Open in Google Maps →
+                    </a>
+                  </div>
+                ))}
               </div>
-              {/* Map embed — Benin City */}
-              <div className="mt-2 overflow-hidden rounded-sm border border-stone-200">
-                <iframe
-                  title="Map of Benin City, Nigeria"
-                  src="https://maps.google.com/maps?q=Benin+City+Nigeria&t=&z=12&ie=UTF8&iwloc=&output=embed"
-                  width="100%"
-                  height="200"
-                  style={{ border: 0 }}
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                />
-              </div>
-              <a
-                href="https://www.google.com/maps/search/?api=1&query=Benin+City+Nigeria"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-[11px] tracking-[0.18em] uppercase font-semibold text-[#2D4C3B] hover:underline"
-              >
-                Open in Google Maps →
-              </a>
             </StaggerItem>
 
             {/* Col 2: Dress Code — dark green card */}
@@ -379,31 +406,40 @@ export default function RSVP() {
                 <path d="M20.38 18H3.62a1 1 0 0 1-.76-1.64L12 6"/><path d="M12 6a2 2 0 1 1 1.73-3"/><line x1="12" y1="6" x2="12" y2="4"/>
               </svg>
               <div>
-                <h3 style={{ color: '#ffffff' }} className="font-display italic text-xl lg:text-2xl mb-2">The Dress Code</h3>
-                <p style={{ color: 'rgba(255,255,255,0.5)' }} className="text-[10px] tracking-[0.28em] uppercase font-semibold mb-5">
-                  Black Tie Preferred
+                <h3 style={{ color: '#ffffff' }} className="font-display italic text-xl lg:text-2xl mb-2">What to Wear</h3>
+                <p style={{ color: 'rgba(255,255,255,0.55)' }} className="text-[10px] tracking-[0.28em] uppercase font-semibold mb-5">
+                  Formal &amp; Traditional
                 </p>
                 <div className="w-8 h-px bg-white/20 mx-auto mb-5" />
-                <p style={{ color: 'rgba(255,255,255,0.65)' }} className="text-[13px] leading-[1.8]">
-                  We invite you to join us in formal attire. Think timeless elegance and botanical tones.
+                <p style={{ color: 'rgba(255,255,255,0.7)' }} className="text-[13px] leading-[1.8]">
+                  Formal attire for the White Wedding on Saturday. Traditional Nigerian attire is warmly encouraged for the Traditional Marriage on Thursday.
                 </p>
               </div>
             </StaggerItem>
 
-            {/* Col 3: The Timeline */}
+            {/* Col 3: Programme of the Day */}
             <StaggerItem className="flex flex-col gap-4">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0F0F0F" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="opacity-40">
                 <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
               </svg>
-              <h3 className="font-display italic text-[#0F0F0F] text-xl lg:text-2xl">The Timeline</h3>
+              <h3 className="font-display italic text-[#0F0F0F] text-xl lg:text-2xl">Saturday Programme</h3>
+              <p className="text-[12px] text-[#0F0F0F]/50 leading-relaxed -mt-1">
+                The order of the wedding day. Full week&rsquo;s schedule on the Order of Events page.
+              </p>
               <div className="flex flex-col divide-y divide-stone-200">
-                {timeline.map(({ event, time }) => (
-                  <div key={event} className="flex items-center justify-between py-3">
-                    <span className="text-[13.5px] text-[#0F0F0F]/70">{event}</span>
-                    <span className="text-[12px] font-semibold text-[#2D4C3B] tracking-wide">{time}</span>
+                {programme.map(({ event, time }) => (
+                  <div key={event} className="flex items-center justify-between gap-3 py-3">
+                    <span className="text-[13.5px] text-[#0F0F0F]/70 leading-tight">{event}</span>
+                    <span className="text-[11px] font-semibold text-[#2D4C3B] tracking-wide flex-shrink-0 text-right">{time}</span>
                   </div>
                 ))}
               </div>
+              <Link
+                to="/order-of-events"
+                className="text-[10.5px] tracking-[0.18em] uppercase font-semibold text-[#2D4C3B] hover:underline w-fit"
+              >
+                Full Week&rsquo;s Schedule →
+              </Link>
             </StaggerItem>
 
           </StaggerGroup>

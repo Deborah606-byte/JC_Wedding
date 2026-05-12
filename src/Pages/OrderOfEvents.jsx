@@ -43,7 +43,7 @@ function OrderHero() {
           <div className="flex-1 flex flex-col justify-center py-12 lg:py-0">
             <div className="w-full">
               <Reveal as="p" className="text-[10px] tracking-[0.3em] uppercase text-[#2D4C3B] font-semibold mb-4">
-                The Weekend
+                The Celebration Week
               </Reveal>
               <Reveal delay={0.1}>
                 <h1 className="font-display text-[#0F0F0F] text-4xl lg:text-5xl leading-[1.05] mb-5">
