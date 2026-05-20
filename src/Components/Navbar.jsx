@@ -28,7 +28,7 @@ export default function Navbar() {
             alt="JC Monogram"
             className="h-11 sm:h-14 md:h-20 lg:h-24 w-auto object-contain transition-transform duration-300 group-hover:scale-[1.03]"
           />
-          <span className="font-script text-[#2D4C3B] text-[26px] sm:text-3xl md:text-5xl lg:text-[3.75rem] leading-none tracking-wide whitespace-nowrap">
+          <span className="font-script text-[#2D4C3B] text-[22px] sm:text-3xl md:text-5xl lg:text-[3.75rem] leading-none tracking-wide whitespace-nowrap">
             Josephine &amp; Christopher
           </span>
         </Link>
@@ -60,7 +60,6 @@ export default function Navbar() {
 
           <Link
             to="/rsvp"
-            style={{ color: '#ffffff' }}
             className="text-[11.5px] font-semibold tracking-[0.22em] uppercase px-5 py-2 bg-[#2D4C3B] text-white hover:bg-[#3a6050] transition-colors duration-200"
           >
             RSVP
@@ -72,7 +71,6 @@ export default function Navbar() {
           <Link
             to="/rsvp"
             onClick={() => setMenuOpen(false)}
-            style={{ color: '#ffffff' }}
             className="text-[10.5px] font-semibold tracking-[0.22em] uppercase px-4 py-1.5 bg-[#2D4C3B] text-white"
           >
             RSVP

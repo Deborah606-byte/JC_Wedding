@@ -3,18 +3,19 @@ import { motion, useScroll, useTransform } from 'motion/react'
 import { useRef } from 'react'
 import PageTransition from '../Components/PageTransition'
 import Reveal from '../Components/Reveal'
+import usePageTitle from '../hooks/usePageTitle'
 
 // ─────────────────────────────────────────────────────────
 // 🖼️  IMAGES — rename your files in src/assets/ to match
 // ─────────────────────────────────────────────────────────
-import heroFlowers1  from '../assets/flower1.png'   // top-right flowers (top)
-import heroFlowers2  from '../assets/flower2.png'   // top-right flowers (bottom)
-import event01Img    from '../assets/flower3.png'    // Court Wedding
-import event02Img    from '../assets/flower4.png'    // Traditional Marriage
-import event03ImgA   from '../assets/flower5.png'    // Bridal Shower
-import event03ImgB   from '../assets/flower6.png'    // Bachelor Party
-import event05Img    from '../assets/flower1.png'    // Reception & Celebration
-import event06Img    from '../assets/flower2.png'    // Thanksgiving Service
+import heroFlowers1  from '../assets/flower1.webp'   // top-right flowers (top)
+import heroFlowers2  from '../assets/flower2.webp'   // top-right flowers (bottom)
+import event01Img    from '../assets/flower3.webp'    // Court Wedding
+import event02Img    from '../assets/flower4.webp'    // Traditional Marriage
+import event03ImgA   from '../assets/flower5.webp'    // Bridal Shower
+import event03ImgB   from '../assets/flower6.webp'    // Bachelor Party
+import event05Img    from '../assets/flower1.webp'    // Reception & Celebration
+import event06Img    from '../assets/flower2.webp'    // Thanksgiving Service
 
 // ── Shared number label ────────────────────────────────────
 function EventNumber({ n, className = '', style }) {
@@ -67,6 +68,8 @@ function OrderHero() {
               src={heroFlowers1}
               alt="Flowers"
               style={{ y: flowerY }}
+              fetchPriority="high"
+              decoding="async"
               className="w-full h-[120%] object-cover"
             />
             <motion.div
@@ -78,6 +81,7 @@ function OrderHero() {
               <img
                 src={heroFlowers2}
                 alt="Fern"
+                decoding="async"
                 className="w-full h-28 lg:h-36 object-cover"
               />
             </motion.div>
@@ -91,6 +95,7 @@ function OrderHero() {
 
 // ── Page ───────────────────────────────────────────────────
 export default function OrderOfEvents() {
+  usePageTitle('Order of Events')
   return (
     <PageTransition>
 
@@ -113,7 +118,7 @@ export default function OrderOfEvents() {
             </Reveal>
 
             <Reveal x={40} y={0} delay={0.15} className="flex-1 overflow-hidden">
-              <img src={event01Img} alt="Court Wedding" className="w-full h-60 lg:h-72 object-cover hover:scale-105 transition-transform duration-700" />
+              <img src={event01Img} alt="Court Wedding" loading="lazy" decoding="async" className="w-full h-60 lg:h-72 object-cover hover:scale-105 transition-transform duration-700" />
             </Reveal>
 
           </div>
@@ -126,7 +131,7 @@ export default function OrderOfEvents() {
           <div className="flex flex-col lg:flex-row gap-10 lg:gap-12 items-start">
 
             <Reveal x={-40} y={0} className="lg:w-[52%] flex-shrink-0 relative">
-              <img src={event02Img} alt="Traditional Marriage" className="w-full h-72 lg:h-[420px] object-cover hover:scale-105 transition-transform duration-700" />
+              <img src={event02Img} alt="Traditional Marriage" loading="lazy" decoding="async" className="w-full h-72 lg:h-[420px] object-cover hover:scale-105 transition-transform duration-700" />
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -179,13 +184,13 @@ export default function OrderOfEvents() {
 
             <Reveal x={40} y={0} delay={0.15} className="flex-1 grid grid-cols-2 gap-3">
               <div className="overflow-hidden relative group">
-                <img src={event03ImgA} alt="Bridal Shower" className="w-full h-52 lg:h-64 object-cover group-hover:scale-105 transition-transform duration-700" />
+                <img src={event03ImgA} alt="Bridal Shower" loading="lazy" decoding="async" className="w-full h-52 lg:h-64 object-cover group-hover:scale-105 transition-transform duration-700" />
                 <span className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm px-2.5 py-1 text-[10px] tracking-[0.22em] uppercase font-semibold text-[#2D4C3B]">
                   Bridal Shower
                 </span>
               </div>
               <div className="overflow-hidden mt-6 relative group">
-                <img src={event03ImgB} alt="Bachelor Party" className="w-full h-52 lg:h-64 object-cover group-hover:scale-105 transition-transform duration-700" />
+                <img src={event03ImgB} alt="Bachelor Party" loading="lazy" decoding="async" className="w-full h-52 lg:h-64 object-cover group-hover:scale-105 transition-transform duration-700" />
                 <span className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm px-2.5 py-1 text-[10px] tracking-[0.22em] uppercase font-semibold text-[#2D4C3B]">
                   Bachelor Party
                 </span>
@@ -197,20 +202,20 @@ export default function OrderOfEvents() {
       </section>
 
       {/* ── EVENT 04: Dinner & Dancing (full-width green) ── */}
-      <section style={{ color: '#ffffff' }} className="bg-[#2D4C3B] py-20 lg:py-28 overflow-hidden">
+      <section className="bg-[#2D4C3B] text-white py-20 lg:py-28 overflow-hidden">
         <div className="max-w-3xl mx-auto px-6 text-center flex flex-col items-center gap-5">
           <Reveal>
-            <EventNumber n={4} style={{ color: 'rgba(255,255,255,0.2)' }} />
+            <EventNumber n={4} className="text-white/20" />
           </Reveal>
           <Reveal delay={0.1}>
-            <h2 style={{ color: '#ffffff' }} className="font-display italic text-3xl lg:text-5xl leading-tight">
+            <h2 className="font-display italic text-3xl lg:text-5xl leading-tight">
               White Wedding
             </h2>
           </Reveal>
-          <Reveal delay={0.2} as="p" style={{ color: 'rgba(255,255,255,0.5)' }} className="text-[10px] tracking-[0.28em] uppercase font-semibold">
+          <Reveal delay={0.2} as="p" className="text-[10px] tracking-[0.28em] uppercase font-semibold text-white/50">
             Saturday · October 24 · 4:00 PM
           </Reveal>
-          <Reveal delay={0.3} as="p" style={{ color: 'rgba(255,255,255,0.6)' }} className="text-[14px] leading-[1.85] max-w-md mt-2">
+          <Reveal delay={0.3} as="p" className="text-[14px] leading-[1.85] max-w-md mt-2 text-white/60">
             We exchange vows before God, family, and friends as we begin our new journey together in love and faith.
           </Reveal>
           <Reveal delay={0.45} className="mt-5">
@@ -219,10 +224,10 @@ export default function OrderOfEvents() {
                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
               </svg>
               <div>
-                <p style={{ color: 'rgba(255,255,255,0.7)' }} className="text-[10px] tracking-[0.22em] uppercase font-semibold">
+                <p className="text-[10px] tracking-[0.22em] uppercase font-semibold text-white/70">
                   Wedding Venue
                 </p>
-                <p style={{ color: 'rgba(255,255,255,0.85)' }} className="text-[12.5px] leading-[1.7] mt-1.5">
+                <p className="text-[12.5px] leading-[1.7] mt-1.5 text-white/85">
                   Assurance Of Salvation Ministries Inc Fire Centre,<br />
                   Irhinmwirin Mega Church (FC8)<br />
                   No. 2 Freedom Street, Off Enogie Palace Road,<br />
@@ -240,7 +245,7 @@ export default function OrderOfEvents() {
           <div className="flex flex-col lg:flex-row gap-10 lg:gap-16 items-center">
 
             <Reveal x={-40} y={0} className="lg:w-[52%] flex-shrink-0 overflow-hidden">
-              <img src={event05Img} alt="Reception & Celebration" className="w-full h-72 lg:h-[400px] object-cover hover:scale-105 transition-transform duration-700" />
+              <img src={event05Img} alt="Reception & Celebration" loading="lazy" decoding="async" className="w-full h-72 lg:h-[400px] object-cover hover:scale-105 transition-transform duration-700" />
             </Reveal>
 
             <Reveal x={40} y={0} delay={0.15} className="flex-1 flex flex-col gap-3">
@@ -289,7 +294,7 @@ export default function OrderOfEvents() {
             </Reveal>
 
             <Reveal x={40} y={0} delay={0.15} className="flex-1 overflow-hidden">
-              <img src={event06Img} alt="Thanksgiving Service" className="w-full h-60 lg:h-72 object-cover hover:scale-105 transition-transform duration-700" />
+              <img src={event06Img} alt="Thanksgiving Service" loading="lazy" decoding="async" className="w-full h-60 lg:h-72 object-cover hover:scale-105 transition-transform duration-700" />
             </Reveal>
 
           </div>

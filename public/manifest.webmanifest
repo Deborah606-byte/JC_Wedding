@@ -1,0 +1,24 @@
+{
+  "name": "Josephine & Christopher · October 24, 2026",
+  "short_name": "Jossy & Chris",
+  "description": "Join us for our wedding in Benin City, Nigeria.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#F8F4EC",
+  "theme_color": "#2D4C3B",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/og-image.png",
+      "sizes": "1200x630",
+      "type": "image/png"
+    }
+  ]
+}

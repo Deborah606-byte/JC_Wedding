@@ -4,18 +4,19 @@ import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react'
 import PageTransition from '../Components/PageTransition'
 import Reveal, { StaggerGroup, StaggerItem } from '../Components/Reveal'
 import Lightbox, { useLightbox } from '../Components/Lightbox'
+import usePageTitle from '../hooks/usePageTitle'
 
-import heroImg  from '../assets/home-hero.png'
-import venueImg from '../assets/section1.png'
-import heritageImg from '../assets/hero.png'
-import moment1  from '../assets/pic1.png'
-import moment2  from '../assets/ourservices.png'
-import moment3  from '../assets/secondservice.png'
-import moment4  from '../assets/one.png'
-import moment5  from '../assets/first.png'
-import moment6  from '../assets/happy.jpg'
-import moment7  from '../assets/32089.jpg'
-import moment8  from '../assets/47639.jpg'
+import heroImg  from '../assets/home-hero.webp'
+import venueImg from '../assets/section1.webp'
+import heritageImg from '../assets/hero.webp'
+import moment1  from '../assets/pic1.webp'
+import moment2  from '../assets/ourservices.webp'
+import moment3  from '../assets/secondservice.webp'
+import moment4  from '../assets/one.webp'
+import moment5  from '../assets/first.webp'
+import moment6  from '../assets/happy.webp'
+import moment7  from '../assets/32089.webp'
+import moment8  from '../assets/47639.webp'
 
 const EASE = [0.22, 1, 0.36, 1]
 
@@ -102,6 +103,8 @@ function MomentCard({ src, account, caption, likes, onClick }) {
         <img
           src={src}
           alt={caption}
+          loading="lazy"
+          decoding="async"
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
         />
       </button>
@@ -135,6 +138,8 @@ function Hero() {
         src={heroImg}
         alt="Josephine & Christopher"
         style={{ y, scale }}
+        fetchPriority="high"
+        decoding="async"
         className="absolute inset-0 w-full h-[115%] object-cover object-top"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-black/15 via-transparent to-black/55" />
@@ -178,6 +183,7 @@ function Hero() {
 }
 
 export default function Home() {
+  usePageTitle()
   const { days, hours, minutes, seconds } = useCountdown('2026-10-24T16:00:00')
   const lb = useLightbox(lightboxImages)
 
@@ -208,7 +214,6 @@ export default function Home() {
               </Link>
               <Link
                 to="/guestbook"
-                style={{ color: '#ffffff' }}
                 className="text-[12px] sm:text-[13.5px] font-semibold tracking-wide text-white bg-[#0F0F0F] hover:bg-[#2D4C3B] px-5 sm:px-9 py-2.5 sm:py-3 rounded-full transition-colors duration-200 whitespace-nowrap"
               >
                 Leave a Love Note
@@ -227,6 +232,8 @@ export default function Home() {
                 <img
                   src={venueImg}
                   alt="Benin City"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-72 lg:h-[440px] object-cover transition-transform duration-[1200ms] group-hover:scale-105"
                 />
               </div>
@@ -298,16 +305,16 @@ export default function Home() {
         </div>
 
         <div className="relative max-w-3xl mx-auto px-6 text-center">
-          <Reveal as="p" style={{ color: 'rgba(255,255,255,0.55)' }} className="text-[10px] tracking-[0.45em] uppercase text-white/55 font-semibold mb-8">
+          <Reveal as="p" className="text-[10px] tracking-[0.45em] uppercase text-white/55 font-semibold mb-8">
             Built on Faith &amp; Friendship
           </Reveal>
-          <Reveal delay={0.1} as="blockquote" style={{ color: '#ffffff' }} className="font-display italic text-white text-3xl lg:text-[44px] leading-[1.3] mb-8">
+          <Reveal delay={0.1} as="blockquote" className="font-display italic text-white text-3xl lg:text-[44px] leading-[1.3] mb-8">
             Before the love story, <br />there was friendship.<br />
             Before forever, <br />there was faith.
           </Reveal>
           <Reveal delay={0.2}>
             <div className="h-px bg-white/30 w-20 mx-auto mb-6" />
-            <p style={{ color: 'rgba(255,255,255,0.75)' }} className="text-white/75 text-[14.5px] leading-[1.95] max-w-md mx-auto italic">
+            <p className="text-white/75 text-[14.5px] leading-[1.95] max-w-md mx-auto italic">
               And through every season, love continued to grow beautifully between us.
             </p>
           </Reveal>
@@ -354,6 +361,8 @@ export default function Home() {
                 <img
                   src={heritageImg}
                   alt="Our families"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-72 lg:h-[440px] object-cover transition-transform duration-[1200ms] group-hover:scale-105"
                 />
               </div>
@@ -392,26 +401,43 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ── TO OUR FAVORITE PEOPLE ── */}
+      {/* ── TO OUR FAVORITE PEOPLE — stationery card ── */}
       <section className="bg-[#f7f6f2] py-20 lg:py-28">
-        <div className="max-w-xl mx-auto px-6 flex flex-col items-center gap-6 text-center">
+        <div className="max-w-4xl mx-auto px-6">
           <Reveal>
-            <Sprig className="text-[#2D4C3B]/45" />
-          </Reveal>
+            <div className="relative bg-white shadow-[0_30px_60px_-30px_rgba(45,76,59,0.25)] flex flex-col lg:flex-row overflow-hidden">
 
-          <Reveal delay={0.1} as="p" className="text-[10px] tracking-[0.4em] uppercase text-[#2D4C3B] font-semibold">
-            A Note of Thanks
-          </Reveal>
+              {/* Left — green ribbon panel */}
+              <div className="relative bg-[#2D4C3B] text-white px-8 py-10 lg:px-10 lg:py-14 lg:w-[38%] flex flex-col items-center justify-center text-center gap-4">
+                <Sprig className="text-white/60" />
+                <p className="text-[10px] tracking-[0.4em] uppercase text-white/80 font-semibold">
+                  A Note of Thanks
+                </p>
+                <div className="h-px bg-white/30 w-10" />
+                <p className="font-display italic text-white text-lg leading-snug max-w-[14ch]">
+                  With all our love &amp; gratitude.
+                </p>
+              </div>
 
-          <Reveal delay={0.15} as="h2" className="font-display italic text-[#0F0F0F] text-3xl lg:text-[42px] leading-[1.2]">
-            To Our Favorite People.
-          </Reveal>
+              {/* Right — text panel */}
+              <div className="relative px-8 py-10 lg:px-12 lg:py-14 flex-1 flex flex-col gap-5">
+                {/* Faint stamp circle (top-right) */}
+                <div className="absolute top-6 right-6 w-16 h-16 rounded-full border border-[#2D4C3B]/20 hidden lg:flex items-center justify-center" aria-hidden="true">
+                  <span className="font-display italic text-[#2D4C3B]/40 text-xs leading-tight text-center">J &amp; C<br/>2026</span>
+                </div>
 
-          <Reveal delay={0.25} as="p" className="text-[#0F0F0F]/60 text-[15px] leading-[1.95] max-w-md">
-            Thank you for being part of our journey, our memories, our prayers, and our joy.
-          </Reveal>
-          <Reveal delay={0.3} as="p" className="text-[#0F0F0F]/60 text-[15px] leading-[1.95] max-w-md">
-            Celebrating this beautiful moment with you means more to us than words could ever express.
+                <h2 className="font-display italic text-[#0F0F0F] text-3xl lg:text-[40px] leading-[1.15]">
+                  To Our Favorite People.
+                </h2>
+                <p className="text-[#0F0F0F]/65 text-[15px] leading-[1.95] max-w-md">
+                  Thank you for being part of our journey, our memories, our prayers, and our joy.
+                </p>
+                <p className="text-[#0F0F0F]/65 text-[15px] leading-[1.95] max-w-md">
+                  Celebrating this beautiful moment with you means more to us than words could ever express.
+                </p>
+              </div>
+
+            </div>
           </Reveal>
         </div>
       </section>

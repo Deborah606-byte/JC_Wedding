@@ -3,9 +3,10 @@ import { motion } from 'motion/react'
 import PageTransition from '../Components/PageTransition'
 import Reveal, { StaggerGroup, StaggerItem } from '../Components/Reveal'
 import { submitBlessing, fetchBlessings, isApiConfigured } from '../lib/api'
+import usePageTitle from '../hooks/usePageTitle'
 
 // 🖼️ Replace with your actual asset imports
-import botanicalImg from '../assets/happy.jpg'   // flower/botanical photo bottom-left
+import botanicalImg from '../assets/happy.webp'   // flower/botanical photo bottom-left
 
 // ── Card type cycle (visual variety for backend-driven entries) ──
 const CARD_TYPES = ['featured', 'plain', 'minimal', 'plain']
@@ -41,18 +42,15 @@ function PlainCard({ name, date, message }) {
 
 function FeaturedCard({ name, message }) {
   return (
-    <div
-      style={{ color: '#ffffff' }}
-      className="bg-[#2D4C3B] rounded-sm p-7 relative overflow-hidden"
-    >
+    <div className="bg-[#2D4C3B] text-white rounded-sm p-7 relative overflow-hidden">
       {/* Faint leaf watermark */}
       <div className="absolute bottom-3 right-4 opacity-10 text-white">
         <svg width="60" height="60" viewBox="0 0 24 24" fill="currentColor">
           <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 0 0 8 20C19 20 22 3 22 3c-1 2-8 2-8 2s0-8-7-8c0 0 3 5 2 11z"/>
         </svg>
       </div>
-      <h3 style={{ color: '#ffffff' }} className="font-display italic text-xl mb-4">{name}</h3>
-      <p style={{ color: '#ffffff' }} className="text-[13.5px] leading-[1.8] italic">"{message}"</p>
+      <h3 className="font-display italic text-xl mb-4">{name}</h3>
+      <p className="text-[13.5px] leading-[1.8] italic">"{message}"</p>
     </div>
   )
 }
@@ -79,11 +77,13 @@ function MinimalCard({ name, date, message }) {
 
 // ── Page ───────────────────────────────────────────────────
 export default function Guestbook() {
+  usePageTitle('Guestbook')
   const [blessings, setBlessings] = useState([])
   const [loading, setLoading] = useState(true)
   const [loadError, setLoadError] = useState('')
   const [showAll, setShowAll] = useState(false)
   const [form, setForm] = useState({ name: '', message: '' })
+  const [honeypot, setHoneypot] = useState('')
   const [submitted, setSubmitted] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [submitError, setSubmitError] = useState('')
@@ -121,6 +121,13 @@ export default function Guestbook() {
 
   const handleSubmit = async () => {
     if (!form.name.trim() || !form.message.trim() || submitting) return
+    // Honeypot — if filled, silently "succeed" without submitting.
+    if (honeypot) {
+      setForm({ name: '', message: '' })
+      setSubmitted(true)
+      setTimeout(() => setSubmitted(false), 5000)
+      return
+    }
     setSubmitError('')
     setSubmitting(true)
     try {
@@ -170,6 +177,17 @@ export default function Guestbook() {
                 <h2 className="font-display italic text-[#0F0F0F] text-xl mb-6">Write to us</h2>
 
                 <div className="flex flex-col gap-5">
+                  {/* Honeypot — invisible to humans, attractive to bots */}
+                  <input
+                    type="text"
+                    name="website"
+                    tabIndex="-1"
+                    autoComplete="off"
+                    aria-hidden="true"
+                    value={honeypot}
+                    onChange={e => setHoneypot(e.target.value)}
+                    style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', opacity: 0 }}
+                  />
                   {/* Name */}
                   <div>
                     <label className="text-[10px] tracking-[0.2em] uppercase text-[#0F0F0F]/40 font-semibold block mb-2">
@@ -202,8 +220,7 @@ export default function Guestbook() {
                   <button
                     onClick={handleSubmit}
                     disabled={submitting}
-                    style={{ color: '#ffffff' }}
-                    className="w-full bg-[#2D4C3B] text-[11px] font-semibold tracking-[0.25em] uppercase py-3.5 rounded-sm hover:bg-[#3a6050] transition-colors duration-300 flex items-center justify-center gap-2 mt-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                                       className="w-full bg-[#2D4C3B] text-[11px] font-semibold tracking-[0.25em] uppercase py-3.5 rounded-sm hover:bg-[#3a6050] transition-colors duration-300 flex items-center justify-center gap-2 mt-2 disabled:opacity-60 disabled:cursor-not-allowed"
                   >
                     {submitting ? 'Sending…' : submitted ? 'Blessing Sent ✓' : (
                       <>
@@ -234,6 +251,8 @@ export default function Guestbook() {
                   src={botanicalImg}
                   alt=""
                   aria-hidden="true"
+                  loading="lazy"
+                  decoding="async"
                   className="w-full h-48 lg:h-56 object-cover"
                 />
               </div>

@@ -18,6 +18,15 @@ function googleCalendarUrl() {
   return `https://www.google.com/calendar/render?${params}`
 }
 
+// Escape iCalendar TEXT values per RFC 5545 §3.3.11
+function escapeIcsText(value) {
+  return String(value)
+    .replace(/\\/g, '\\\\')
+    .replace(/;/g, '\\;')
+    .replace(/,/g, '\\,')
+    .replace(/\r?\n/g, '\\n')
+}
+
 function downloadIcs() {
   const ics = [
     'BEGIN:VCALENDAR',
@@ -30,9 +39,9 @@ function downloadIcs() {
     `DTSTAMP:${new Date().toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, '')}`,
     `DTSTART:${START_UTC}`,
     `DTEND:${END_UTC}`,
-    `SUMMARY:${TITLE}`,
-    `DESCRIPTION:${DETAILS}`,
-    `LOCATION:${LOCATION}`,
+    `SUMMARY:${escapeIcsText(TITLE)}`,
+    `DESCRIPTION:${escapeIcsText(DETAILS)}`,
+    `LOCATION:${escapeIcsText(LOCATION)}`,
     'STATUS:CONFIRMED',
     'END:VEVENT',
     'END:VCALENDAR',
@@ -56,7 +65,6 @@ export default function AddToCalendar({ className = '' }) {
         href={googleCalendarUrl()}
         target="_blank"
         rel="noopener noreferrer"
-        style={{ color: '#ffffff' }}
         className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.22em] uppercase px-5 py-3 bg-[#2D4C3B] text-white hover:bg-[#3a6050] transition-colors duration-200"
       >
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">

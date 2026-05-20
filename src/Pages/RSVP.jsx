@@ -5,12 +5,16 @@ import PageTransition from '../Components/PageTransition'
 import Reveal, { StaggerGroup, StaggerItem } from '../Components/Reveal'
 import { submitRsvp } from '../lib/api'
 import AddToCalendar from '../Components/AddToCalendar'
+import usePageTitle from '../hooks/usePageTitle'
 
 // ─────────────────────────────────────────────────────────
 // 🖼️  IMAGES — rename your files in src/assets/ to match
 // ─────────────────────────────────────────────────────────
-import heroBg    from '../assets/flower1.png'   // full-width botanical background
-import rsvpFloral from '../assets/flower2.png'   // dark floral/roses photo left of form
+import heroBg    from '../assets/flower1.webp'   // full-width botanical background
+import rsvpFloral from '../assets/flower2.webp'   // dark floral/roses photo left of form
+import infoVenues from '../assets/flower3.webp'   // practical info: venues band
+import infoAttire from '../assets/flower4.webp'   // practical info: dress code band
+import infoProgramme from '../assets/flower5.webp' // practical info: programme band
 
 // ── Wedding-day programme ──
 const programme = [
@@ -117,6 +121,8 @@ function RsvpHero() {
         src={heroBg}
         alt=""
         style={{ y, scale }}
+        fetchPriority="high"
+        decoding="async"
         className="absolute inset-0 w-full h-[115%] object-cover"
       />
       <div className="absolute inset-0 bg-[#2D4C3B]/30" />
@@ -135,7 +141,6 @@ function RsvpHero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.1, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
-          style={{ color: '#ffffff' }}
           className="font-display italic text-white text-4xl lg:text-6xl xl:text-7xl leading-[1.1] drop-shadow-lg max-w-3xl"
         >
           Kindly respond by the twenty-fourth of September
@@ -144,7 +149,6 @@ function RsvpHero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.9, delay: 0.7, ease: [0.22, 1, 0.36, 1] }}
-          style={{ color: 'rgba(255,255,255,0.85)' }}
           className="text-white/85 text-[14px] leading-[1.85] max-w-md mt-2 drop-shadow"
         >
           We look forward to celebrating this special milestone with those we love most in the heart of Benin City.
@@ -156,6 +160,7 @@ function RsvpHero() {
 
 // ── Page ───────────────────────────────────────────────────
 export default function RSVP() {
+  usePageTitle('RSVP')
   const [form, setForm] = useState({
     name: '',
     attending: 'Yes, gladly',
@@ -163,6 +168,7 @@ export default function RSVP() {
     contact: '',
     note: '',
   })
+  const [honeypot, setHoneypot] = useState('')
   const [submitted, setSubmitted] = useState(false)
   const [submitting, setSubmitting] = useState(false)
   const [error, setError] = useState('')
@@ -170,6 +176,8 @@ export default function RSVP() {
 
   const handleSubmit = async () => {
     if (!form.name || !form.attending || submitting) return
+    // Honeypot — if filled, silently "succeed" without submitting.
+    if (honeypot) { setSubmitted(true); return }
     setError('')
     setSubmitting(true)
     try {
@@ -198,6 +206,8 @@ export default function RSVP() {
               <img
                 src={rsvpFloral}
                 alt="The Celebration"
+                loading="lazy"
+                decoding="async"
                 className="w-full h-64 lg:h-full object-cover"
               />
               {/* Dark overlay for readability */}
@@ -239,6 +249,17 @@ export default function RSVP() {
                 </div>
               ) : (
                 <>
+                  {/* Honeypot — invisible to humans, attractive to bots */}
+                  <input
+                    type="text"
+                    name="website"
+                    tabIndex="-1"
+                    autoComplete="off"
+                    aria-hidden="true"
+                    value={honeypot}
+                    onChange={e => setHoneypot(e.target.value)}
+                    style={{ position: 'absolute', left: '-9999px', width: '1px', height: '1px', opacity: 0 }}
+                  />
                   {/* Attending */}
                   <div>
                     <label className="text-[10px] tracking-[0.22em] uppercase text-[#2D4C3B] font-semibold block mb-2">
@@ -329,8 +350,7 @@ export default function RSVP() {
                     <button
                       onClick={handleSubmit}
                       disabled={submitting}
-                      style={{ color: '#ffffff' }}
-                      className="bg-[#2D4C3B] text-[11px] font-semibold tracking-[0.25em] uppercase px-8 py-4 hover:bg-[#3a6050] transition-colors duration-300 flex-shrink-0 disabled:opacity-60 disabled:cursor-not-allowed"
+                      className="bg-[#2D4C3B] text-white text-[11px] font-semibold tracking-[0.25em] uppercase px-8 py-4 hover:bg-[#3a6050] transition-colors duration-300 flex-shrink-0 disabled:opacity-60 disabled:cursor-not-allowed"
                     >
                       {submitting ? 'Sending…' : 'Confirm Attendance'}
                     </button>
@@ -350,96 +370,324 @@ export default function RSVP() {
         </div>
       </section>
 
-      {/* ── 3. PRACTICAL INFORMATION ── */}
+      {/* ── 3. PRACTICAL INFORMATION — horizontal alternating bands ── */}
       <section className="bg-[#f7f6f2] py-16 lg:py-24">
         <div className="max-w-5xl mx-auto px-6 lg:px-10">
 
           {/* Heading */}
-          <div className="text-center mb-14">
-            <Reveal as="h2" className="font-display italic text-[#0F0F0F] text-3xl lg:text-4xl mb-2">
-              Practical Information
-            </Reveal>
-            <Reveal delay={0.1} as="p" className="text-[10px] tracking-[0.3em] uppercase text-[#2D4C3B] font-semibold">
+          <div className="text-center mb-14 lg:mb-20">
+            <Reveal as="p" className="text-[10px] tracking-[0.3em] uppercase text-[#2D4C3B] font-semibold mb-3">
               The Details of the Day
+            </Reveal>
+            <Reveal delay={0.1} as="h2" className="font-display italic text-[#0F0F0F] text-3xl lg:text-4xl">
+              Practical Information
             </Reveal>
           </div>
 
-          {/* 3 columns */}
-          <StaggerGroup stagger={0.15} className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-4 items-start">
+          <div className="flex flex-col gap-16 lg:gap-24">
 
-            {/* Col 1: Venues */}
-            <StaggerItem className="flex flex-col gap-4">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0F0F0F" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="opacity-40">
-                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
-              </svg>
-              <h3 className="font-display italic text-[#0F0F0F] text-xl lg:text-2xl">Where We&rsquo;ll Be</h3>
-              <div className="flex flex-col gap-5">
-                {venues.map((v) => (
-                  <div key={v.label} className="flex flex-col gap-1.5">
-                    <p className="text-[10px] tracking-[0.22em] uppercase text-[#2D4C3B] font-semibold">
-                      {v.label}
-                    </p>
-                    <p className="font-display italic text-[#0F0F0F] text-[15px] leading-tight">
-                      {v.name}
-                    </p>
-                    {v.sub && (
-                      <p className="text-[12px] text-[#0F0F0F]/55 leading-relaxed">{v.sub}</p>
-                    )}
-                    <p className="text-[12px] text-[#0F0F0F]/55 leading-relaxed">{v.address}</p>
-                    <a
-                      href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(v.mapQuery)}`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-[10.5px] tracking-[0.18em] uppercase font-semibold text-[#2D4C3B] hover:underline w-fit mt-1"
-                    >
-                      Open in Google Maps →
-                    </a>
+            {/* ── BAND I: Venues — image left, text right ── */}
+            <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-14">
+              <Reveal x={-40} y={0} className="w-full lg:w-[42%] flex-shrink-0">
+                <div className="relative overflow-hidden shadow-xl group">
+                  <img
+                    src={infoVenues}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-72 lg:h-[460px] object-cover transition-transform duration-[1200ms] group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-[#2D4C3B]/25" />
+                  <div className="absolute top-5 left-5">
+                    <p className="font-display italic text-white/85 text-sm drop-shadow">I</p>
+                    <p className="text-[10px] tracking-[0.3em] uppercase text-white font-semibold drop-shadow mt-1">Locations</p>
                   </div>
-                ))}
+                </div>
+              </Reveal>
+
+              <Reveal x={40} y={0} delay={0.15} className="flex-1 flex flex-col gap-5">
+                <p className="text-[10px] tracking-[0.3em] uppercase text-[#2D4C3B] font-semibold">
+                  Where We&rsquo;ll Be
+                </p>
+                <h3 className="font-display italic text-[#0F0F0F] text-3xl lg:text-[40px] leading-[1.1]">
+                  The Venues<br/>for the Day.
+                </h3>
+                <div className="flex flex-col mt-3">
+                  {venues.map((v, i) => (
+                    <div key={v.label} className={`flex flex-col gap-1.5 py-5 ${i > 0 ? 'border-t border-stone-200' : ''}`}>
+                      <p className="text-[10px] tracking-[0.22em] uppercase text-[#2D4C3B] font-semibold">{v.label}</p>
+                      <p className="font-display italic text-[#0F0F0F] text-[16.5px] leading-snug mt-0.5">{v.name}</p>
+                      {v.sub && <p className="text-[12px] text-[#0F0F0F]/55 leading-relaxed">{v.sub}</p>}
+                      <p className="text-[12.5px] text-[#0F0F0F]/55 leading-[1.75]">{v.address}</p>
+                      <a
+                        href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(v.mapQuery)}`}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-[10.5px] tracking-[0.2em] uppercase font-semibold text-[#2D4C3B] hover:underline w-fit mt-1.5"
+                      >
+                        Open in Google Maps →
+                      </a>
+                    </div>
+                  ))}
+                </div>
+              </Reveal>
+            </div>
+
+            {/* ── BAND II: Dress Code — image right, text left ── */}
+            <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-14">
+              <Reveal x={-40} y={0} className="w-full lg:w-[42%] flex-shrink-0 order-1 lg:order-2">
+                <div className="relative overflow-hidden shadow-xl group">
+                  <img
+                    src={infoAttire}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-72 lg:h-[460px] object-cover transition-transform duration-[1200ms] group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-[#2D4C3B]/25" />
+                  <div className="absolute top-5 left-5">
+                    <p className="font-display italic text-white/85 text-sm drop-shadow">II</p>
+                    <p className="text-[10px] tracking-[0.3em] uppercase text-white font-semibold drop-shadow mt-1">Attire</p>
+                  </div>
+                </div>
+              </Reveal>
+
+              <Reveal x={40} y={0} delay={0.15} className="flex-1 flex flex-col gap-5 order-2 lg:order-1">
+                <p className="text-[10px] tracking-[0.3em] uppercase text-[#2D4C3B] font-semibold">
+                  Dress Code
+                </p>
+                <h3 className="font-display italic text-[#0F0F0F] text-3xl lg:text-[40px] leading-[1.1]">
+                  Formal &amp;<br/>Traditional.
+                </h3>
+                <p className="text-[#0F0F0F]/60 text-[15px] leading-[1.9] max-w-md mt-2">
+                  Formal attire is warmly encouraged for the White Wedding and Reception on Saturday.
+                </p>
+                <p className="text-[#0F0F0F]/60 text-[15px] leading-[1.9] max-w-md">
+                  Traditional Nigerian attire is welcomed for the Traditional Marriage on Thursday.
+                </p>
+                <div className="flex items-center gap-4 max-w-sm mt-3">
+                  <span className="font-display italic text-[#2D4C3B] text-base">Saturday</span>
+                  <div className="flex-1 h-px bg-[#2D4C3B]/25" />
+                  <span className="font-display italic text-[#2D4C3B]/50 text-base">&amp;</span>
+                  <div className="flex-1 h-px bg-[#2D4C3B]/25" />
+                  <span className="font-display italic text-[#2D4C3B] text-base">Thursday</span>
+                </div>
+              </Reveal>
+            </div>
+
+            {/* ── BAND III: Programme — image left, text right ── */}
+            <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-14">
+              <Reveal x={-40} y={0} className="w-full lg:w-[42%] flex-shrink-0">
+                <div className="relative overflow-hidden shadow-xl group">
+                  <img
+                    src={infoProgramme}
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    className="w-full h-72 lg:h-[460px] object-cover transition-transform duration-[1200ms] group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-[#2D4C3B]/25" />
+                  <div className="absolute top-5 left-5">
+                    <p className="font-display italic text-white/85 text-sm drop-shadow">III</p>
+                    <p className="text-[10px] tracking-[0.3em] uppercase text-white font-semibold drop-shadow mt-1">Programme</p>
+                  </div>
+                </div>
+              </Reveal>
+
+              <Reveal x={40} y={0} delay={0.15} className="flex-1 flex flex-col gap-5">
+                <p className="text-[10px] tracking-[0.3em] uppercase text-[#2D4C3B] font-semibold">
+                  Saturday
+                </p>
+                <h3 className="font-display italic text-[#0F0F0F] text-3xl lg:text-[40px] leading-[1.1]">
+                  The Order<br/>of the Day.
+                </h3>
+                <div className="flex flex-col mt-2 divide-y divide-stone-200">
+                  {programme.map(({ event, time }) => (
+                    <div key={event} className="flex items-center justify-between gap-3 py-4">
+                      <span className="text-[14px] text-[#0F0F0F]/70 leading-snug">{event}</span>
+                      <span className="font-display italic text-[#2D4C3B] text-base whitespace-nowrap">{time}</span>
+                    </div>
+                  ))}
+                </div>
+                <Link
+                  to="/order-of-events"
+                  className="inline-flex items-center gap-2 text-[11px] tracking-[0.2em] uppercase font-semibold text-[#2D4C3B] border border-[#2D4C3B]/30 px-5 py-2.5 rounded-sm hover:bg-[#2D4C3B] hover:text-white transition-all duration-300 w-fit mt-2"
+                >
+                  Full Week&rsquo;s Schedule →
+                </Link>
+              </Reveal>
+            </div>
+
+          </div>
+        </div>
+      </section>
+
+      {/* ── 3.5 GIFTS ── PLACEHOLDER: replace bank/Opay/PalmPay values with real details */}
+      <section className="bg-white py-16 lg:py-24 border-t border-stone-100">
+        <div className="max-w-5xl mx-auto px-6 lg:px-10">
+
+          <div className="text-center mb-14">
+            <Reveal as="p" className="text-[10px] tracking-[0.3em] uppercase text-[#2D4C3B] font-semibold mb-3">
+              With Gratitude
+            </Reveal>
+            <Reveal delay={0.1} as="h2" className="font-display italic text-[#0F0F0F] text-3xl lg:text-4xl mb-4">
+              Your Presence Is Our Present
+            </Reveal>
+            <Reveal delay={0.2} as="p" className="text-[#0F0F0F]/55 text-[14px] leading-[1.85] max-w-lg mx-auto">
+              If you wish to bless us further, the following details are kindly provided for your convenience.
+            </Reveal>
+          </div>
+
+          <StaggerGroup stagger={0.12} className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-5 items-stretch">
+
+            {/* Bank Transfer */}
+            <StaggerItem className="bg-[#f7f6f2] p-7 lg:p-8 flex flex-col gap-4">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-[#2D4C3B]/10 flex items-center justify-center text-[#2D4C3B]">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="2" y="5" width="20" height="14" rx="2"/><line x1="2" y1="10" x2="22" y2="10"/>
+                  </svg>
+                </div>
+                <h3 className="font-display italic text-[#0F0F0F] text-xl">Bank Transfer</h3>
+              </div>
+              <div className="flex flex-col gap-2 text-[13.5px]">
+                <div>
+                  <p className="text-[10px] tracking-[0.22em] uppercase text-[#0F0F0F]/40 font-semibold">Bank</p>
+                  <p className="text-[#0F0F0F]/75 mt-0.5">[Bank name &mdash; TBD]</p>
+                </div>
+                <div>
+                  <p className="text-[10px] tracking-[0.22em] uppercase text-[#0F0F0F]/40 font-semibold">Account Number</p>
+                  <p className="text-[#0F0F0F]/75 mt-0.5 font-mono tracking-wider">0000 0000 0000</p>
+                </div>
+                <div>
+                  <p className="text-[10px] tracking-[0.22em] uppercase text-[#0F0F0F]/40 font-semibold">Account Name</p>
+                  <p className="text-[#0F0F0F]/75 mt-0.5">[Account holder &mdash; TBD]</p>
+                </div>
               </div>
             </StaggerItem>
 
-            {/* Col 2: Dress Code — dark green card */}
-            <StaggerItem style={{ color: '#ffffff' }} className="bg-[#2D4C3B] p-8 flex flex-col items-center text-center gap-5">
-              {/* Hanger icon */}
-              <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#a8c5b5" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M20.38 18H3.62a1 1 0 0 1-.76-1.64L12 6"/><path d="M12 6a2 2 0 1 1 1.73-3"/><line x1="12" y1="6" x2="12" y2="4"/>
-              </svg>
-              <div>
-                <h3 style={{ color: '#ffffff' }} className="font-display italic text-xl lg:text-2xl mb-2">What to Wear</h3>
-                <p style={{ color: 'rgba(255,255,255,0.55)' }} className="text-[10px] tracking-[0.28em] uppercase font-semibold mb-5">
-                  Formal &amp; Traditional
-                </p>
-                <div className="w-8 h-px bg-white/20 mx-auto mb-5" />
-                <p style={{ color: 'rgba(255,255,255,0.7)' }} className="text-[13px] leading-[1.8]">
-                  Formal attire for the White Wedding on Saturday. Traditional Nigerian attire is warmly encouraged for the Traditional Marriage on Thursday.
-                </p>
+            {/* Opay */}
+            <StaggerItem className="bg-[#2D4C3B] text-white p-7 lg:p-8 flex flex-col gap-4">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="5" y="2" width="14" height="20" rx="2"/><line x1="12" y1="18" x2="12" y2="18"/>
+                  </svg>
+                </div>
+                <h3 className="font-display italic text-white text-xl">Opay</h3>
+              </div>
+              <div className="flex flex-col gap-2 text-[13.5px]">
+                <div>
+                  <p className="text-[10px] tracking-[0.22em] uppercase text-white/55 font-semibold">Phone Number</p>
+                  <p className="text-white/85 mt-0.5 font-mono tracking-wider">+234 [TBD]</p>
+                </div>
+                <div>
+                  <p className="text-[10px] tracking-[0.22em] uppercase text-white/55 font-semibold">Account Name</p>
+                  <p className="text-white/85 mt-0.5">[Account holder &mdash; TBD]</p>
+                </div>
               </div>
             </StaggerItem>
 
-            {/* Col 3: Programme of the Day */}
-            <StaggerItem className="flex flex-col gap-4">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#0F0F0F" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="opacity-40">
-                <circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/>
-              </svg>
-              <h3 className="font-display italic text-[#0F0F0F] text-xl lg:text-2xl">Saturday Programme</h3>
-              <p className="text-[12px] text-[#0F0F0F]/50 leading-relaxed -mt-1">
-                The order of the wedding day. Full week&rsquo;s schedule on the Order of Events page.
+            {/* PalmPay */}
+            <StaggerItem className="bg-[#f7f6f2] p-7 lg:p-8 flex flex-col gap-4">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-[#2D4C3B]/10 flex items-center justify-center text-[#2D4C3B]">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M12 2 L4 6 L4 12 C4 17 7.5 21 12 22 C16.5 21 20 17 20 12 L20 6 Z"/>
+                  </svg>
+                </div>
+                <h3 className="font-display italic text-[#0F0F0F] text-xl">PalmPay</h3>
+              </div>
+              <div className="flex flex-col gap-2 text-[13.5px]">
+                <div>
+                  <p className="text-[10px] tracking-[0.22em] uppercase text-[#0F0F0F]/40 font-semibold">Phone Number</p>
+                  <p className="text-[#0F0F0F]/75 mt-0.5 font-mono tracking-wider">+234 [TBD]</p>
+                </div>
+                <div>
+                  <p className="text-[10px] tracking-[0.22em] uppercase text-[#0F0F0F]/40 font-semibold">Account Name</p>
+                  <p className="text-[#0F0F0F]/75 mt-0.5">[Account holder &mdash; TBD]</p>
+                </div>
+              </div>
+            </StaggerItem>
+
+          </StaggerGroup>
+        </div>
+      </section>
+
+      {/* ── 3.6 TRAVEL & STAY ── PLACEHOLDER: replace hotel/airport/transport details */}
+      <section className="bg-[#f7f6f2] py-16 lg:py-24">
+        <div className="max-w-5xl mx-auto px-6 lg:px-10">
+
+          <div className="text-center mb-14">
+            <Reveal as="p" className="text-[10px] tracking-[0.3em] uppercase text-[#2D4C3B] font-semibold mb-3">
+              Travel &amp; Stay
+            </Reveal>
+            <Reveal delay={0.1} as="h2" className="font-display italic text-[#0F0F0F] text-3xl lg:text-4xl mb-4">
+              Getting to Benin City
+            </Reveal>
+            <Reveal delay={0.2} as="p" className="text-[#0F0F0F]/55 text-[14px] leading-[1.85] max-w-lg mx-auto">
+              For our guests travelling from afar, a few helpful notes to make your journey easier.
+            </Reveal>
+          </div>
+
+          <StaggerGroup stagger={0.12} className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-5 items-stretch">
+
+            {/* Airport */}
+            <StaggerItem className="bg-white border border-stone-200 p-7 lg:p-8 flex flex-col gap-4">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-[#2D4C3B]/10 flex items-center justify-center text-[#2D4C3B]">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2 1.5V22l3.5-1 3.5 1v-1.5L13 19v-5.5z"/>
+                  </svg>
+                </div>
+                <h3 className="font-display italic text-[#0F0F0F] text-xl">Airport</h3>
+              </div>
+              <p className="text-[#0F0F0F]/65 text-[13.5px] leading-[1.85] flex-1">
+                <span className="font-semibold text-[#0F0F0F]/80">Benin Airport (BNI)</span> &mdash; the closest option, with daily flights from Lagos and Abuja.
               </p>
-              <div className="flex flex-col divide-y divide-stone-200">
-                {programme.map(({ event, time }) => (
-                  <div key={event} className="flex items-center justify-between gap-3 py-3">
-                    <span className="text-[13.5px] text-[#0F0F0F]/70 leading-tight">{event}</span>
-                    <span className="text-[11px] font-semibold text-[#2D4C3B] tracking-wide flex-shrink-0 text-right">{time}</span>
-                  </div>
-                ))}
+              <p className="text-[#0F0F0F]/55 text-[12.5px] leading-[1.75]">
+                [Travel notes &mdash; TBD: typical flight duration, recommended airlines, taxi from airport]
+              </p>
+            </StaggerItem>
+
+            {/* Hotels */}
+            <StaggerItem className="bg-[#2D4C3B] text-white p-7 lg:p-8 flex flex-col gap-4">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center text-white">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <path d="M3 21V8l9-5 9 5v13"/><path d="M9 21V12h6v9"/>
+                  </svg>
+                </div>
+                <h3 className="font-display italic text-white text-xl">Where to Stay</h3>
               </div>
-              <Link
-                to="/order-of-events"
-                className="text-[10.5px] tracking-[0.18em] uppercase font-semibold text-[#2D4C3B] hover:underline w-fit"
-              >
-                Full Week&rsquo;s Schedule →
-              </Link>
+              <div className="flex flex-col gap-2 text-[13.5px] flex-1">
+                <p className="text-white/75 leading-[1.75]">
+                  A few suggested options near the venue:
+                </p>
+                <ul className="text-white/85 leading-[1.85] space-y-1">
+                  <li>&middot; [Hotel name 1 &mdash; TBD]</li>
+                  <li>&middot; [Hotel name 2 &mdash; TBD]</li>
+                  <li>&middot; [Hotel name 3 &mdash; TBD]</li>
+                </ul>
+              </div>
+            </StaggerItem>
+
+            {/* Transport */}
+            <StaggerItem className="bg-white border border-stone-200 p-7 lg:p-8 flex flex-col gap-4">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-[#2D4C3B]/10 flex items-center justify-center text-[#2D4C3B]">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                    <rect x="3" y="11" width="18" height="9" rx="2"/><path d="M5 11V7a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v4"/><circle cx="7.5" cy="16.5" r="1.5"/><circle cx="16.5" cy="16.5" r="1.5"/>
+                  </svg>
+                </div>
+                <h3 className="font-display italic text-[#0F0F0F] text-xl">Getting Around</h3>
+              </div>
+              <p className="text-[#0F0F0F]/65 text-[13.5px] leading-[1.85] flex-1">
+                Bolt and local taxis operate throughout the city.
+              </p>
+              <p className="text-[#0F0F0F]/55 text-[12.5px] leading-[1.75]">
+                [Transport notes &mdash; TBD: tips on local taxis, typical fares, anything to know about getting between venues]
+              </p>
             </StaggerItem>
 
           </StaggerGroup>
@@ -524,26 +772,22 @@ export default function RSVP() {
             </StaggerItem>
 
             {/* WhatsApp — dark green card */}
-            <StaggerItem
-              style={{ color: '#ffffff' }}
-              className="bg-[#2D4C3B] p-7 lg:p-8 flex flex-col gap-5"
-            >
+            <StaggerItem className="bg-[#2D4C3B] p-7 lg:p-8 flex flex-col gap-5">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center">
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="#ffffff">
                     <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
                   </svg>
                 </div>
-                <h3 style={{ color: '#ffffff' }} className="font-display italic text-white text-xl">WhatsApp</h3>
+                <h3 className="font-display italic text-white text-xl">WhatsApp</h3>
               </div>
-              <p style={{ color: 'rgba(255,255,255,0.7)' }} className="text-white/70 text-[13.5px] leading-[1.85] flex-1">
+              <p className="text-white/70 text-[13.5px] leading-[1.85] flex-1">
                 For quick responses and assistance, message us on WhatsApp.
               </p>
               <a
                 href="https://wa.me/2348084315949"
                 target="_blank"
                 rel="noopener noreferrer"
-                style={{ color: '#ffffff' }}
                 className="inline-flex items-center gap-2 font-display italic text-white text-lg hover:opacity-80 transition-opacity mt-auto"
               >
                 +234 808 431 5949 →

@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom'
 import PageTransition from '../Components/PageTransition'
 import Reveal from '../Components/Reveal'
+import usePageTitle from '../hooks/usePageTitle'
 
 export default function NotFound() {
+  usePageTitle('Page Not Found')
   return (
     <PageTransition>
       <section className="bg-[#F8F4EC] min-h-[70vh] flex items-center justify-center px-6 py-20">
@@ -25,7 +27,6 @@ export default function NotFound() {
           <Reveal delay={0.35} className="flex flex-wrap items-center justify-center gap-3 mt-3">
             <Link
               to="/"
-              style={{ color: '#ffffff' }}
               className="text-[11px] font-semibold tracking-[0.22em] uppercase px-6 py-3 bg-[#2D4C3B] text-white hover:bg-[#3a6050] transition-colors duration-200"
             >
               Return Home

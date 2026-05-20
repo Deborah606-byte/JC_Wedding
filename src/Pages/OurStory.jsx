@@ -2,21 +2,22 @@ import { motion, useScroll, useTransform } from 'motion/react'
 import PageTransition from '../Components/PageTransition'
 import Reveal, { StaggerGroup, StaggerItem } from '../Components/Reveal'
 import Lightbox, { useLightbox } from '../Components/Lightbox'
+import usePageTitle from '../hooks/usePageTitle'
 
 // ─────────────────────────────────────────────────────────
 // 🖼️  IMAGES — swap any of these for real couple photos
 // ─────────────────────────────────────────────────────────
-import heroImg    from '../assets/happy.jpg'      // Full-bleed page hero
-import storyImg1  from '../assets/32089.jpg'      // Where It Began
-import storyImg2  from '../assets/pic1.png'       // Faith & Fellowship
-import storyImg3  from '../assets/47639.jpg'      // From Friendship to Love
-import storyImg4  from '../assets/home-hero.png'  // The Proposal
-import storyImg5  from '../assets/hero.png'       // Forever Begins
-import collected1 from '../assets/happy.jpg'
-import collected2 from '../assets/32089.jpg'
-import collected3 from '../assets/47639.jpg'
-import collected4 from '../assets/pic1.png'
-import collected5 from '../assets/home-hero.png'
+import heroImg    from '../assets/happy.webp'      // Full-bleed page hero
+import storyImg1  from '../assets/32089.webp'      // Where It Began
+import storyImg2  from '../assets/pic1.webp'       // Faith & Fellowship
+import storyImg3  from '../assets/47639.webp'      // From Friendship to Love
+import storyImg4  from '../assets/home-hero.webp'  // The Proposal
+import storyImg5  from '../assets/hero.webp'       // Forever Begins
+import collected1 from '../assets/happy.webp'
+import collected2 from '../assets/32089.webp'
+import collected3 from '../assets/47639.webp'
+import collected4 from '../assets/pic1.webp'
+import collected5 from '../assets/home-hero.webp'
 
 const EASE = [0.22, 1, 0.36, 1]
 
@@ -96,6 +97,8 @@ function Chapter({ roman, label, title, body, img, imgLeft }) {
           <img
             src={img}
             alt={title}
+            loading="lazy"
+            decoding="async"
             className="w-full h-80 lg:h-[540px] object-cover transition-transform duration-[1200ms] group-hover:scale-105"
           />
           <div className="absolute inset-0 ring-1 ring-inset ring-black/5 pointer-events-none" />
@@ -152,6 +155,8 @@ function StoryHero() {
         src={heroImg}
         alt="Josephine and Christopher"
         style={{ y, scale }}
+        fetchPriority="high"
+        decoding="async"
         className="absolute inset-0 w-full h-[115%] object-cover"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/15 to-black/60" />
@@ -209,6 +214,7 @@ function StoryHero() {
 
 // ── Page ───────────────────────────────────────────────────
 export default function OurStory() {
+  usePageTitle('Our Story')
   const lb = useLightbox(collageImages)
 
   return (
@@ -247,40 +253,40 @@ export default function OurStory() {
 
         <div className="relative max-w-4xl mx-auto px-6 text-center">
 
-          <Reveal as="p" style={{ color: 'rgba(255,255,255,0.55)' }} className="text-[10px] tracking-[0.45em] uppercase text-white/55 font-semibold mb-10">
+          <Reveal as="p" className="text-[10px] tracking-[0.45em] uppercase text-white/55 font-semibold mb-10">
             Meet The Couple
           </Reveal>
 
           <Reveal delay={0.05}>
-            <p style={{ color: 'rgba(255,255,255,0.8)' }} className="font-display italic text-white/80 text-base lg:text-lg leading-[1.9] mb-14">
+            <p className="font-display italic text-white/80 text-base lg:text-lg leading-[1.9] mb-14">
               Together with our families,
             </p>
           </Reveal>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 mb-14">
             <Reveal delay={0.1} className="flex flex-col items-center md:items-end md:text-right">
-              <p style={{ color: '#ffffff' }} className="font-display italic text-white text-xl lg:text-[24px] leading-[1.45]">
+              <p className="font-display italic text-white text-xl lg:text-[24px] leading-[1.45]">
                 Dr. Ekhator Julius<br />
                 &amp; Mrs. Itohan Augustina<br />
                 Ighodaro
               </p>
-              <p style={{ color: 'rgba(255,255,255,0.55)' }} className="text-white/55 text-[12px] tracking-wide mt-4 leading-relaxed">
+              <p className="text-white/55 text-[12px] tracking-wide mt-4 leading-relaxed">
                 of Evboesi, Orhionmwon LGA
               </p>
-              <p style={{ color: 'rgba(255,255,255,0.4)' }} className="text-white/40 text-[10px] tracking-[0.3em] uppercase mt-1">
+              <p className="text-white/40 text-[10px] tracking-[0.3em] uppercase mt-1">
                 Edo State, Nigeria
               </p>
             </Reveal>
             <Reveal delay={0.2} className="flex flex-col items-center md:items-start md:text-left">
-              <p style={{ color: '#ffffff' }} className="font-display italic text-white text-xl lg:text-[24px] leading-[1.45]">
+              <p className="font-display italic text-white text-xl lg:text-[24px] leading-[1.45]">
                 Late Barrister F.U. Ineomon<br />
                 &amp; Mrs. Franca<br />
                 Ineomon
               </p>
-              <p style={{ color: 'rgba(255,255,255,0.55)' }} className="text-white/55 text-[12px] tracking-wide mt-4 leading-relaxed">
+              <p className="text-white/55 text-[12px] tracking-wide mt-4 leading-relaxed">
                 of Eidenu, Irrua, Esan Central LGA
               </p>
-              <p style={{ color: 'rgba(255,255,255,0.4)' }} className="text-white/40 text-[10px] tracking-[0.3em] uppercase mt-1">
+              <p className="text-white/40 text-[10px] tracking-[0.3em] uppercase mt-1">
                 Edo State, Nigeria
               </p>
             </Reveal>
@@ -288,29 +294,29 @@ export default function OurStory() {
 
           <Reveal delay={0.3}>
             <div className="h-px bg-white/25 w-20 mx-auto mb-10" />
-            <p style={{ color: 'rgba(255,255,255,0.75)' }} className="text-white/75 text-[13.5px] tracking-wide leading-[2] max-w-xl mx-auto">
+            <p className="text-white/75 text-[13.5px] tracking-wide leading-[2] max-w-xl mx-auto">
               joyfully celebrate the solemnization of the<br />
               Holy Matrimony of their beloved children,
             </p>
           </Reveal>
 
           <Reveal delay={0.4} className="mt-14">
-            <p style={{ color: '#ffffff' }} className="font-script text-white text-5xl sm:text-6xl lg:text-7xl leading-[1.05]">
+            <p className="font-script text-white text-5xl sm:text-6xl lg:text-7xl leading-[1.05]">
               Christopher
             </p>
-            <p style={{ color: 'rgba(255,255,255,0.55)' }} className="font-display italic text-white/55 text-2xl lg:text-3xl my-4">
+            <p className="font-display italic text-white/55 text-2xl lg:text-3xl my-4">
               &amp;
             </p>
-            <p style={{ color: '#ffffff' }} className="font-script text-white text-5xl sm:text-6xl lg:text-7xl leading-[1.05]">
+            <p className="font-script text-white text-5xl sm:text-6xl lg:text-7xl leading-[1.05]">
               Josephine
             </p>
           </Reveal>
 
           <Reveal delay={0.5}>
             <div className="h-px bg-white/25 w-20 mx-auto mt-14 mb-10" />
-            <p style={{ color: 'rgba(255,255,255,0.75)' }} className="text-white/75 text-[14px] leading-[2] max-w-lg mx-auto italic">
+            <p className="text-white/75 text-[14px] leading-[2] max-w-lg mx-auto italic">
               To many friends and loved ones, she is fondly known as{' '}
-              <span style={{ color: '#ffffff' }} className="font-display text-white not-italic">Jossy Nation</span>{' '}
+              <span className="font-display text-white not-italic">Jossy Nation</span>{' '}
               — full of warmth, joy, and vibrant energy. To Christopher, she became a best friend, answered prayer, peace, and forever.
             </p>
           </Reveal>
@@ -352,12 +358,12 @@ export default function OurStory() {
           <Reveal>
             <Sprig className="text-white/45 mx-auto mb-8" />
           </Reveal>
-          <Reveal delay={0.1} as="blockquote" style={{ color: '#ffffff' }} className="font-display italic text-white text-3xl lg:text-5xl leading-[1.3] mb-8">
+          <Reveal delay={0.1} as="blockquote" className="font-display italic text-white text-3xl lg:text-5xl leading-[1.3] mb-8">
             &ldquo;Built on friendship,<br />grounded in faith,<br />and covered in love.&rdquo;
           </Reveal>
           <Reveal delay={0.2}>
             <div className="h-px bg-white/30 w-20 mx-auto mb-6" />
-            <p style={{ color: 'rgba(255,255,255,0.65)' }} className="text-[10px] tracking-[0.45em] uppercase text-white/65 font-semibold">
+            <p className="text-[10px] tracking-[0.45em] uppercase text-white/65 font-semibold">
               — Christopher &amp; Josephine
             </p>
           </Reveal>
@@ -380,29 +386,29 @@ export default function OurStory() {
           <StaggerGroup stagger={0.1} className="grid grid-cols-3 grid-rows-2 gap-2 h-[420px] lg:h-[560px]">
             <StaggerItem className="col-span-1 row-span-2 overflow-hidden rounded-sm">
               <button onClick={() => lb.open(0)} className="w-full h-full cursor-zoom-in" aria-label="Open photo 1 of 5">
-                <img src={collected1} alt="Josephine and Christopher together" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+                <img src={collected1} alt="Josephine and Christopher together" loading="lazy" decoding="async" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
               </button>
             </StaggerItem>
             <StaggerItem className="col-span-1 row-span-1 overflow-hidden rounded-sm">
               <button onClick={() => lb.open(1)} className="w-full h-full cursor-zoom-in" aria-label="Open photo 2 of 5">
-                <img src={collected2} alt="Josephine and Christopher together" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+                <img src={collected2} alt="Josephine and Christopher together" loading="lazy" decoding="async" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
               </button>
             </StaggerItem>
             <div className="col-span-1 row-span-1 grid grid-rows-2 gap-2">
               <StaggerItem className="overflow-hidden rounded-sm">
                 <button onClick={() => lb.open(2)} className="w-full h-full cursor-zoom-in" aria-label="Open photo 3 of 5">
-                  <img src={collected3} alt="Josephine and Christopher together" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+                  <img src={collected3} alt="Josephine and Christopher together" loading="lazy" decoding="async" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
                 </button>
               </StaggerItem>
               <StaggerItem className="overflow-hidden rounded-sm">
                 <button onClick={() => lb.open(3)} className="w-full h-full cursor-zoom-in" aria-label="Open photo 4 of 5">
-                  <img src={collected4} alt="Josephine and Christopher together" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+                  <img src={collected4} alt="Josephine and Christopher together" loading="lazy" decoding="async" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
                 </button>
               </StaggerItem>
             </div>
             <StaggerItem className="col-span-2 row-span-1 overflow-hidden rounded-sm">
               <button onClick={() => lb.open(4)} className="w-full h-full cursor-zoom-in" aria-label="Open photo 5 of 5">
-                <img src={collected5} alt="Josephine and Christopher together" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
+                <img src={collected5} alt="Josephine and Christopher together" loading="lazy" decoding="async" className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
               </button>
             </StaggerItem>
           </StaggerGroup>

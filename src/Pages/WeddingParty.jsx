@@ -1,16 +1,17 @@
 import PageTransition from '../Components/PageTransition'
 import Reveal, { StaggerGroup, StaggerItem } from '../Components/Reveal'
+import usePageTitle from '../hooks/usePageTitle'
 
 // ─────────────────────────────────────────────────────────
 // 🖼️  IMAGES — rename your files in src/assets/ to match
 // ─────────────────────────────────────────────────────────
-import bm1 from '../assets/maid1.png'  
-import bm2 from '../assets/maid2.png'  
-import bm3 from '../assets/maid3.png'  
-import bm4 from '../assets/maid4.png'  
-import gm1 from '../assets/men1.png'   
-import gm2 from '../assets/men2.png'   
-import gm3 from '../assets/men3.png'  
+import bm1 from '../assets/maid1.webp'  
+import bm2 from '../assets/maid2.webp'  
+import bm3 from '../assets/maid3.webp'  
+import bm4 from '../assets/maid4.webp'  
+import gm1 from '../assets/men1.webp'   
+import gm2 from '../assets/men2.webp'   
+import gm3 from '../assets/men3.webp'  
 
 function SectionTitle({ title }) {
   return (
@@ -25,6 +26,8 @@ function PersonCard({ imageSrc, imageAlt, name, bio, label, className = '' }) {
         <img
           src={imageSrc}
           alt={imageAlt}
+          loading="lazy"
+          decoding="async"
           className="w-full h-[320px] sm:h-[360px] lg:h-[400px] object-cover grayscale transition-transform duration-700 group-hover:scale-105"
         />
       </div>
@@ -41,6 +44,7 @@ function PersonCard({ imageSrc, imageAlt, name, bio, label, className = '' }) {
 
 // ── Page ───────────────────────────────────────────────────
 export default function WeddingParty() {
+  usePageTitle('Wedding Party')
   return (
     <PageTransition>
 
@@ -70,87 +74,61 @@ export default function WeddingParty() {
             <SectionTitle title="The Bridesmaids" />
           </Reveal>
 
-          {/* ROW 1: Sarah large left + Elena small right */}
-          <StaggerGroup stagger={0.15} className="flex flex-col md:flex-row gap-4 mb-4">
+          <StaggerGroup stagger={0.12} className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-14 items-start">
 
-            {/* Sarah — large, name overlay bottom-left */}
-            <StaggerItem className="md:w-[55%] flex-shrink-0 flex flex-col gap-3">
-              <div className="relative overflow-hidden group">
-                <img
-                  src={bm1}
-                  alt="Sarah Jenkins"
-                  className="w-full h-[380px] lg:h-[460px] object-cover grayscale transition-transform duration-700 group-hover:scale-105"
-                />
-                {/* Name tag overlay */}
-                <div className="absolute bottom-3 left-3 bg-white/90 px-3 py-2">
-                  <p className="font-semibold text-[#0F0F0F] text-[13px] leading-none">Sarah Jenkins</p>
-                  <p className="text-[10px] tracking-[0.18em] uppercase text-[#0F0F0F]/50 mt-0.5">Maid of Honor</p>
-                </div>
-              </div>
-              {/* Bio below Sarah */}
-              <p className="text-[#0F0F0F]/50 text-[12.5px] leading-relaxed">
-                Met in 3rd grade over a shared love of glitter pens. Sarah is the architect of our wildest adventures and the keeper of all my secrets since 1998.
-              </p>
+            <StaggerItem>
+              <PersonCard
+                imageSrc={bm1}
+                imageAlt="Sarah Jenkins"
+                label="MAID OF HONOR"
+                name="Sarah Jenkins"
+                bio="Met in 3rd grade over a shared love of glitter pens. Sarah is the architect of our wildest adventures and the keeper of all my secrets since 1998."
+              />
             </StaggerItem>
 
-            {/* Elena — small top-right, name + bio below */}
-            <StaggerItem className="flex-1 flex flex-col gap-3 md:pt-12">
-              <div className="overflow-hidden group">
-                <img
-                  src={bm2}
-                  alt="Elena Rodriguez"
-                  className="w-full h-52 lg:h-64 object-cover grayscale transition-transform duration-700 group-hover:scale-105"
-                />
-              </div>
-              <div>
-                <p className="font-semibold text-[#0F0F0F] text-[14px]">Elena Rodriguez</p>
-                <p className="text-[#0F0F0F]/50 text-[12.5px] leading-relaxed mt-1">
-                  The one who will definitely start the dance battle and knows every word to 2000s R&B.
-                </p>
-              </div>
-            </StaggerItem>
-          </StaggerGroup>
-
-          {/* ROW 2: Chloe small left + Maya large portrait right */}
-          <StaggerGroup stagger={0.15} className="flex flex-col md:flex-row gap-4 items-start">
-
-            {/* Chloe — small left, name + bio below */}
-            <StaggerItem className="md:w-[32%] flex-shrink-0 flex flex-col gap-3">
-              <div className="overflow-hidden group">
-                <img
-                  src={bm3}
-                  alt="Chloe Bennett"
-                  className="w-full h-52 lg:h-64 object-cover grayscale transition-transform duration-700 group-hover:scale-105"
-                />
-              </div>
-              <div>
-                <p className="font-semibold text-[#0F0F0F] text-[14px]">Chloe Bennett</p>
-                <p className="text-[#0F0F0F]/50 text-[12.5px] leading-relaxed mt-1">
-                  My college roommate and the voice of reason. Chloe has a PhD in 'Calming Me Down'.
-                </p>
-              </div>
+            <StaggerItem className="lg:mt-16">
+              <PersonCard
+                imageSrc={bm2}
+                imageAlt="Elena Rodriguez"
+                name="Elena Rodriguez"
+                bio="The one who will definitely start the dance battle and knows every word to 2000s R&B."
+              />
             </StaggerItem>
 
-            {/* Maya — large portrait right with bio card beside/below */}
-            <StaggerItem className="flex-1 flex flex-col md:flex-row gap-4 items-start">
-              <div className="w-full md:w-[55%] overflow-hidden group flex-shrink-0">
-                <img
-                  src={bm4}
-                  alt="Maya Lin"
-                  className="w-full h-64 lg:h-80 object-cover object-top grayscale transition-transform duration-700 group-hover:scale-105"
-                />
-              </div>
-              {/* Bio card */}
-              <div className="bg-[#f7f6f2] p-5 flex-1 self-stretch flex flex-col justify-center gap-3">
-                <p className="font-semibold text-[#0F0F0F] text-[15px]">Maya Lin</p>
-                <p className="text-[#0F0F0F]/55 text-[12.5px] leading-relaxed">
-                  Friendship forged in the fires of design school. Maya is the botanical curator behind our floral vision and a lifelong partner in crime.
-                </p>
-                {/* Leaf */}
-                <svg width="14" height="18" viewBox="0 0 24 24" fill="#2D4C3B" className="opacity-60">
-                  <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 0 0 8 20C19 20 22 3 22 3c-1 2-8 2-8 2s0-8-7-8c0 0 3 5 2 11z"/>
-                </svg>
-              </div>
+            <StaggerItem>
+              <PersonCard
+                imageSrc={bm3}
+                imageAlt="Chloe Bennett"
+                name="Chloe Bennett"
+                bio="My college roommate and the voice of reason. Chloe has a PhD in 'Calming Me Down'."
+              />
+            </StaggerItem>
+
+            <StaggerItem className="lg:mt-16">
+              <PersonCard
+                imageSrc={bm4}
+                imageAlt="Maya Lin"
+                name="Maya Lin"
+                bio="Friendship forged in the fires of design school. Maya is our botanical curator and lifelong partner in crime."
+              />
+            </StaggerItem>
+
+            <StaggerItem>
+              <PersonCard
+                imageSrc={bm2}
+                imageAlt="Priya Kumar"
+                name="Priya Kumar"
+                bio="My yoga partner and travel co-conspirator. Priya plans our trips with spreadsheet-grade precision."
+              />
+            </StaggerItem>
+
+            <StaggerItem className="lg:mt-16">
+              <PersonCard
+                imageSrc={bm1}
+                imageAlt="Zoe Hart"
+                name="Zoe Hart"
+                bio="The art-school maverick. Zoe will be the loudest at the reception and first on the dance floor."
+              />
             </StaggerItem>
 
           </StaggerGroup>
