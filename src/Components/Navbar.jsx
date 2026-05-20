@@ -60,7 +60,7 @@ export default function Navbar() {
 
           <Link
             to="/rsvp"
-            className="text-[11.5px] font-semibold tracking-[0.22em] uppercase px-5 py-2 bg-[#2D4C3B] text-white hover:bg-[#3a6050] transition-colors duration-200"
+            className="text-[11.5px] font-semibold tracking-[0.22em] uppercase px-5 py-2 bg-[#2D4C3B] text-[#FFFFFF] hover:bg-[#3a6050] transition-colors duration-200"
           >
             RSVP
           </Link>
@@ -71,7 +71,7 @@ export default function Navbar() {
           <Link
             to="/rsvp"
             onClick={() => setMenuOpen(false)}
-            className="text-[10.5px] font-semibold tracking-[0.22em] uppercase px-4 py-1.5 bg-[#2D4C3B] text-white"
+            className="text-[10.5px] font-semibold tracking-[0.22em] uppercase px-4 py-1.5 bg-[#2D4C3B] text-[#FFFFFF]"
           >
             RSVP
           </Link>

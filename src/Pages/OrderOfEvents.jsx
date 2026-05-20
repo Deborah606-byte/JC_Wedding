@@ -202,20 +202,20 @@ export default function OrderOfEvents() {
       </section>
 
       {/* ── EVENT 04: Dinner & Dancing (full-width green) ── */}
-      <section className="bg-[#2D4C3B] text-white py-20 lg:py-28 overflow-hidden">
+      <section className="bg-[#2D4C3B] text-[#FFFFFF] py-20 lg:py-28 overflow-hidden">
         <div className="max-w-3xl mx-auto px-6 text-center flex flex-col items-center gap-5">
           <Reveal>
-            <EventNumber n={4} className="text-white/20" />
+            <EventNumber n={4} className="text-[#FFFFFF]/20" />
           </Reveal>
           <Reveal delay={0.1}>
             <h2 className="font-display italic text-3xl lg:text-5xl leading-tight">
               White Wedding
             </h2>
           </Reveal>
-          <Reveal delay={0.2} as="p" className="text-[10px] tracking-[0.28em] uppercase font-semibold text-white/50">
+          <Reveal delay={0.2} as="p" className="text-[10px] tracking-[0.28em] uppercase font-semibold text-[#FFFFFF]/50">
             Saturday · October 24 · 4:00 PM
           </Reveal>
-          <Reveal delay={0.3} as="p" className="text-[14px] leading-[1.85] max-w-md mt-2 text-white/60">
+          <Reveal delay={0.3} as="p" className="text-[14px] leading-[1.85] max-w-md mt-2 text-[#FFFFFF]/60">
             We exchange vows before God, family, and friends as we begin our new journey together in love and faith.
           </Reveal>
           <Reveal delay={0.45} className="mt-5">
@@ -224,10 +224,10 @@ export default function OrderOfEvents() {
                 <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/>
               </svg>
               <div>
-                <p className="text-[10px] tracking-[0.22em] uppercase font-semibold text-white/70">
+                <p className="text-[10px] tracking-[0.22em] uppercase font-semibold text-[#FFFFFF]/70">
                   Wedding Venue
                 </p>
-                <p className="text-[12.5px] leading-[1.7] mt-1.5 text-white/85">
+                <p className="text-[12.5px] leading-[1.7] mt-1.5 text-[#FFFFFF]/85">
                   Assurance Of Salvation Ministries Inc Fire Centre,<br />
                   Irhinmwirin Mega Church (FC8)<br />
                   No. 2 Freedom Street, Off Enogie Palace Road,<br />

@@ -35,7 +35,7 @@ function PersonCard({ imageSrc, imageAlt, name, bio, label, className = '' }) {
         {label ? (
           <p className="text-[10px] tracking-[0.22em] uppercase text-[#2D4C3B] font-semibold">{label}</p>
         ) : null}
-        <p className="font-display italic text-[#0F0F0F]/80 text-[16px] lg:text-[17px] mt-1">{name}</p>
+        <p className="font-display italic font-bold text-[#2D4C3B] text-[16px] lg:text-[17px] mt-1">{name}</p>
         <p className="text-[#0F0F0F]/55 text-[13px] leading-[1.75] mt-2">{bio}</p>
       </div>
     </div>

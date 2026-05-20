@@ -27,13 +27,13 @@ export default function NotFound() {
           <Reveal delay={0.35} className="flex flex-wrap items-center justify-center gap-3 mt-3">
             <Link
               to="/"
-              className="text-[11px] font-semibold tracking-[0.22em] uppercase px-6 py-3 bg-[#2D4C3B] text-white hover:bg-[#3a6050] transition-colors duration-200"
+              className="text-[11px] font-semibold tracking-[0.22em] uppercase px-6 py-3 bg-[#2D4C3B] text-[#FFFFFF] hover:bg-[#3a6050] transition-colors duration-200"
             >
               Return Home
             </Link>
             <Link
               to="/rsvp"
-              className="text-[11px] font-semibold tracking-[0.22em] uppercase px-6 py-3 border border-[#2D4C3B]/40 text-[#2D4C3B] hover:bg-[#2D4C3B] hover:text-white transition-colors duration-200"
+              className="text-[11px] font-semibold tracking-[0.22em] uppercase px-6 py-3 border border-[#2D4C3B]/40 text-[#2D4C3B] hover:bg-[#2D4C3B] hover:text-[#FFFFFF] transition-colors duration-200"
             >
               RSVP
             </Link>

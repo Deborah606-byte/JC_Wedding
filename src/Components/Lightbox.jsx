@@ -36,7 +36,7 @@ export default function Lightbox({ images, index, onClose, onPrev, onNext }) {
           {/* Close button */}
           <button
             onClick={(e) => { e.stopPropagation(); onClose() }}
-            className="absolute top-5 right-5 lg:top-8 lg:right-8 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur text-white flex items-center justify-center transition-colors z-10"
+            className="absolute top-5 right-5 lg:top-8 lg:right-8 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur text-[#FFFFFF] flex items-center justify-center transition-colors z-10"
             aria-label="Close"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -45,7 +45,7 @@ export default function Lightbox({ images, index, onClose, onPrev, onNext }) {
           </button>
 
           {/* Counter */}
-          <div className="absolute top-6 left-6 lg:top-10 lg:left-10 text-white/70 text-[11px] tracking-[0.25em] uppercase font-medium">
+          <div className="absolute top-6 left-6 lg:top-10 lg:left-10 text-[#FFFFFF]/70 text-[11px] tracking-[0.25em] uppercase font-medium">
             {index + 1} / {images.length}
           </div>
 
@@ -53,7 +53,7 @@ export default function Lightbox({ images, index, onClose, onPrev, onNext }) {
           {images.length > 1 && (
             <button
               onClick={(e) => { e.stopPropagation(); onPrev() }}
-              className="absolute left-3 lg:left-8 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur text-white flex items-center justify-center transition-colors"
+              className="absolute left-3 lg:left-8 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur text-[#FFFFFF] flex items-center justify-center transition-colors"
               aria-label="Previous image"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -79,7 +79,7 @@ export default function Lightbox({ images, index, onClose, onPrev, onNext }) {
           {images.length > 1 && (
             <button
               onClick={(e) => { e.stopPropagation(); onNext() }}
-              className="absolute right-3 lg:right-8 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur text-white flex items-center justify-center transition-colors"
+              className="absolute right-3 lg:right-8 top-1/2 -translate-y-1/2 w-11 h-11 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur text-[#FFFFFF] flex items-center justify-center transition-colors"
               aria-label="Next image"
             >
               <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">

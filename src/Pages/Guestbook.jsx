@@ -42,9 +42,9 @@ function PlainCard({ name, date, message }) {
 
 function FeaturedCard({ name, message }) {
   return (
-    <div className="bg-[#2D4C3B] text-white rounded-sm p-7 relative overflow-hidden">
+    <div className="bg-[#2D4C3B] text-[#FFFFFF] rounded-sm p-7 relative overflow-hidden">
       {/* Faint leaf watermark */}
-      <div className="absolute bottom-3 right-4 opacity-10 text-white">
+      <div className="absolute bottom-3 right-4 opacity-10 text-[#FFFFFF]">
         <svg width="60" height="60" viewBox="0 0 24 24" fill="currentColor">
           <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 0 0 8 20C19 20 22 3 22 3c-1 2-8 2-8 2s0-8-7-8c0 0 3 5 2 11z"/>
         </svg>
@@ -220,7 +220,7 @@ export default function Guestbook() {
                   <button
                     onClick={handleSubmit}
                     disabled={submitting}
-                                       className="w-full bg-[#2D4C3B] text-[11px] font-semibold tracking-[0.25em] uppercase py-3.5 rounded-sm hover:bg-[#3a6050] transition-colors duration-300 flex items-center justify-center gap-2 mt-2 disabled:opacity-60 disabled:cursor-not-allowed"
+                    className="w-full bg-[#2D4C3B] text-[#FFFFFF] text-[11px] font-semibold tracking-[0.25em] uppercase py-3.5 rounded-sm hover:bg-[#3a6050] transition-colors duration-300 flex items-center justify-center gap-2 mt-2 disabled:opacity-60 disabled:cursor-not-allowed"
                   >
                     {submitting ? 'Sending…' : submitted ? 'Blessing Sent ✓' : (
                       <>

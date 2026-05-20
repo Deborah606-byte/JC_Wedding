@@ -149,7 +149,7 @@ function Hero() {
           initial={{ opacity: 0, y: 14 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.15, ease: EASE }}
-          className="text-white/85 text-[10px] tracking-[0.5em] uppercase font-semibold drop-shadow"
+          className="text-[#FFFFFF]/85 text-[10px] tracking-[0.5em] uppercase font-semibold drop-shadow"
         >
           Benin City
         </motion.p>
@@ -157,7 +157,7 @@ function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.3, ease: EASE }}
-          className="font-script text-white text-5xl sm:text-7xl lg:text-8xl leading-[0.95] tracking-wide drop-shadow-lg"
+          className="font-script text-[#FFFFFF] text-5xl sm:text-7xl lg:text-8xl leading-[0.95] tracking-wide drop-shadow-lg"
         >
           Josephine &amp; Christopher
         </motion.h1>
@@ -165,7 +165,7 @@ function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.6, ease: EASE }}
-          className="font-display italic text-white/95 text-base sm:text-lg lg:text-xl drop-shadow mt-1"
+          className="font-display italic text-[#FFFFFF]/95 text-base sm:text-lg lg:text-xl drop-shadow mt-1"
         >
           A Celebration of Love, Faith &amp; Family
         </motion.p>
@@ -173,7 +173,7 @@ function Hero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.8, ease: EASE }}
-          className="text-white/80 text-[12px] sm:text-[13px] tracking-[0.3em] uppercase font-medium drop-shadow mt-3"
+          className="text-[#FFFFFF]/80 text-[12px] sm:text-[13px] tracking-[0.3em] uppercase font-medium drop-shadow mt-3"
         >
           Saturday · October 24, 2026
         </motion.p>
@@ -204,21 +204,22 @@ export default function Home() {
             <CountUnit value={minutes} label="Minutes" />
             <CountUnit value={seconds} label="Seconds" />
           </Reveal>
-          <Reveal delay={0.3}>
-            <div className="mt-2 inline-flex items-center gap-3 sm:gap-8 p-1.5 sm:p-2 pl-6 sm:pl-20 pr-1.5 sm:pr-8 bg-white rounded-full shadow-[0_10px_30px_-12px_rgba(15,15,15,0.25)] ring-1 ring-stone-200/70 max-w-full">
-              <Link
-                to="/rsvp"
-                className="text-[12px] sm:text-[13.5px] font-medium tracking-wide text-[#0F0F0F] hover:text-[#2D4C3B] transition-colors duration-200 whitespace-nowrap"
-              >
-                RSVP Now
-              </Link>
-              <Link
-                to="/guestbook"
-                className="text-[12px] sm:text-[13.5px] font-semibold tracking-wide text-white bg-[#0F0F0F] hover:bg-[#2D4C3B] px-5 sm:px-9 py-2.5 sm:py-3 rounded-full transition-colors duration-200 whitespace-nowrap"
-              >
-                Leave a Love Note
-              </Link>
-            </div>
+          <Reveal delay={0.3} className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mt-2">
+            <Link
+              to="/rsvp"
+              className="inline-flex items-center gap-2 text-[11px] sm:text-[12px] font-semibold tracking-[0.22em] uppercase text-[#FFFFFF] bg-[#2D4C3B] hover:bg-[#3a6050] px-7 sm:px-9 py-3.5 sm:py-4 transition-colors duration-300 whitespace-nowrap"
+            >
+              RSVP Now
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+              </svg>
+            </Link>
+            <Link
+              to="/guestbook"
+              className="inline-flex items-center gap-2 text-[11px] sm:text-[12px] font-semibold tracking-[0.22em] uppercase text-[#2D4C3B] border border-[#2D4C3B]/40 hover:bg-[#2D4C3B] hover:text-[#FFFFFF] hover:border-[#2D4C3B] px-7 sm:px-9 py-3.5 sm:py-4 transition-all duration-300 whitespace-nowrap"
+            >
+              Leave a Love Note
+            </Link>
           </Reveal>
         </div>
       </section>
@@ -257,7 +258,7 @@ export default function Home() {
               </p>
               <Link
                 to="/order-of-events"
-                className="inline-flex items-center gap-2 text-[11px] tracking-[0.2em] uppercase font-semibold text-[#2D4C3B] border border-[#2D4C3B]/30 px-5 py-2.5 rounded-sm hover:bg-[#2D4C3B] hover:text-white transition-all duration-300 w-fit mt-2"
+                className="inline-flex items-center gap-2 text-[11px] tracking-[0.2em] uppercase font-semibold text-[#2D4C3B] border border-[#2D4C3B]/30 px-5 py-2.5 rounded-sm hover:bg-[#2D4C3B] hover:text-[#FFFFFF] transition-all duration-300 w-fit mt-2"
               >
                 View More Details →
               </Link>
@@ -287,7 +288,7 @@ export default function Home() {
           <Reveal delay={0.4}>
             <Link
               to="/our-story"
-              className="inline-flex items-center gap-2 text-[11px] tracking-[0.2em] uppercase font-semibold text-[#2D4C3B] border border-[#2D4C3B]/30 px-5 py-2.5 rounded-sm hover:bg-[#2D4C3B] hover:text-white transition-all duration-300 mt-4"
+              className="inline-flex items-center gap-2 text-[11px] tracking-[0.2em] uppercase font-semibold text-[#2D4C3B] border border-[#2D4C3B]/30 px-5 py-2.5 rounded-sm hover:bg-[#2D4C3B] hover:text-[#FFFFFF] transition-all duration-300 mt-4"
             >
               Read Our Story →
             </Link>
@@ -297,24 +298,24 @@ export default function Home() {
 
       {/* ── BUILT ON FAITH & FRIENDSHIP — dark green band ── */}
       <section className="relative bg-[#2D4C3B] py-20 lg:py-28 overflow-hidden">
-        <div className="absolute top-10 left-10 text-white/15 hidden lg:block">
+        <div className="absolute top-10 left-10 text-[#FFFFFF]/15 hidden lg:block">
           <Sprig className="w-10 h-14" />
         </div>
-        <div className="absolute bottom-10 right-10 text-white/15 hidden lg:block rotate-180">
+        <div className="absolute bottom-10 right-10 text-[#FFFFFF]/15 hidden lg:block rotate-180">
           <Sprig className="w-10 h-14" />
         </div>
 
         <div className="relative max-w-3xl mx-auto px-6 text-center">
-          <Reveal as="p" className="text-[10px] tracking-[0.45em] uppercase text-white/55 font-semibold mb-8">
+          <Reveal as="p" className="text-[10px] tracking-[0.45em] uppercase text-[#FFFFFF]/55 font-semibold mb-8">
             Built on Faith &amp; Friendship
           </Reveal>
-          <Reveal delay={0.1} as="blockquote" className="font-display italic text-white text-3xl lg:text-[44px] leading-[1.3] mb-8">
+          <Reveal delay={0.1} as="blockquote" className="font-display italic text-[#FFFFFF] text-3xl lg:text-[44px] leading-[1.3] mb-8">
             Before the love story, <br />there was friendship.<br />
             Before forever, <br />there was faith.
           </Reveal>
           <Reveal delay={0.2}>
             <div className="h-px bg-white/30 w-20 mx-auto mb-6" />
-            <p className="text-white/75 text-[14.5px] leading-[1.95] max-w-md mx-auto italic">
+            <p className="text-[#FFFFFF]/75 text-[14.5px] leading-[1.95] max-w-md mx-auto italic">
               And through every season, love continued to grow beautifully between us.
             </p>
           </Reveal>
@@ -350,7 +351,7 @@ export default function Home() {
               </p>
               <Link
                 to="/our-story"
-                className="inline-flex items-center gap-2 text-[11px] tracking-[0.2em] uppercase font-semibold text-[#2D4C3B] border border-[#2D4C3B]/30 px-5 py-2.5 rounded-sm hover:bg-[#2D4C3B] hover:text-white transition-all duration-300 w-fit mt-2"
+                className="inline-flex items-center gap-2 text-[11px] tracking-[0.2em] uppercase font-semibold text-[#2D4C3B] border border-[#2D4C3B]/30 px-5 py-2.5 rounded-sm hover:bg-[#2D4C3B] hover:text-[#FFFFFF] transition-all duration-300 w-fit mt-2"
               >
                 View Wedding Details →
               </Link>
@@ -408,13 +409,13 @@ export default function Home() {
             <div className="relative bg-white shadow-[0_30px_60px_-30px_rgba(45,76,59,0.25)] flex flex-col lg:flex-row overflow-hidden">
 
               {/* Left — green ribbon panel */}
-              <div className="relative bg-[#2D4C3B] text-white px-8 py-10 lg:px-10 lg:py-14 lg:w-[38%] flex flex-col items-center justify-center text-center gap-4">
-                <Sprig className="text-white/60" />
-                <p className="text-[10px] tracking-[0.4em] uppercase text-white/80 font-semibold">
+              <div className="relative bg-[#2D4C3B] text-[#FFFFFF] px-8 py-10 lg:px-10 lg:py-14 lg:w-[38%] flex flex-col items-center justify-center text-center gap-4">
+                <Sprig className="text-[#FFFFFF]/60" />
+                <p className="text-[10px] tracking-[0.4em] uppercase text-[#FFFFFF]/80 font-semibold">
                   A Note of Thanks
                 </p>
                 <div className="h-px bg-white/30 w-10" />
-                <p className="font-display italic text-white text-lg leading-snug max-w-[14ch]">
+                <p className="font-display italic text-[#FFFFFF] text-lg leading-snug max-w-[14ch]">
                   With all our love &amp; gratitude.
                 </p>
               </div>

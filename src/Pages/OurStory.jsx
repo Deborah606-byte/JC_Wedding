@@ -166,7 +166,7 @@ function StoryHero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.3, ease: EASE }}
-          className="text-[10px] tracking-[0.45em] uppercase text-white/85 font-semibold mb-7 drop-shadow"
+          className="text-[10px] tracking-[0.45em] uppercase text-[#FFFFFF]/85 font-semibold mb-7 drop-shadow"
         >
           Our Story
         </motion.p>
@@ -174,7 +174,7 @@ function StoryHero() {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.5, ease: EASE }}
-          className="font-display italic text-white text-5xl sm:text-6xl lg:text-8xl leading-[1.05] drop-shadow-lg max-w-4xl"
+          className="font-display italic text-[#FFFFFF] text-5xl sm:text-6xl lg:text-8xl leading-[1.05] drop-shadow-lg max-w-4xl"
         >
           From Schoolmates<br />to Soulmates.
         </motion.h1>
@@ -188,7 +188,7 @@ function StoryHero() {
           initial={{ opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 1, ease: EASE }}
-          className="font-script text-white text-4xl sm:text-5xl lg:text-6xl drop-shadow-lg leading-none"
+          className="font-script text-[#FFFFFF] text-4xl sm:text-5xl lg:text-6xl drop-shadow-lg leading-none"
         >
           Christopher &amp; Josephine
         </motion.p>
@@ -199,7 +199,7 @@ function StoryHero() {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.6, duration: 0.8 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-white/70"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-3 text-[#FFFFFF]/70"
       >
         <span className="text-[9px] tracking-[0.45em] uppercase font-medium">Read Our Story</span>
         <motion.div
@@ -244,49 +244,49 @@ export default function OurStory() {
       {/* ── 3. MEET THE COUPLE (centerpiece) ── */}
       <section className="relative bg-[#2D4C3B] py-20 lg:py-32 overflow-hidden">
         {/* Corner sprigs */}
-        <div className="absolute top-10 left-10 text-white/15 hidden lg:block">
+        <div className="absolute top-10 left-10 text-[#FFFFFF]/15 hidden lg:block">
           <Sprig className="w-10 h-14" />
         </div>
-        <div className="absolute bottom-10 right-10 text-white/15 hidden lg:block rotate-180">
+        <div className="absolute bottom-10 right-10 text-[#FFFFFF]/15 hidden lg:block rotate-180">
           <Sprig className="w-10 h-14" />
         </div>
 
         <div className="relative max-w-4xl mx-auto px-6 text-center">
 
-          <Reveal as="p" className="text-[10px] tracking-[0.45em] uppercase text-white/55 font-semibold mb-10">
+          <Reveal as="p" className="text-[10px] tracking-[0.45em] uppercase text-[#FFFFFF]/55 font-semibold mb-10">
             Meet The Couple
           </Reveal>
 
           <Reveal delay={0.05}>
-            <p className="font-display italic text-white/80 text-base lg:text-lg leading-[1.9] mb-14">
+            <p className="font-display italic text-[#FFFFFF]/80 text-base lg:text-lg leading-[1.9] mb-14">
               Together with our families,
             </p>
           </Reveal>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 mb-14">
             <Reveal delay={0.1} className="flex flex-col items-center md:items-end md:text-right">
-              <p className="font-display italic text-white text-xl lg:text-[24px] leading-[1.45]">
+              <p className="font-display italic text-[#FFFFFF] text-xl lg:text-[24px] leading-[1.45]">
                 Dr. Ekhator Julius<br />
                 &amp; Mrs. Itohan Augustina<br />
                 Ighodaro
               </p>
-              <p className="text-white/55 text-[12px] tracking-wide mt-4 leading-relaxed">
+              <p className="text-[#FFFFFF]/55 text-[12px] tracking-wide mt-4 leading-relaxed">
                 of Evboesi, Orhionmwon LGA
               </p>
-              <p className="text-white/40 text-[10px] tracking-[0.3em] uppercase mt-1">
+              <p className="text-[#FFFFFF]/40 text-[10px] tracking-[0.3em] uppercase mt-1">
                 Edo State, Nigeria
               </p>
             </Reveal>
             <Reveal delay={0.2} className="flex flex-col items-center md:items-start md:text-left">
-              <p className="font-display italic text-white text-xl lg:text-[24px] leading-[1.45]">
+              <p className="font-display italic text-[#FFFFFF] text-xl lg:text-[24px] leading-[1.45]">
                 Late Barrister F.U. Ineomon<br />
                 &amp; Mrs. Franca<br />
                 Ineomon
               </p>
-              <p className="text-white/55 text-[12px] tracking-wide mt-4 leading-relaxed">
+              <p className="text-[#FFFFFF]/55 text-[12px] tracking-wide mt-4 leading-relaxed">
                 of Eidenu, Irrua, Esan Central LGA
               </p>
-              <p className="text-white/40 text-[10px] tracking-[0.3em] uppercase mt-1">
+              <p className="text-[#FFFFFF]/40 text-[10px] tracking-[0.3em] uppercase mt-1">
                 Edo State, Nigeria
               </p>
             </Reveal>
@@ -294,29 +294,29 @@ export default function OurStory() {
 
           <Reveal delay={0.3}>
             <div className="h-px bg-white/25 w-20 mx-auto mb-10" />
-            <p className="text-white/75 text-[13.5px] tracking-wide leading-[2] max-w-xl mx-auto">
+            <p className="text-[#FFFFFF]/75 text-[13.5px] tracking-wide leading-[2] max-w-xl mx-auto">
               joyfully celebrate the solemnization of the<br />
               Holy Matrimony of their beloved children,
             </p>
           </Reveal>
 
           <Reveal delay={0.4} className="mt-14">
-            <p className="font-script text-white text-5xl sm:text-6xl lg:text-7xl leading-[1.05]">
+            <p className="font-script text-[#FFFFFF] text-5xl sm:text-6xl lg:text-7xl leading-[1.05]">
               Christopher
             </p>
-            <p className="font-display italic text-white/55 text-2xl lg:text-3xl my-4">
+            <p className="font-display italic text-[#FFFFFF]/55 text-2xl lg:text-3xl my-4">
               &amp;
             </p>
-            <p className="font-script text-white text-5xl sm:text-6xl lg:text-7xl leading-[1.05]">
+            <p className="font-script text-[#FFFFFF] text-5xl sm:text-6xl lg:text-7xl leading-[1.05]">
               Josephine
             </p>
           </Reveal>
 
           <Reveal delay={0.5}>
             <div className="h-px bg-white/25 w-20 mx-auto mt-14 mb-10" />
-            <p className="text-white/75 text-[14px] leading-[2] max-w-lg mx-auto italic">
+            <p className="text-[#FFFFFF]/75 text-[14px] leading-[2] max-w-lg mx-auto italic">
               To many friends and loved ones, she is fondly known as{' '}
-              <span className="font-display text-white not-italic">Jossy Nation</span>{' '}
+              <span className="font-display text-[#FFFFFF] not-italic">Jossy Nation</span>{' '}
               — full of warmth, joy, and vibrant energy. To Christopher, she became a best friend, answered prayer, peace, and forever.
             </p>
           </Reveal>
@@ -356,14 +356,14 @@ export default function OurStory() {
       <section className="relative bg-[#2D4C3B] py-20 lg:py-28 overflow-hidden">
         <div className="relative max-w-3xl mx-auto px-6 text-center">
           <Reveal>
-            <Sprig className="text-white/45 mx-auto mb-8" />
+            <Sprig className="text-[#FFFFFF]/45 mx-auto mb-8" />
           </Reveal>
-          <Reveal delay={0.1} as="blockquote" className="font-display italic text-white text-3xl lg:text-5xl leading-[1.3] mb-8">
+          <Reveal delay={0.1} as="blockquote" className="font-display italic text-[#FFFFFF] text-3xl lg:text-5xl leading-[1.3] mb-8">
             &ldquo;Built on friendship,<br />grounded in faith,<br />and covered in love.&rdquo;
           </Reveal>
           <Reveal delay={0.2}>
             <div className="h-px bg-white/30 w-20 mx-auto mb-6" />
-            <p className="text-[10px] tracking-[0.45em] uppercase text-white/65 font-semibold">
+            <p className="text-[10px] tracking-[0.45em] uppercase text-[#FFFFFF]/65 font-semibold">
               — Christopher &amp; Josephine
             </p>
           </Reveal>
