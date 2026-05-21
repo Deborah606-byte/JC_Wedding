@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { motion, AnimatePresence, useScroll, useTransform } from 'motion/react'
+import { motion, AnimatePresence } from 'motion/react'
 import PageTransition from '../Components/PageTransition'
 import Reveal, { StaggerGroup, StaggerItem } from '../Components/Reveal'
 import { submitRsvp } from '../lib/api'
@@ -10,7 +10,6 @@ import usePageTitle from '../hooks/usePageTitle'
 // ─────────────────────────────────────────────────────────
 // 🖼️  IMAGES — rename your files in src/assets/ to match
 // ─────────────────────────────────────────────────────────
-import heroBg    from '../assets/wedding/BG2.jpeg' // RSVP hero — couple, bride sitting on the floor
 import rsvpFloral from '../assets/wedding/BG2.jpeg' // RSVP form left — couple sitting together
 import infoVenues from '../assets/flower3.webp'   // practical info: venues band
 import infoAttire from '../assets/flower4.webp'   // practical info: dress code band
@@ -258,73 +257,35 @@ function FaqItem({ q, a, isOpen, onToggle }) {
   )
 }
 
-// ── Hero — two-column (photo left, text right) so the whole couple stays visible ──
+// ── Hero — clean cream banner, no photo (smaller eyebrow per latest direction) ──
 function RsvpHero() {
-  const { scrollY } = useScroll()
-  const y = useTransform(scrollY, [0, 600], [0, 60])
-  const scale = useTransform(scrollY, [0, 600], [1, 1.04])
-
   return (
-    <section className="relative bg-[#F8F4EC] overflow-hidden">
-      {/* Soft blurred wash of the same photo behind everything (atmosphere) */}
-      <img
-        src={heroBg}
-        alt=""
-        aria-hidden="true"
-        className="absolute inset-0 w-full h-full object-cover opacity-25 blur-2xl scale-110 pointer-events-none"
-      />
-      <div className="absolute inset-0 bg-[#F8F4EC]/55 pointer-events-none" />
-
-      <div className="relative z-10 max-w-6xl mx-auto px-6 lg:px-10 py-12 lg:py-20">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
-
-          {/* Photo — portrait card showing both faces */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1.1, ease: [0.22, 1, 0.36, 1] }}
-            style={{ y, scale }}
-            className="lg:col-span-5 order-1"
-          >
-            <div className="relative aspect-[4/5] overflow-hidden shadow-[0_18px_60px_rgba(15,15,15,0.18)] rounded-sm bg-stone-100">
-              <img
-                src={heroBg}
-                alt="Josephine & Christopher"
-                fetchPriority="high"
-                decoding="async"
-                className="absolute inset-0 w-full h-full object-cover object-center"
-              />
-            </div>
-          </motion.div>
-
-          {/* Text */}
-          <div className="lg:col-span-7 flex flex-col items-center lg:items-start text-center lg:text-left order-2">
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
-              className="text-[10px] tracking-[0.35em] uppercase text-[#2D4C3B] font-semibold"
-            >
-              Join Us in Celebration
-            </motion.p>
-            <motion.h1
-              initial={{ opacity: 0, y: 24 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1.1, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
-              className="font-display italic text-[#0F0F0F] text-[34px] sm:text-5xl lg:text-[58px] xl:text-[64px] leading-[1.05] mt-4 max-w-xl"
-            >
-              Kindly respond by the twenty-fourth of September
-            </motion.h1>
-            <motion.p
-              initial={{ opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.6, ease: [0.22, 1, 0.36, 1] }}
-              className="text-[#0F0F0F]/60 text-[14.5px] leading-[1.85] max-w-md mt-5"
-            >
-              We look forward to celebrating this special milestone with those we love most in the heart of Benin City.
-            </motion.p>
-          </div>
-        </div>
+    <section className="relative bg-[#F8F4EC] py-14 lg:py-20">
+      <div className="max-w-3xl mx-auto px-6 lg:px-10 flex flex-col items-center text-center">
+        <motion.p
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
+          className="text-[9px] tracking-[0.32em] uppercase text-[#2D4C3B] font-semibold"
+        >
+          Join Us in Celebration
+        </motion.p>
+        <motion.h1
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1.1, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
+          className="font-display italic text-[#0F0F0F] text-[34px] sm:text-5xl lg:text-[60px] xl:text-[68px] leading-[1.05] mt-4 max-w-3xl"
+        >
+          Kindly respond by the twenty-fourth of September
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.55, ease: [0.22, 1, 0.36, 1] }}
+          className="text-[#0F0F0F]/60 text-[14px] leading-[1.85] max-w-md mt-5"
+        >
+          We look forward to celebrating this special milestone with those we love most in the heart of Benin City.
+        </motion.p>
       </div>
     </section>
   )

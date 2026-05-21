@@ -11,8 +11,8 @@ import bm2 from '../assets/wedding/Elohor Felix.jpeg'
 import bm3 from '../assets/wedding/Evelynlee.jpeg'
 import bm4 from '../assets/wedding/Melody Oke.jpeg'
 import bm5 from '../assets/wedding/Racheal Richie.jpeg'
-import gm1 from '../assets/men1.webp'
-import gm2 from '../assets/men2.webp'
+import gm1 from '../assets/wedding/Mighty Shalom.jpeg'
+import gm2 from '../assets/wedding/MANAGER OGHENEYOLE PROMISE.jpeg'
 import gm3 from '../assets/men3.webp'
 
 function SectionTitle({ title }) {
@@ -146,26 +146,26 @@ export default function WeddingParty() {
             <StaggerItem>
               <PersonCard
                 imageSrc={gm1}
-                imageAlt="David Thorne"
+                imageAlt="Mighty Shalom"
                 label="BEST MAN"
-                name="David Thorne"
-                bio="The guy who once convinced me that moving to London with £500 was a brilliant tactical maneuver. We made it."
+                name="Mighty Shalom"
+                bio="[Bio — TBD]"
               />
             </StaggerItem>
             <StaggerItem className="lg:mt-16">
               <PersonCard
                 imageSrc={gm2}
-                imageAlt="Marcus Vane"
-                name="Marcus Vane"
-                bio="Expert in craft beer; mediocre at golf; and the first person I call when something breaks. Usually it's my car."
+                imageAlt="Manager Ogheneyole Promise"
+                name="Manager Ogheneyole Promise"
+                bio="[Bio — TBD]"
               />
             </StaggerItem>
             <StaggerItem>
               <PersonCard
                 imageSrc={gm3}
-                imageAlt="Julian Chen"
-                name="Julian Chen"
-                bio="The culinary genius of the group. If the reception food is good, it's because Julian approved the tasting menu."
+                imageAlt="Groomsman"
+                name="[Groomsman — name TBD]"
+                bio="[Bio — TBD]"
               />
             </StaggerItem>
           </StaggerGroup>
