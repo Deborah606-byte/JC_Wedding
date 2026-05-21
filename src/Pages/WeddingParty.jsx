@@ -5,13 +5,15 @@ import usePageTitle from '../hooks/usePageTitle'
 // ─────────────────────────────────────────────────────────
 // 🖼️  IMAGES — rename your files in src/assets/ to match
 // ─────────────────────────────────────────────────────────
-import bm1 from '../assets/maid1.webp'  
-import bm2 from '../assets/maid2.webp'  
-import bm3 from '../assets/maid3.webp'  
-import bm4 from '../assets/maid4.webp'  
-import gm1 from '../assets/men1.webp'   
-import gm2 from '../assets/men2.webp'   
-import gm3 from '../assets/men3.webp'  
+import moh from '../assets/wedding/maid of honour.jpeg'
+import bm1 from '../assets/wedding/Blessing Ehimwenma Normwengho.jpeg'
+import bm2 from '../assets/wedding/Elohor Felix.jpeg'
+import bm3 from '../assets/wedding/Evelynlee.jpeg'
+import bm4 from '../assets/wedding/Melody Oke.jpeg'
+import bm5 from '../assets/wedding/Racheal Richie.jpeg'
+import gm1 from '../assets/men1.webp'
+import gm2 from '../assets/men2.webp'
+import gm3 from '../assets/men3.webp'
 
 function SectionTitle({ title }) {
   return (
@@ -78,56 +80,56 @@ export default function WeddingParty() {
 
             <StaggerItem>
               <PersonCard
-                imageSrc={bm1}
-                imageAlt="Sarah Jenkins"
-                label="MAID OF HONOR"
-                name="Sarah Jenkins"
-                bio="Met in 3rd grade over a shared love of glitter pens. Sarah is the architect of our wildest adventures and the keeper of all my secrets since 1998."
+                imageSrc={moh}
+                imageAlt="Ella Oghogho Ekhator"
+                label="MAID OF HONOUR"
+                name="Ella Oghogho Ekhator"
+                bio="[Bio — TBD]"
               />
             </StaggerItem>
 
             <StaggerItem className="lg:mt-16">
               <PersonCard
-                imageSrc={bm2}
-                imageAlt="Elena Rodriguez"
-                name="Elena Rodriguez"
-                bio="The one who will definitely start the dance battle and knows every word to 2000s R&B."
+                imageSrc={bm1}
+                imageAlt="Blessing Ehimwenma Normwengho"
+                name="Blessing Ehimwenma Normwengho"
+                bio="[Bio — TBD]"
               />
             </StaggerItem>
 
             <StaggerItem>
+              <PersonCard
+                imageSrc={bm2}
+                imageAlt="Elohor Felix"
+                name="Elohor Felix"
+                bio="[Bio — TBD]"
+              />
+            </StaggerItem>
+
+            <StaggerItem className="lg:mt-16">
               <PersonCard
                 imageSrc={bm3}
-                imageAlt="Chloe Bennett"
-                name="Chloe Bennett"
-                bio="My college roommate and the voice of reason. Chloe has a PhD in 'Calming Me Down'."
-              />
-            </StaggerItem>
-
-            <StaggerItem className="lg:mt-16">
-              <PersonCard
-                imageSrc={bm4}
-                imageAlt="Maya Lin"
-                name="Maya Lin"
-                bio="Friendship forged in the fires of design school. Maya is our botanical curator and lifelong partner in crime."
+                imageAlt="Evelynlee"
+                name="Evelynlee"
+                bio="[Bio — TBD]"
               />
             </StaggerItem>
 
             <StaggerItem>
               <PersonCard
-                imageSrc={bm2}
-                imageAlt="Priya Kumar"
-                name="Priya Kumar"
-                bio="My yoga partner and travel co-conspirator. Priya plans our trips with spreadsheet-grade precision."
+                imageSrc={bm4}
+                imageAlt="Melody Oke"
+                name="Melody Oke"
+                bio="[Bio — TBD]"
               />
             </StaggerItem>
 
             <StaggerItem className="lg:mt-16">
               <PersonCard
-                imageSrc={bm1}
-                imageAlt="Zoe Hart"
-                name="Zoe Hart"
-                bio="The art-school maverick. Zoe will be the loudest at the reception and first on the dance floor."
+                imageSrc={bm5}
+                imageAlt="Racheal Richie"
+                name="Racheal Richie"
+                bio="[Bio — TBD]"
               />
             </StaggerItem>
 

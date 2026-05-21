@@ -7,17 +7,17 @@ import usePageTitle from '../hooks/usePageTitle'
 // ─────────────────────────────────────────────────────────
 // 🖼️  IMAGES — swap any of these for real couple photos
 // ─────────────────────────────────────────────────────────
-import heroImg    from '../assets/happy.webp'      // Full-bleed page hero
-import storyImg1  from '../assets/32089.webp'      // Where It Began
-import storyImg2  from '../assets/pic1.webp'       // Faith & Fellowship
-import storyImg3  from '../assets/47639.webp'      // From Friendship to Love
-import storyImg4  from '../assets/home-hero.webp'  // The Proposal
-import storyImg5  from '../assets/hero.webp'       // Forever Begins
-import collected1 from '../assets/happy.webp'
-import collected2 from '../assets/32089.webp'
-import collected3 from '../assets/47639.webp'
-import collected4 from '../assets/pic1.webp'
-import collected5 from '../assets/home-hero.webp'
+import heroImg    from '../assets/wedding/BG1.jpeg'  // Full-bleed page hero — couple embrace
+import storyImg1  from '../assets/wedding/BG4.jpeg'  // Where It Began
+import storyImg2  from '../assets/wedding/BG2.jpeg'  // Faith & Fellowship
+import storyImg3  from '../assets/wedding/BG5.jpeg'  // From Friendship to Love
+import storyImg4  from '../assets/wedding/BG1.jpeg'  // The Proposal
+import storyImg5  from '../assets/wedding/BG5.jpeg'  // Forever Begins
+import collected1 from '../assets/wedding/BG1.jpeg'
+import collected2 from '../assets/wedding/BG2.jpeg'
+import collected3 from '../assets/wedding/BG4.jpeg'
+import collected4 from '../assets/wedding/BG5.jpeg'
+import collected5 from '../assets/wedding/Bride.jpeg'
 
 const EASE = [0.22, 1, 0.36, 1]
 

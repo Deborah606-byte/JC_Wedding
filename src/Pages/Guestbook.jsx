@@ -6,7 +6,7 @@ import { submitBlessing, fetchBlessings, isApiConfigured } from '../lib/api'
 import usePageTitle from '../hooks/usePageTitle'
 
 // 🖼️ Replace with your actual asset imports
-import botanicalImg from '../assets/happy.webp'   // flower/botanical photo bottom-left
+import botanicalImg from '../assets/wedding/BG2.jpeg'   // bottom-left couple photo
 
 // ── Card type cycle (visual variety for backend-driven entries) ──
 const CARD_TYPES = ['featured', 'plain', 'minimal', 'plain']
