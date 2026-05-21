@@ -2,9 +2,9 @@ const TITLE = "Josephine & Christopher's Wedding"
 const DETAILS = 'Join Josephine and Christopher as they celebrate their wedding in Benin City, Nigeria.'
 const LOCATION = 'Benin City, Edo State, Nigeria'
 
-// Saturday, October 24, 2026 at 4:00 PM (West Africa Time, UTC+1) → 15:00 UTC
+// Saturday, October 24, 2026 at 9:00 AM (West Africa Time, UTC+1) → 08:00 UTC
 // End: 11:30 PM WAT → 22:30 UTC
-const START_UTC = '20261024T150000Z'
+const START_UTC = '20261024T080000Z'
 const END_UTC   = '20261024T223000Z'
 
 function googleCalendarUrl() {

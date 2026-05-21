@@ -213,7 +213,7 @@ export default function OrderOfEvents() {
             </h2>
           </Reveal>
           <Reveal delay={0.2} as="p" className="text-[10px] tracking-[0.28em] uppercase font-semibold text-[#FFFFFF]/50">
-            Saturday · October 24 · 4:00 PM
+            Saturday · October 24 · 9:00 AM
           </Reveal>
           <Reveal delay={0.3} as="p" className="text-[14px] leading-[1.85] max-w-md mt-2 text-[#FFFFFF]/60">
             We exchange vows before God, family, and friends as we begin our new journey together in love and faith.
