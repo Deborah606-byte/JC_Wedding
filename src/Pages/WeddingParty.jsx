@@ -13,7 +13,7 @@ import bm4 from '../assets/wedding/Melody Oke.jpeg'
 import bm5 from '../assets/wedding/Racheal Richie.jpeg'
 import gm1 from '../assets/wedding/Mighty Shalom.jpeg'
 import gm2 from '../assets/wedding/MANAGER OGHENEYOLE PROMISE.jpeg'
-import gm3 from '../assets/men3.webp'
+import gm3 from '../assets/wedding/Abraham Daniel.jpeg'
 
 function SectionTitle({ title }) {
   return (
@@ -163,8 +163,8 @@ export default function WeddingParty() {
             <StaggerItem>
               <PersonCard
                 imageSrc={gm3}
-                imageAlt="Groomsman"
-                name="[Groomsman — name TBD]"
+                imageAlt="Abraham Daniel"
+                name="Abraham Daniel"
                 bio="[Bio — TBD]"
               />
             </StaggerItem>

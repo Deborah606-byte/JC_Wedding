@@ -72,186 +72,79 @@ const chapters = [
   },
 ]
 
-// ── JC monogram — narrow arched gold-frame pill, diamond just outside the bottom ──
-function JcEmblem({ className = '' }) {
-  return (
-    <svg
-      width="56"
-      height="100"
-      viewBox="0 0 56 100"
-      fill="none"
-      aria-hidden="true"
-      className={className}
-    >
-      {/* Arched outer frame (taller, narrower pill) */}
-      <path
-        d="M10 86 V26 C10 14 18 6 28 6 C38 6 46 14 46 26 V86 Z"
-        stroke="#B49A6B"
-        strokeWidth="1.1"
-        fill="none"
-      />
-      {/* Inner divider line */}
-      <line x1="17" y1="50" x2="39" y2="50" stroke="#B49A6B" strokeWidth="0.9" />
-      {/* J letter */}
-      <text
-        x="28"
-        y="43"
-        textAnchor="middle"
-        fontFamily="Georgia, 'Times New Roman', serif"
-        fontStyle="italic"
-        fontSize="20"
-        fill="#2D4C3B"
-      >
-        J
-      </text>
-      {/* C letter */}
-      <text
-        x="28"
-        y="71"
-        textAnchor="middle"
-        fontFamily="Georgia, 'Times New Roman', serif"
-        fontStyle="italic"
-        fontSize="20"
-        fill="#2D4C3B"
-      >
-        C
-      </text>
-      {/* Small diamond outside the pill, below */}
-      <path d="M28 96 L31.5 92 L28 88 L24.5 92 Z" fill="#B49A6B" />
-    </svg>
-  )
-}
-
-// ── Decorative olive-leaf branch drooping in from upper-left corner ──
-function CornerLeaves({ className = '' }) {
-  return (
-    <svg
-      viewBox="0 0 180 140"
-      fill="none"
-      aria-hidden="true"
-      className={className}
-    >
-      {/* Main stem curving down-right */}
-      <path
-        d="M-10 0 C20 25 50 50 80 90"
-        stroke="#7E8E72"
-        strokeWidth="1.1"
-        strokeLinecap="round"
-        fill="none"
-        opacity="0.65"
-      />
-      {/* Small offshoot */}
-      <path
-        d="M30 38 C45 50 55 70 60 95"
-        stroke="#7E8E72"
-        strokeWidth="0.9"
-        strokeLinecap="round"
-        fill="none"
-        opacity="0.55"
-      />
-      {/* Leaves along the stems */}
-      {[
-        { cx: 18, cy: 18, rx: 11, ry: 4, rot: 35 },
-        { cx: 36, cy: 38, rx: 13, ry: 4.5, rot: 45 },
-        { cx: 28, cy: 45, rx: 10, ry: 3.6, rot: 95 },
-        { cx: 56, cy: 62, rx: 13, ry: 4.6, rot: 55 },
-        { cx: 48, cy: 72, rx: 10, ry: 3.6, rot: 110 },
-        { cx: 74, cy: 88, rx: 12, ry: 4.4, rot: 65 },
-        { cx: 65, cy: 100, rx: 9, ry: 3.4, rot: 120 },
-      ].map((l, i) => (
-        <ellipse
-          key={i}
-          cx={l.cx}
-          cy={l.cy}
-          rx={l.rx}
-          ry={l.ry}
-          fill="#A8B89A"
-          opacity="0.55"
-          transform={`rotate(${l.rot} ${l.cx} ${l.cy})`}
-        />
-      ))}
-    </svg>
-  )
-}
-
-// ── Forever Begins — closing chapter, two-column with cream rounded panel + veil image ──
+// ── Forever Begins — Chapter V, same pattern as the timeline chapters ──
 function ForeverBegins() {
+  const imgLeft = true  // alternates with Chapter IV (imgLeft=false)
   return (
-    <section className="relative bg-white overflow-hidden">
-      <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 items-stretch min-h-[520px] lg:min-h-[600px]">
+    <section className="bg-white">
+      <div className="max-w-7xl mx-auto">
+        <div className="flex flex-col lg:flex-row items-stretch w-full">
 
-        {/* LEFT: cream rounded panel — aligned with page edges, gentle elliptical right edge */}
-        <motion.div
-          initial={{ opacity: 0, x: -40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.9, ease: EASE }}
-          className="relative lg:col-span-7 bg-[#F8F4EC] z-10 lg:rounded-r-[25%_50%] px-8 sm:px-12 lg:px-14 lg:pr-20 py-14 lg:py-20 flex flex-col justify-center"
-        >
-          {/* Decorative leaf branch drooping from upper-left corner */}
-          <CornerLeaves className="absolute -top-2 -left-4 w-[140px] sm:w-[160px] lg:w-[170px] pointer-events-none select-none" />
+          {/* Image side */}
+          <motion.div
+            initial={{ opacity: 0, x: imgLeft ? -50 : 50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.9, ease: EASE }}
+            className={`w-full lg:w-1/2 ${imgLeft ? 'lg:order-1' : 'lg:order-2'}`}
+          >
+            <div className="relative h-full overflow-hidden group">
+              <img
+                src={foreverImg}
+                alt="Where Our Forever Begins"
+                loading="lazy"
+                decoding="async"
+                className="w-full h-80 lg:h-[540px] object-cover transition-transform duration-[1200ms] group-hover:scale-105"
+              />
+              <div className="absolute inset-0 ring-1 ring-inset ring-black/5 pointer-events-none" />
+            </div>
+          </motion.div>
 
-          <div className="relative max-w-md">
-            <JcEmblem className="mb-7" />
-
-            <p className="text-[10px] tracking-[0.32em] uppercase text-[#0F0F0F]/65 font-semibold mb-5">
+          {/* Text side */}
+          <motion.div
+            initial={{ opacity: 0, x: imgLeft ? 50 : -50 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.9, delay: 0.15, ease: EASE }}
+            className={`w-full lg:w-1/2 flex flex-col justify-center px-8 lg:px-20 py-14 lg:py-0
+              ${imgLeft ? 'lg:order-2' : 'lg:order-1'}`}
+          >
+            <div className="flex items-center gap-5 mb-5">
+              <span className="font-display italic text-[#2D4C3B]/40 text-5xl lg:text-6xl leading-none tracking-wider select-none">
+                V
+              </span>
+              <div className="h-px bg-[#2D4C3B]/25 w-16 lg:w-20" />
+            </div>
+            <p className="text-[10px] tracking-[0.32em] uppercase text-[#2D4C3B] font-semibold mb-3">
               The Setting
             </p>
-
-            <h2 className="font-display text-[#0F0F0F] text-4xl sm:text-5xl lg:text-[60px] leading-[1.02]">
-              Where Our <span className="italic text-[#B49A6B]">Forever</span> Begins.
+            <h2 className="font-display text-[#0F0F0F] text-3xl lg:text-[40px] mb-4 leading-[1.15]">
+              Where Our <span className="italic">Forever</span> Begins.
             </h2>
 
-            {/* Diamond divider */}
-            <div className="flex items-center gap-3 my-7 max-w-xs">
-              <span className="block flex-1 h-px bg-[#2D4C3B]/30" />
-              <svg width="10" height="10" viewBox="0 0 10 10" fill="none" aria-hidden="true">
-                <path d="M5 0 L10 5 L5 10 L0 5 Z" fill="#B49A6B" />
-              </svg>
-              <span className="block flex-1 h-px bg-[#2D4C3B]/30" />
-            </div>
-
-            <p className="text-[11px] tracking-[0.22em] uppercase text-[#0F0F0F]/80 font-semibold leading-[1.7]">
-              Benin City, Edo State, Nigeria<br/>
-              October 24, 2026
+            <p className="text-[#2D4C3B] text-[11px] tracking-[0.28em] uppercase font-semibold mb-5">
+              Benin City, Edo State, Nigeria &middot; October 24, 2026
             </p>
 
-            <div className="mt-7 space-y-4 text-[#0F0F0F]/65 text-[14.5px] leading-[1.85] max-w-md">
-              <p>
-                In the heart of Benin City, surrounded by the people we love most, we will begin the next chapter of our lives together.
-              </p>
-              <p>
-                A beautiful celebration of love, joyful memories, heartfelt prayers, laughter, and forever.
-              </p>
-            </div>
+            <p className="text-[#0F0F0F]/60 text-[15px] leading-[1.9] max-w-md mb-4">
+              In the heart of Benin City, surrounded by the people we love most, we will begin the next chapter of our lives together.
+            </p>
+            <p className="text-[#0F0F0F]/60 text-[15px] leading-[1.9] max-w-md">
+              A beautiful celebration of love, joyful memories, heartfelt prayers, laughter, and forever.
+            </p>
 
             <Link
               to="/order-of-events"
-              className="inline-flex items-center gap-3 mt-8 text-[11.5px] font-semibold tracking-[0.24em] uppercase px-6 py-3.5 bg-[#2D4C3B] text-white hover:bg-[#3a6050] transition-colors duration-200"
+              className="inline-flex items-center gap-2 text-[11px] tracking-[0.22em] uppercase font-semibold text-[#FFFFFF] bg-[#2D4C3B] hover:bg-[#3a6050] px-7 py-3.5 transition-colors duration-300 w-fit mt-7"
             >
               View More Details
-              <span aria-hidden="true">→</span>
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+              </svg>
             </Link>
-          </div>
-        </motion.div>
+          </motion.div>
 
-        {/* RIGHT: flowing veil image */}
-        <motion.div
-          initial={{ opacity: 0, x: 40 }}
-          whileInView={{ opacity: 1, x: 0 }}
-          viewport={{ once: true, margin: '-80px' }}
-          transition={{ duration: 0.9, delay: 0.15, ease: EASE }}
-          className="relative lg:col-span-5 min-h-[320px] lg:min-h-full"
-        >
-          <img
-            src={foreverImg}
-            alt="Flowing veil — Where Our Forever Begins"
-            loading="lazy"
-            decoding="async"
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-        </motion.div>
-
+        </div>
       </div>
     </section>
   )
