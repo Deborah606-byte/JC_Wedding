@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { Link, useLocation } from 'react-router-dom'
-import flowersHero from '../assets/FLOWERS HERO.jpeg'
+import headerFlower from '../assets/FLOWERS HERO.jpeg'
 
 const navLinks = [
   { label: 'Home', to: '/' },
@@ -10,26 +10,25 @@ const navLinks = [
   { label: 'Order Of Events', to: '/order-of-events' },
 ]
 
-// Photographic flower decoration anchored to a side corner of the header.
-// Image is cropped to its leftmost portion (the orchids) and an inner cream gradient
-// fades the bokeh restaurant backdrop into the cream header.
+// Flower decoration anchored to a side corner of the header.
+// Single orchid subject — crop to the orchid side, mirror on the right.
 function FlowerCorner({ side = 'left', className = '' }) {
   return (
     <div className={`relative overflow-hidden ${className}`}>
       <img
-        src={flowersHero}
+        src={headerFlower}
         alt=""
         aria-hidden="true"
         decoding="async"
         className="absolute inset-0 w-full h-full object-cover object-left"
         style={{ transform: side === 'right' ? 'scaleX(-1)' : 'none' }}
       />
-      {/* Inner fade so the bokeh background melts into the cream */}
+      {/* Inner cream fade — only the inner third softens into the header cream */}
       <div
-        className="absolute inset-y-0 w-3/4 pointer-events-none"
+        className="absolute inset-y-0 w-1/3 pointer-events-none"
         style={{
           [side === 'right' ? 'left' : 'right']: 0,
-          background: `linear-gradient(${side === 'right' ? 'to right' : 'to left'}, #F8F4EC 0%, rgba(248,244,236,0.85) 30%, rgba(248,244,236,0) 100%)`,
+          background: `linear-gradient(${side === 'right' ? 'to right' : 'to left'}, #F8F4EC 0%, rgba(248,244,236,0.4) 70%, rgba(248,244,236,0) 100%)`,
         }}
       />
     </div>
@@ -47,14 +46,14 @@ export default function Navbar() {
         {/* Decorative blossoms (placeholders — swap for real photo asset when ready) */}
         <FlowerCorner
           side="left"
-          className="absolute left-0 top-0 h-full w-[150px] sm:w-[200px] md:w-[260px] lg:w-[300px] pointer-events-none select-none"
+          className="absolute left-0 top-0 h-full w-[180px] sm:w-[240px] md:w-[320px] lg:w-[380px] pointer-events-none select-none"
         />
         <FlowerCorner
           side="right"
-          className="absolute right-0 top-0 h-full w-[150px] sm:w-[200px] md:w-[260px] lg:w-[300px] pointer-events-none select-none"
+          className="absolute right-0 top-0 h-full w-[180px] sm:w-[240px] md:w-[320px] lg:w-[380px] pointer-events-none select-none"
         />
-        {/* Soft cream wash so flowers fade into the background near the center */}
-        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#F8F4EC]/80 to-transparent pointer-events-none" />
+        {/* Soft cream wash on the centre only, so the script stays legible without smothering the corner flowers */}
+        <div className="absolute inset-y-0 left-1/4 right-1/4 bg-gradient-to-r from-transparent via-[#F8F4EC]/70 to-transparent pointer-events-none" />
 
         <Link
           to="/"
