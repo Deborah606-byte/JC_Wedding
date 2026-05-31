@@ -30,7 +30,7 @@ function PersonCard({ imageSrc, imageAlt, name, bio, label, className = '' }) {
           alt={imageAlt}
           loading="lazy"
           decoding="async"
-          className="w-full h-[320px] sm:h-[360px] lg:h-[400px] object-cover grayscale transition-transform duration-700 group-hover:scale-105"
+          className="w-full h-[320px] sm:h-[360px] lg:h-[400px] object-cover transition-transform duration-700 group-hover:scale-105"
         />
       </div>
       <div className="px-1">
