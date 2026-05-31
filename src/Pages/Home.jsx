@@ -6,7 +6,7 @@ import Reveal, { StaggerGroup, StaggerItem } from '../Components/Reveal'
 import Lightbox, { useLightbox } from '../Components/Lightbox'
 import usePageTitle from '../hooks/usePageTitle'
 
-import heroImg  from '../assets/wedding/BG5.jpeg'
+import heroImg  from '../assets/hero section.png'
 import settingImg from '../assets/two.jpeg'
 import journey1 from '../assets/one.jpeg'
 import journey2 from '../assets/two.jpeg'

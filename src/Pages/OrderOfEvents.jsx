@@ -8,8 +8,7 @@ import usePageTitle from '../hooks/usePageTitle'
 // ─────────────────────────────────────────────────────────
 // 🖼️  IMAGES — rename your files in src/assets/ to match
 // ─────────────────────────────────────────────────────────
-import heroFlowers1  from '../assets/flower1.webp'   // top-right flowers (top)
-import heroFlowers2  from '../assets/flower2.webp'   // top-right flowers (bottom)
+import heroFlowers1  from '../assets/order of events.png'   // hero image (main)
 import event01Img    from '../assets/flower3.webp'    // Court Wedding
 import event02Img    from '../assets/flower4.webp'    // Traditional Marriage
 import event03ImgA   from '../assets/flower5.webp'    // Bridal Shower
@@ -66,25 +65,12 @@ function OrderHero() {
           >
             <motion.img
               src={heroFlowers1}
-              alt="Flowers"
+              alt="Josephine & Christopher"
               style={{ y: flowerY }}
               fetchPriority="high"
               decoding="async"
-              className="w-full h-[120%] object-cover"
+              className="w-full h-[120%] object-cover object-[center_25%]"
             />
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 1, delay: 0.5, ease: [0.22, 1, 0.36, 1] }}
-              className="absolute bottom-6 left-0 -translate-x-8 border-4 border-white shadow-xl w-[40%]"
-            >
-              <img
-                src={heroFlowers2}
-                alt="Fern"
-                decoding="async"
-                className="w-full h-28 lg:h-36 object-cover"
-              />
-            </motion.div>
           </motion.div>
 
         </div>

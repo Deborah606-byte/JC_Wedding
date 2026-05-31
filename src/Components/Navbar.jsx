@@ -15,13 +15,18 @@ const navLinks = [
 function FlowerCorner({ side = 'left', className = '' }) {
   return (
     <div className={`relative overflow-hidden ${className}`}>
-      <img
-        src={headerFlower}
-        alt=""
+      {/* Zoom into the orchid cluster (left ~45% of the source photo) so the blooms
+          fill the corner instead of the dark venue background. Mirrored on the right. */}
+      <div
         aria-hidden="true"
-        decoding="async"
-        className="absolute inset-0 w-full h-full object-cover object-left"
-        style={{ transform: side === 'right' ? 'scaleX(-1)' : 'none' }}
+        className="absolute inset-0"
+        style={{
+          backgroundImage: `url(${headerFlower})`,
+          backgroundSize: '230% auto',
+          backgroundPosition: 'left center',
+          backgroundRepeat: 'no-repeat',
+          transform: side === 'right' ? 'scaleX(-1)' : 'none',
+        }}
       />
       {/* Inner cream fade — only the inner third softens into the header cream */}
       <div
@@ -43,7 +48,7 @@ export default function Navbar() {
     <>
       {/* ── TOP BLOCK: cream backdrop + decorative flowers + centered script + leaf divider ── */}
       <div className="relative bg-[#F8F4EC] overflow-hidden">
-        {/* Decorative blossoms (placeholders — swap for real photo asset when ready) */}
+        {/* Decorative blossoms — cropped from FLOWERS HERO.jpeg, mirrored across both corners */}
         <FlowerCorner
           side="left"
           className="absolute left-0 top-0 h-full w-[180px] sm:w-[240px] md:w-[320px] lg:w-[380px] pointer-events-none select-none"

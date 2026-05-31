@@ -8,7 +8,7 @@ import usePageTitle from '../hooks/usePageTitle'
 // ─────────────────────────────────────────────────────────
 // 🖼️  IMAGES — swap any of these for real couple photos
 // ─────────────────────────────────────────────────────────
-import heroImg    from '../assets/wedding/BG1.jpeg'  // Full-bleed page hero — couple embrace
+import heroImg    from '../assets/Our Story.png'  // Full-bleed page hero
 import storyImg1  from '../assets/wedding/BG4.jpeg'  // Where It Began
 import storyImg2  from '../assets/wedding/BG2.jpeg'  // Faith & Fellowship
 import storyImg3  from '../assets/wedding/BG5.jpeg'  // From Friendship to Love
@@ -60,6 +60,7 @@ const chapters = [
     body: 'From schoolmates to fellowship members, to executives serving side by side, to genuine friends, and at last to love. Somewhere along the journey, we stopped imagining the future separately and began seeing it together.',
     img: storyImg3,
     imgLeft: true,
+    objPos: 'object-[center_20%]',
   },
   {
     id: 4,
@@ -69,6 +70,7 @@ const chapters = [
     body: 'After years of friendship, prayers, and growth, Christopher asked the question that would change our lives forever. With a full heart and joyful tears, Josephine said yes — yes to love, to partnership, to purpose, to forever.',
     img: storyImg4,
     imgLeft: false,
+    objPos: 'object-[center_20%]',
   },
 ]
 
@@ -151,7 +153,7 @@ function ForeverBegins() {
 }
 
 // ── Chapter block ──────────────────────────────────────────
-function Chapter({ roman, label, title, body, img, imgLeft }) {
+function Chapter({ roman, label, title, body, img, imgLeft, objPos }) {
   return (
     <div className="flex flex-col lg:flex-row items-stretch w-full">
 
@@ -169,7 +171,7 @@ function Chapter({ roman, label, title, body, img, imgLeft }) {
             alt={title}
             loading="lazy"
             decoding="async"
-            className="w-full h-80 lg:h-[540px] object-cover transition-transform duration-[1200ms] group-hover:scale-105"
+            className={`w-full h-80 lg:h-[540px] object-cover ${objPos ?? ''} transition-transform duration-[1200ms] group-hover:scale-105`}
           />
           <div className="absolute inset-0 ring-1 ring-inset ring-black/5 pointer-events-none" />
         </div>
