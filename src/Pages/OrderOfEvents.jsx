@@ -11,8 +11,8 @@ import usePageTitle from '../hooks/usePageTitle'
 import heroFlowers1  from '../assets/order of events.png'   // hero image (main)
 import event01Img    from '../assets/court wedding.png'    // Court Wedding
 import event02Img    from '../assets/traditional marriage.png'    // Traditional Marriage
-import event03ImgA   from '../assets/flower5.webp'    // Bridal Shower
-import event03ImgB   from '../assets/flower6.webp'    // Bachelor Party
+import event03ImgA   from '../assets/bride party.jpg'    // Bridal Shower
+import event03ImgB   from '../assets/bachelor party.jpg'    // Bachelor Party
 import event05Img    from '../assets/flower1.webp'    // Reception & Celebration
 import event06Img    from '../assets/flower2.webp'    // Thanksgiving Service
 
