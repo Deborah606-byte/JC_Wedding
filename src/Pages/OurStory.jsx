@@ -42,6 +42,7 @@ const chapters = [
     body: 'We first met as students — simply schoolmates navigating lectures, assignments, and the future ahead of us. Neither of us knew that behind those ordinary moments, God was quietly preparing something extraordinary.',
     img: storyImg1,
     imgLeft: true,
+    objPos: 'object-[center_20%]',
   },
   {
     id: 2,
