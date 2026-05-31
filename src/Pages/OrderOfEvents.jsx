@@ -9,7 +9,7 @@ import usePageTitle from '../hooks/usePageTitle'
 // 🖼️  IMAGES — rename your files in src/assets/ to match
 // ─────────────────────────────────────────────────────────
 import heroFlowers1  from '../assets/order of events.png'   // hero image (main)
-import event01Img    from '../assets/flower3.webp'    // Court Wedding
+import event01Img    from '../assets/court wedding.png'    // Court Wedding
 import event02Img    from '../assets/traditional marriage.png'    // Traditional Marriage
 import event03ImgA   from '../assets/flower5.webp'    // Bridal Shower
 import event03ImgB   from '../assets/flower6.webp'    // Bachelor Party
