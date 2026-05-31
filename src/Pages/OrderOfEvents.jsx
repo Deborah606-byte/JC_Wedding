@@ -10,7 +10,7 @@ import usePageTitle from '../hooks/usePageTitle'
 // ─────────────────────────────────────────────────────────
 import heroFlowers1  from '../assets/order of events.png'   // hero image (main)
 import event01Img    from '../assets/flower3.webp'    // Court Wedding
-import event02Img    from '../assets/flower4.webp'    // Traditional Marriage
+import event02Img    from '../assets/traditional marriage.png'    // Traditional Marriage
 import event03ImgA   from '../assets/flower5.webp'    // Bridal Shower
 import event03ImgB   from '../assets/flower6.webp'    // Bachelor Party
 import event05Img    from '../assets/flower1.webp'    // Reception & Celebration
