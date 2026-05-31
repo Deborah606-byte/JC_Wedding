@@ -104,7 +104,7 @@ export default function OrderOfEvents() {
             </Reveal>
 
             <Reveal x={40} y={0} delay={0.15} className="flex-1 overflow-hidden">
-              <img src={event01Img} alt="Court Wedding" loading="lazy" decoding="async" className="w-full h-60 lg:h-72 object-cover hover:scale-105 transition-transform duration-700" />
+              <img src={event01Img} alt="Court Wedding" loading="lazy" decoding="async" className="w-full h-60 lg:h-72 object-cover object-[center_20%] hover:scale-105 transition-transform duration-700" />
             </Reveal>
 
           </div>
