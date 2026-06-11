@@ -9,6 +9,7 @@ import usePageTitle from '../hooks/usePageTitle'
 // 🖼️  IMAGES — swap any of these for real couple photos
 // ─────────────────────────────────────────────────────────
 import heroImg    from '../assets/Our Story.png'  // Full-bleed page hero
+import heroImgMobile from '../assets/mobile-hero.jpeg'  // Portrait crop so couple isn't hidden on mobile
 import storyImg1  from '../assets/wedding/BG4.jpeg'  // Where It Began
 import storyImg2  from '../assets/wedding/BG2.jpeg'  // Faith & Fellowship
 import storyImg3  from '../assets/wedding/BG5.jpeg'  // From Friendship to Love
@@ -225,12 +226,20 @@ function StoryHero() {
   return (
     <section className="relative w-full h-[78vh] lg:h-[92vh] overflow-hidden">
       <motion.img
+        src={heroImgMobile}
+        alt="Josephine and Christopher"
+        style={{ y, scale }}
+        fetchPriority="high"
+        decoding="async"
+        className="absolute inset-0 w-full h-[115%] object-cover object-center sm:hidden"
+      />
+      <motion.img
         src={heroImg}
         alt="Josephine and Christopher"
         style={{ y, scale }}
         fetchPriority="high"
         decoding="async"
-        className="absolute inset-0 w-full h-[115%] object-cover"
+        className="absolute inset-0 w-full h-[115%] object-cover hidden sm:block"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/15 to-black/60" />
 

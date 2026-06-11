@@ -9,6 +9,7 @@ import usePageTitle from '../hooks/usePageTitle'
 // 🖼️  IMAGES — rename your files in src/assets/ to match
 // ─────────────────────────────────────────────────────────
 import heroFlowers1  from '../assets/order of events.png'   // hero image (main)
+import heroImgMobile  from '../assets/mobile-hero.jpeg'      // Portrait crop so couple isn't hidden on mobile
 import event01Img    from '../assets/court wedding.png'    // Court Wedding
 import event02Img    from '../assets/traditional marriage.png'    // Traditional Marriage
 import event03ImgA   from '../assets/bride party.jpg'    // Bridal Shower
@@ -64,12 +65,20 @@ function OrderHero() {
             className="lg:w-[42%] flex-shrink-0 relative h-52 lg:h-full"
           >
             <motion.img
+              src={heroImgMobile}
+              alt="Josephine & Christopher"
+              style={{ y: flowerY }}
+              fetchPriority="high"
+              decoding="async"
+              className="w-full h-[120%] object-cover object-center sm:hidden"
+            />
+            <motion.img
               src={heroFlowers1}
               alt="Josephine & Christopher"
               style={{ y: flowerY }}
               fetchPriority="high"
               decoding="async"
-              className="w-full h-[120%] object-cover object-[center_25%]"
+              className="w-full h-[120%] object-cover object-[center_25%] hidden sm:block"
             />
           </motion.div>
 
