@@ -7,6 +7,7 @@ import Lightbox, { useLightbox } from '../Components/Lightbox'
 import usePageTitle from '../hooks/usePageTitle'
 
 import heroImg  from '../assets/hero section.png'
+import heroImgMobile from '../assets/mobile-hero.jpeg'
 import settingImg from '../assets/two.jpeg'
 import journey1 from '../assets/one.jpeg'
 import journey2 from '../assets/two.jpeg'
@@ -141,12 +142,20 @@ function Hero() {
   return (
     <section className="relative w-full h-[64svh] min-h-[460px] sm:h-[74svh] lg:h-[92vh] overflow-hidden">
       <motion.img
+        src={heroImgMobile}
+        alt="Josephine & Christopher"
+        style={{ y, scale }}
+        fetchPriority="high"
+        decoding="async"
+        className="absolute inset-0 w-full h-[115%] object-cover object-center sm:hidden"
+      />
+      <motion.img
         src={heroImg}
         alt="Josephine & Christopher"
         style={{ y, scale }}
         fetchPriority="high"
         decoding="async"
-        className="absolute inset-0 w-full h-[115%] object-cover object-[38%_top]"
+        className="absolute inset-0 w-full h-[115%] object-cover object-[38%_top] hidden sm:block"
       />
       <div className="absolute inset-0 bg-gradient-to-b from-black/15 via-transparent to-black/55" />
 
