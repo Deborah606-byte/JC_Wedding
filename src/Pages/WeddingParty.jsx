@@ -38,7 +38,9 @@ function PersonCard({ imageSrc, imageAlt, name, bio, label, className = '' }) {
           <p className="text-[10px] tracking-[0.22em] uppercase text-[#2D4C3B] font-semibold">{label}</p>
         ) : null}
         <p className="font-display italic font-bold text-[#2D4C3B] text-[16px] lg:text-[17px] mt-1">{name}</p>
-        <p className="text-[#0F0F0F]/55 text-[13px] leading-[1.75] mt-2">{bio}</p>
+        {bio ? (
+          <p className="text-[#0F0F0F]/55 text-[13px] leading-[1.75] mt-2">{bio}</p>
+        ) : null}
       </div>
     </div>
   )
@@ -84,7 +86,6 @@ export default function WeddingParty() {
                 imageAlt="Ella Oghogho Ekhator"
                 label="MAID OF HONOUR"
                 name="Ella Oghogho Ekhator"
-                bio="[Bio — TBD]"
               />
             </StaggerItem>
 
@@ -93,7 +94,6 @@ export default function WeddingParty() {
                 imageSrc={bm1}
                 imageAlt="Blessing Ehimwenma Normwengho"
                 name="Blessing Ehimwenma Normwengho"
-                bio="[Bio — TBD]"
               />
             </StaggerItem>
 
@@ -102,7 +102,6 @@ export default function WeddingParty() {
                 imageSrc={bm2}
                 imageAlt="Elohor Felix"
                 name="Elohor Felix"
-                bio="[Bio — TBD]"
               />
             </StaggerItem>
 
@@ -111,7 +110,6 @@ export default function WeddingParty() {
                 imageSrc={bm3}
                 imageAlt="Evelynlee"
                 name="Evelynlee"
-                bio="[Bio — TBD]"
               />
             </StaggerItem>
 
@@ -120,7 +118,6 @@ export default function WeddingParty() {
                 imageSrc={bm4}
                 imageAlt="Melody Oke"
                 name="Melody Oke"
-                bio="[Bio — TBD]"
               />
             </StaggerItem>
 
@@ -129,7 +126,6 @@ export default function WeddingParty() {
                 imageSrc={bm5}
                 imageAlt="Racheal Richie"
                 name="Racheal Richie"
-                bio="[Bio — TBD]"
               />
             </StaggerItem>
 
@@ -149,7 +145,6 @@ export default function WeddingParty() {
                 imageAlt="Mighty Shalom"
                 label="BEST MAN"
                 name="Mighty Shalom"
-                bio="[Bio — TBD]"
               />
             </StaggerItem>
             <StaggerItem className="lg:mt-16">
@@ -157,7 +152,6 @@ export default function WeddingParty() {
                 imageSrc={gm2}
                 imageAlt="Manager Ogheneyole Promise"
                 name="Manager Ogheneyole Promise"
-                bio="[Bio — TBD]"
               />
             </StaggerItem>
             <StaggerItem>
@@ -165,7 +159,6 @@ export default function WeddingParty() {
                 imageSrc={gm3}
                 imageAlt="Abraham Daniel"
                 name="Abraham Daniel"
-                bio="[Bio — TBD]"
               />
             </StaggerItem>
           </StaggerGroup>
