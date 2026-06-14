@@ -432,7 +432,7 @@ export default function Home() {
               <div className="h-px bg-[#D4B574]/45 w-12" />
             </Reveal>
 
-            <Reveal delay={0.3} as="p" className="text-[#FFFFFF]/72 text-[13.5px] leading-[1.9] max-w-xs">
+            <Reveal delay={0.3} as="p" className="text-white text-[13.5px] leading-[1.9] max-w-xs">
               And through every season, love continued to grow beautifully between us.
             </Reveal>
           </div>
