@@ -1,7 +1,6 @@
 import { useEffect, lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom'
 import { AnimatePresence, MotionConfig } from 'motion/react'
-import { Analytics } from '@vercel/analytics/react'
 import Layout from './Components/Layout'
 import Home from './Pages/Home'
 
@@ -55,7 +54,6 @@ export default function App() {
         <Layout>
           <AnimatedRoutes />
         </Layout>
-        <Analytics />
       </BrowserRouter>
     </MotionConfig>
   )
